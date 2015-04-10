@@ -1,32 +1,62 @@
 /* General Code */
 
+h1, h2, h3, h4, p, ul, ol, li, body, div, span {
+	margin: 0em;
+	padding: 0em;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+}
+
 body {
-    margin: 0em;
-    padding: 0em;
     width: 100%;
     background-color: #FFFFFF;
     font-family: 'Charcoal', Times, serif;
 	font-size: 100%;
 }
 
-.center {
-    text-align: center;
+h1 {
+	font-size: 2.5em;
+	font-weight: normal;
+	color: #FA0000;
+	margin-bottom: 0.4em;
+}
+
+h2 {
+	color: #5D5D5D;
+	margin-bottom: 0.667em;
 }
 
 h3 {
     font-size: 2em;
-	margin: 0em;
-	padding: 0em;
 }
 
 h4 {
     font-size: 1em;
-	margin: 0em;
-	padding: 0em;
 }
 
 p {
 	text-align: left;
+	margin-bottom: 0.5em;
+}
+
+ol, ul {
+	padding-bottom: 1em;
+}
+
+li {
+	margin-left: 1.5em;
+}
+
+table {
+	margin-bottom: 1em;
+}
+
+#login input {
+	margin-top: 1em;
+}
+
+#login button {
+	margin-top: 1em;
 }
 
 #title {
@@ -55,7 +85,7 @@ p {
 }
 
 #main_active {
-	padding: 0.6em 10% 0.4em 10%;
+	padding: 0.3em 10% 0.3em 10%;
 }
 
 .navbar .active {
@@ -67,7 +97,7 @@ p {
     display: inline-block;
     float: left;
 	text-align: center;
-	padding: 1em;
+	padding: 0.9em 1em 0.9em 1em;
 }
 
 .navbar a {
@@ -138,7 +168,6 @@ p {
     width: 70%;
     display: inline-block;
     float: left;
-    text-align: center;
 }
 
 .one_sidebar_main {
@@ -157,16 +186,26 @@ p {
 
 .middle_container div {
     border-bottom: 1px solid black;
-    text-align: center;
+	padding-left: 1em;
+	padding-top: 1em;
 }
 
-#banner_resized {
+#banner {
+	text-align: center;
+}
+
+#banner img {
     width: 60%;
 	padding-bottom: 1em;
 }
 
-#flexslider {
+#flexslider { 
 	border-width: 0px;
+	padding: 0em;
+}
+
+#flexslider ul li {
+	margin: 0em;
 }
 
 #bottom_element {
@@ -188,6 +227,7 @@ li img {
 
 .news_column img {
     width: 100%;
+	margin-bottom: 1em;
 }
 
 /* Footer */

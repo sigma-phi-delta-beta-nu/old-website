@@ -5,7 +5,7 @@
     <title>Sigma Phi Delta Fraternity</title>
     
     <!-- Favicon -->
-    <link rel='icon' type='image/png' href='res/images/crest.png' />
+    <link rel='icon' type='image/png' href='/res/images/crest.png' />
 	
 	<!-- Metadata -->
 	<meta name='title' content='Sigma Phi Delta Fraternity Beta Nu Chapter - Cal Poly' />
@@ -13,11 +13,11 @@
 	<meta name='keywords' content='spd, sigma, phi, delta, engineering, fraternity, sigma phi delta, cal poly, san luis obispo, slo, beta, nu, beta nu' />
     
 	<!-- CSS -->
-    <link rel='stylesheet' type='text/css' href='res/css/stylesheet.css' />
+    <link rel='stylesheet' type='text/css' href='/res/css/stylesheet.css' />
     
 	<!-- Javascript -->
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
-    <script src='res/js/jquery.js'></script>
+    <script src='/res/js/jquery.js'></script>
 </head>
 
 <body>
@@ -47,20 +47,16 @@
     <div class='submenu'>
         <div class='container'>
 			<div id='blank'></div>
-			<div class='submenu_animate'>
-				<div>
-				    <a href='/'><h4>Home</h4></a>
-				</div>
-				<div>
-				    <a href='/'><h4>Sign Up</h4></a>
-				</div>
-				<div>
-				    <a href='/'><h4>Login</h4></a>
-				</div>
+			<div class='submenu_static'>
+				<div id="login">
+                    <h4>Login</h4>
+                    <input type="password" placeholder="Password">
+                    <button type="button" id="submit">Submit</button>
+                </div>
 			</div>
 		</div>
     </div>
-    <div class='one_sidebar_main'>
+    <div class='two_sidebar_main'>
 		<div class='middle_container'>
 			<div id='blank'></div>
 			<div>
@@ -84,7 +80,7 @@
 					<li>Software Engineering</li>
 				</ul>
 				<h2>Rush</h2>
-				<img src="res/images/rushflyer.jpg"/>
+				<img src="/res/images/rushflyer.jpg"/>
 				<p>Beta-Nu chapter will not be sponsering rush events until Fall of 2015. If you are interested, <a href="/contact_us/">contact us</a> for more details.</p>
 			</div>
 		</div>
@@ -93,4 +89,5 @@
         <h4>Sigma Phi Delta Fraternity</h4>
     </div>
 </body>
+
 </html>
