@@ -43,12 +43,20 @@ app.get('/contact_us', function(request, response) {
 app.get('/login_handler', function(request, response) {
 	
 	var pwd = request.query.password;
-	if (pwd === 'oookillem') {
+	if (pwd === '11743189') {
 		response.end('Successful');
 		sessionCode = 1;
 	} else {
 		response.end('Failed');
+		sessionCode = 0;
 	}
+	
+});
+
+app.get('/logout_handler', function(request, response) {
+	
+	sessionCode = 0;
+	response.end("Successful");
 	
 });
 
@@ -57,7 +65,7 @@ app.get('/internal', function (request, response) {
 	if (sessionCode == 1) {
 		displayPage('internal.html', response);
 	} else {
-		response.end('Nice try. Please login');
+		displayPage('external.html', response);
 	}
 
 });
