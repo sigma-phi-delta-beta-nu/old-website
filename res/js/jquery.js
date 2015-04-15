@@ -17,7 +17,8 @@ $(document).ready(function() {
 		if (event.keyCode == 13) {
 			event.preventDefault();
 			var pwd = $(this).val();
-			var hash = hashCode(pwd);
+			//var hash = hashCode(pwd);
+			var hash = Sha256.hash(pwd);
 			authenticate(hash);
 		}
 
@@ -25,8 +26,9 @@ $(document).ready(function() {
 	
 	$('#login').click(function() {
 		
-		var pwd = $(this).closest("div").find("input").val();	
-		var hash = hashCode(pwd);
+		var pwd = $(this).closest("div").find("input").val();
+		//var hash = hashCode(pwd);
+		var hash = Sha256.hash(pwd);
 		authenticate(hash);
 	
 	});
@@ -58,8 +60,9 @@ $(document).ready(function() {
                 if (returnedData === "Successful") {
                     window.location = "/internal";
                 } else {
-                    alert('Sorry, the password you entered was incorrect.');
-                }
+                    //alert("Sorry, that password was incorrect.");
+					alert(pwd);
+				}
             },
             error: function() {
                 alert("Error occured.");
