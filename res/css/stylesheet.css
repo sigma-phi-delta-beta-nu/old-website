@@ -95,7 +95,7 @@ button {
 
 .navbar span {
     display: inline-block;
-    float: left;
+	float: left;
 	text-align: center;
 	padding: 0.9em 1em 0.9em 1em;
 }
