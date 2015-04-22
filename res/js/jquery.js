@@ -1,5 +1,27 @@
 $(document).ready(function() {
-	
+
+	if ($.cookie('logged_in')) {
+		$("#login_form").hide();
+		$("#logout_form").show();
+		var $welcome_message = $("#welcome");
+		$.ajax({
+			type: "GET",
+			url: "/welcome",
+			data: { username : $.cookie('logged_in') },
+			dataType: "text",
+			success: function(nickname) {
+				$welcome_message.text("Welcome, Brother " + nickname + "!");
+			},
+			error: function(err) {
+				console.log(err);
+			}
+		});
+	} else {
+		$("#login_form").show();
+		$("#logout_form").hide();
+		$("#login_form").find("input").first().focus();
+	}
+
 	$('.submenu_animate div').mouseenter(function() {
 		$(this).animate({
 			padding: '0.7em',
@@ -16,20 +38,22 @@ $(document).ready(function() {
 		
 		if (event.keyCode == 13) {
 			event.preventDefault();
-			var pwd = $(this).val();
-			//var hash = hashCode(pwd);
+			var $inputs = $(this).closest("div").find("input");
+			var usr = $inputs.first().val();
+			var pwd = $inputs.last().val();
 			var hash = Sha256.hash(pwd);
-			authenticate(hash);
+			authenticate(usr, hash);
 		}
 
 	});
 	
 	$('#login').click(function() {
 		
-		var pwd = $(this).closest("div").find("input").val();
-		//var hash = hashCode(pwd);
+		var $inputs = $(this).closest("div").find("input");
+		var usr = $inputs.first().val();
+		var pwd = $inputs.last().val();
 		var hash = Sha256.hash(pwd);
-		authenticate(hash);
+		authenticate(usr, hash);
 	
 	});
 	
@@ -39,15 +63,16 @@ $(document).ready(function() {
 			type: 'GET',
 			url: '/logout_handler',
 			success: function() {
-				window.location = '/internal';
+				location.reload(true);
 			}
 		});
 
 	});
 	
-	function authenticate(pwd) {
+	function authenticate(usr, pwd) {
 		
         var sendingData = {
+			username: usr,
             password: pwd
         }
 
@@ -57,15 +82,17 @@ $(document).ready(function() {
             data: sendingData,
             dataType: 'text',
             success: function(returnedData) {
-                if (returnedData === "Successful") {
-                    window.location = "/internal";
+                if (returnedData !== "Failed") {
+                    location.reload(true);
                 } else {
                     //alert("Sorry, that password was incorrect.");
 					alert(pwd);
+					$("#login_form").find("input").val("");
+					$("#login_form").find("input").first().focus();
 				}
             },
-            error: function() {
-                alert("Error occured.");
+            error: function(err) {
+                console.log(err);
             }
 		});
 	}

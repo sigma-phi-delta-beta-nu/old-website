@@ -17,6 +17,7 @@
 	<!-- Javascript -->
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
     <script src='res/js/jquery.js'></script>
+	<script src='/res/js/jquery.cookie.js'></script>
 	<script src='res/js/sha256.js'></script>
 </head>
 
@@ -51,10 +52,15 @@
         <div class='container'>
 			<div id='blank'></div>
 			<div class='submenu_static'>
-				<div>
+				<div id="login_form">
 					<h4>Login</h4>
+					<input type="text" placeholder="Username">
 					<input type="password" placeholder="Password">
 					<button type="button" id="login">Submit</button>
+				</div>
+				<div id="logout_form">
+					<h4>Logout</h4>
+					<button type="button" id="logout">Submit</button>
 				</div>
 			</div>
 			<div id='submenu_spacer'></div>

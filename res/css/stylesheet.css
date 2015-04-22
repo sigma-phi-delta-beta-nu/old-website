@@ -52,6 +52,9 @@ table {
 }
 
 input {
+	display: block;
+	width: 50%;
+	margin: auto;
 	margin-top: 1em;
 }
 
@@ -62,6 +65,10 @@ button {
 #title {
 	padding-top: 1em;
 	padding-bottom: 1em;
+}
+
+*:focus {
+	outline: 0;
 }
 
 /* Navigation Bar */

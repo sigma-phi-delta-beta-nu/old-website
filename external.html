@@ -18,6 +18,7 @@
 	<!-- Javascript -->
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
     <script src='/res/js/jquery.js'></script>
+	<script src='/res/js/jquery.cookie.js'></script>
 	<script src='/res/js/sha256.js'></script>
 </head>
 
@@ -50,19 +51,28 @@
     </div>
     <div class='submenu'>
         <div class='container'>
-			<div id='blank'></div>
-			<div class='submenu_static'>
-				<div>
-                    <h4>Login</h4>
-                    <input type="password" placeholder="Password">
-                    <button type="button" id="login">Submit</button>
-                </div>
+		<div id='blank'></div>
+		<div class='submenu_static'>
+			<div id="login_form">
+				<h4>Login</h4>
+				<input type="text" placeholder="Username">
+				<input type="password" placeholder="Password">
+				<button type="button" id="login">Submit</button>
+			</div>
+			<div id="logout_form">
+				<h4>Logout</h4>
+				<button type="button" id="logout">Submit</button>
 			</div>
 		</div>
+	</div>
     </div>
     <div class='two_sidebar_main'>
 		<div class='middle_container'>
 			<div id='blank'></div>
+			<div>
+				<h1>Are you a member of Sigma Phi Delta?</h1>
+				<p>Login to see important updates and other relevant information.</p>
+			</div>
 		</div>
 	</div>
     <div class='footer'>
