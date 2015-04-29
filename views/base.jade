@@ -1,0 +1,83 @@
+doctype html
+html
+	block head
+		title Sigma Phi Delta Fraternity
+		
+		<!-- CSS -->
+		
+		link(rel='stylesheet', href='/css/stylesheet.css')
+		
+		<!-- JavaScript -->
+		script(src='/js/jquery-2.1.3.min.js')
+		script(src='/js/jquery.js')
+		script(src='/js/jquery.cookie.js')
+		script(src='/js/sha256.js')
+		
+	body
+		div.navbar
+			div#main_nav_container
+				div#main_nav_element
+					block navbar main element
+						span#main_active
+							a(href="/")
+								h3 &#931&#934&#916
+			block navbar about us element
+				span
+					a(href="/about_us")
+						h4 About Us
+			block navbar recruitment element
+				span
+					a(href="/recruitment")
+						h4 Recruitment
+			block navbar contact us element
+				span
+					a(href="/contact_us")
+						h4 Contact Us
+			block navbar members element
+				span
+					a(href="/internal")
+						h4 Members' Page
+			div#school_nav_container
+				span#school_nav
+					a(href="//www.calpoly.edu/")
+						h4 Cal Poly, SLO
+		div.submenu
+			div.container
+				div#blank
+				div.submenu_static
+					div#login_form
+						h4 Login
+						input(type="text", placeholder="Username")
+						input(type="password", placeholder="Password")
+						button#login(type="button") Submit
+					div#logout_form
+						h4 Logout
+						button#logout(type="button") Submit
+				div#submenu_spacer
+				div.submenu_animate
+					div: h4: a(href="/") Home
+					div: h4: a(href="/about_us") About Us
+					div: h4: a(href="/recruitment") Recruitment
+					div: h4: a(href="/contact_us") Contact Us
+		div.two_sidebar_main
+			block error log
+			div.middle_container
+				div#blank
+				block main content
+		div.news_column
+			div.container
+				div#blank
+				div: h4#title Beta-Nu News
+				div#blank
+				div
+					h4#title Cal Poly BAE Day
+					img(src="/images/bae_day.jpg")
+					p This year, Sigma Phi Delta took part in setting up Build an Engineer day as part of its philanthropic activites.
+				div#blank
+				div
+					h4#title The King, Dethroned!
+					img(src="/images/moonshine_rectal_sabre.jpg")
+					p In the last brothers' game of disc golf, brother Ethan Tietze stole the coveted prize from champion Ian Washburne.
+				div#blank
+		div.footer
+			h4 Sigma Phi Delta Fraternity

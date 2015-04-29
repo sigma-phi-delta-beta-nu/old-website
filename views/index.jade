@@ -1,0 +1,23 @@
+extends base
+
+block append head
+	link(rel="stylesheet", href="/css/flexslider.css")
+	script(src="/js/jquery.flexslider.js")
+	script(src="/js/jquery.flexslider.start.js")
+
+block navbar main element
+	span#main_active.active
+		a.active(href="/")
+			h3 &#931&#934&#916
+
+block main content
+	div#banner
+		img(src="/images/spdbanner.png")
+	div.container#bottom_element
+		div#flexslider.flexslider
+			ul.slides
+				li: img(src="/images/spdcharter.jpg")
+				li: img(src="/images/spdline.jpg")
+				li: img(src="/images/calpolyengsign.jpg")
+				li: img(src="/images/foundersandalphas.jpg")
+				li: img(src="/images/spddinner.jpg")
