@@ -20,7 +20,6 @@
     <script src='res/js/jquery.js'></script>
 	<script src='res/js/jquery.cookie.js'></script>
    
-   <script src='res/js/create_event.js'></script>
 </head>
 
 <body>
@@ -64,7 +63,7 @@
     <div class='two_sidebar_main'>
 		<div class='middle_container'>
          <h1>Create Event</h1>
-         <div>
+         <div id='requiredInformation'>
             <h2>Required Information</h2>
             <form action='#' onsubmit='return formSubmit(this)'>
                <input type='text' placeholder='Event Title'></input>
@@ -72,10 +71,7 @@
                Start Time: <input type='datetime-local' placeholder='Test'></input>
                End Time: <input type='datetime-local'></input>
                <br>
-               <select>
-                  <option value='internal'>Internal</option>
-                  <option value='kickback'>Kickback</option>
-               </select>
+               <select id='eventSelect'></select>
                <br>
                <select>
                   <option value='public'>Public</option>
@@ -98,5 +94,8 @@
     <div class='footer'>
         <h4>Sigma Phi Delta Fraternity</h4>
     </div>
+    
+   <script src='res/js/events/Events.js'></script>
+   <script src='res/js/create_event.js'></script>
 </body>
 </html>

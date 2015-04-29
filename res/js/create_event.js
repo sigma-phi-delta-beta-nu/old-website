@@ -2,11 +2,13 @@ var title = "";
 var event_location = "";
 var startTime = "";
 var endTime = "";
-var isInternal = false;
+var eventType = -1;
 var isPublic = false;
 var description = "";
 
+var submitted = false;
 
+// debug function
 var showMe = function() {
    console.log("Title: " + title);
    console.log("Location: " + event_location);
@@ -15,29 +17,21 @@ var showMe = function() {
    console.log("Is Internal: " + isInternal);
    console.log("Is Public: " + isPublic);
    console.log("Description: " + description);
+   
+   //var internal = new InternalEvent(title);
+   
+   //console.log(internal.getTitle());
 };
 
 
 
 var fullSubmission = function(form) {
-   console.log('Done and done');
-   
-   var i = 0;
-   while (i < (form.length - 1)) {
-      console.log("Value from box[" + i + "]: " + form[i].value);
-      ++i;
-   }
-   
-   showMe();
-   
+   // TODO
+   document.getElementById('eventSpecific').style.display = 'none';
 };
 
 
-/*
-   Build the desired div here
-*/
-
-var showInternalInfo = function() {
+var generateKickbackDiv = function() {
    var div = document.createElement('div');
    div.innerHTML = "<h2>INTERNAL EVENT</h2>";
    
@@ -66,12 +60,11 @@ var showInternalInfo = function() {
    
    div.appendChild(form);
    
-   document.getElementById('eventSpecific').appendChild(div);
+   return div;
 };
 
+
 var formSubmit = function(form) {
-   console.log("Form submitted");
-   
    /*
    form[i] gets the input at i in the form.
    i = (number of form elements - 1) is the submit button
@@ -85,28 +78,54 @@ var formSubmit = function(form) {
    event_location = form[1].value;
    startTime = form[2].value;
    endTime = form[3].value;
-   isInternal = form[4].value === 'internal';
+   eventType = form[4].value;
    isPublic = form[5].value === 'public';
    description = form[6].value;
    
+   /* This check may be not needed anymore...*/
+   if (submitted) {
+      return;
+   }
    
-   if (isInternal) {
-      showInternalInfo();
+   submitted = true;
+   document.getElementById('requiredInformation').style.display = 'none';
+   
+   if (eventType == EventType.KICKBACK) {
+      var form = generateKickbackDiv();
+      document.getElementById('eventSpecific').appendChild(form);
+   } else if (eventType == EventType.PROFESSIONAL) {
+      // TODO
+   } else if (eventType == EventType.BROTHEROOD) {
+      // TODO
    } else {
-      console.log("Not internal");
+      console.log("Not yet implemented");
    }
    
    
 };
 
 
+/* BELOW THIS IS THE ONLOAD FUNCTIONALITY */
 
+/* This function walks through the 'EventType' enum (defined in Events.js) and
+   adds an option automatically */
+var populateEventTypes = function() {
+   var select = document.getElementById('eventSelect');
+   
+   for (var key in EventType) {
+      var opt = document.createElement('option');
+      opt.value = EventType[key];
+      opt.text = key;
+      select.appendChild(opt);
+   }
+};
+
+/* This is the function that is called when the DOM is all done.
+   Setup functions should be put in here */
 var ready = function() {
-   console.log("Ready to go");
+   
+   populateEventTypes();
 };
 
-var page = function() {
-   document.addEventListener('load', ready, true);
-};
-
-page();
+// Set 'ready' to be the function called when the DOM is ready
+document.addEventListener('load', ready, true);
