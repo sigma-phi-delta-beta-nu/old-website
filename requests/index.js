@@ -7,6 +7,7 @@ var dynamodb = new aws.DynamoDB({region: 'us-west-2'});
 main_router.get('/', function(request, response) {
 	
 	response.render('index', {});
+	console.log("GET '/' successful\n");
 	
 });
 
@@ -65,10 +66,12 @@ main_router.get('/about_us', function(request, response) {
 					var firstname = list[i]["firstname"]["S"];
 					var lastname = list[i]["lastname"]["S"];
 					membership["founding"].push({"firstname": firstname, "lastname": lastname});
+					if (i === length - 1) {
+						callback();
+					}
 				}
 			}
 		});
-		callback();
 	}
 		
 	var alpha_query = function(callback) {
@@ -82,10 +85,12 @@ main_router.get('/about_us', function(request, response) {
 					var firstname = list[i]["firstname"]["S"];
 					var lastname = list[i]["lastname"]["S"];
 					membership["alpha"].push({"firstname": firstname, "lastname": lastname});
+					if (i === length - 1) {
+						callback();
+					}
 				}
 			}
 		});
-		callback();
 	}
 
 	var beta_query = function(callback) {
@@ -98,20 +103,21 @@ main_router.get('/about_us', function(request, response) {
 				for (var i = 0; i < length; i++) {
 					var firstname = list[i]["firstname"]["S"];
 					var lastname = list[i]["lastname"]["S"];
-					console.log(firstname);
 					membership["beta"].push({"firstname": firstname, "lastname": lastname});
+					if (i === length - 1) {
+						callback();
+					}
 				}
 			}
 		});
-		callback();
 	}
 	
 	function run() {
 		founding_query(function() {
 			alpha_query(function() {
 				beta_query(function() {
-					console.log(membership);
-					response.render('about_us', {});
+					response.render('about_us', { members: membership });
+					console.log("GET '/about_us' successful\n");
 				});
 			});
 		});
@@ -124,12 +130,14 @@ main_router.get('/about_us', function(request, response) {
 main_router.get('/recruitment', function(request, response) {
 	
 	response.render('recruitment', {});
-	
+	console.log("GET '/recruitment' successful\n");
+
 });
 
 main_router.get('/contact_us', function(request, response) {
 	
 	response.render('contact_us', {});
+	console.log("GET '/contact_us' successful\n");
 	
 });
 
@@ -151,6 +159,7 @@ main_router.get('/internal', function(request, response) {
         	} else {
         	    var brothername = data.Item.nickname["S"];
         	    response.render('internal', { nickname: brothername });
+				console.log("GET '/internal' successful\n");
         	}
     	});
 		
@@ -158,6 +167,7 @@ main_router.get('/internal', function(request, response) {
 	} else {
 
 		response.render('external', {});
+		console.log("GET '/external' successful\n");
 	
 	}
 });

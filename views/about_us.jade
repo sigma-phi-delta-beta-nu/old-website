@@ -90,19 +90,16 @@ block main content
 		h2 Membership
 		p Founding Class
 		ul
-			li Ryan Rumsey
-			li Greg Lane
-			li Garrett Klunk
+			for val in members.founding
+				li #{val["firstname"]} #{val["lastname"]}
 		p Alpha Class
 		ul
-			li Alex Boyd
-			li Eugene Chiang
-			li Manuel Alvarez
+			for val in members.alpha
+				li #{val["firstname"]} #{val["lastname"]}
 		p Beta Class
 		ul
-			li Andrew Epperson
-			li Oscar Lyncet
-			li Eric Parella
+			for val in members.beta
+				li #{val["firstname"]} #{val["lastname"]}
 		p Initiates
 		ul
 			li Christian Barreto (Alpha Class)

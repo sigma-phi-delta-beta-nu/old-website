@@ -26,13 +26,14 @@ handler_router.post('/login_handler', function(request, response) {
            		if (data.Item.password["S"] === pwd) {
                     response.cookie('logged_in', user, { maxAge: 100 * 60 * 60 });
                     response.send(data);
+					console.log("User authentication successful, " + user + " logged in");
                 } else {
                     response.send("Failed");
-					console.log("Incorrect password");
+					console.log("Incorrect password entered");
                 }
                 response.end();
             } else {
-                console.log("No username entered.");
+                console.log("No username entered");
 				response.end("Failed");
             }
         }
@@ -43,6 +44,7 @@ handler_router.get('/logout_handler', function(request, response) {
 	
 	response.clearCookie('logged_in');
     response.end("Successful");
+	console.log("User logout successful");
 	
 });
 
