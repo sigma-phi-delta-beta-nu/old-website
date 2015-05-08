@@ -14,96 +14,37 @@ main_router.get('/', function(request, response) {
 main_router.get('/about_us', function(request, response) {
 	
 	var membership = {};
-	
-	membership["founding"] = [];
-	membership["alpha"] = [];
-	membership["beta"] = [];
-		
-	var founding_query_params = {
-		IndexName: "class",
-		KeyConditions: {
-			"class": {
-				ComparisonOperator: "EQ",
-				AttributeValueList: [{"S": "founding"}]
-			}
-		},
-		TableName: "membership",
-		AttributesToGet: ["firstname", "lastname"]
-	}
-	
-	var alpha_query_params = {
-		IndexName: "class",
-		KeyConditions: {
-			"class": {
-				ComparisonOperator: "EQ",
-				AttributeValueList: [{"S": "alpha"}]
-			}
-		},
-		TableName: "membership",
-		AttributesToGet: ["firstname", "lastname"]
-	}
-	
-	var beta_query_params = {
-		IndexName: "class",
-		KeyConditions: {
-			"class": {
-				ComparisonOperator: "EQ",
-				AttributeValueList: [{"S": "beta"}]
-			}
-		},
-		TableName: "membership",
-		AttributesToGet: ["firstname", "lastname"]
-	}
-	
-	var founding_query = function(callback) {
-		dynamodb.query(founding_query_params, function(error, data) {
-			if (error) {
-				console.log(error);
-			} else {
-				var list = data.Items;
-				var length = data.Count;
-				for (var i = 0; i < length; i++) {
-					var firstname = list[i]["firstname"]["S"];
-					var lastname = list[i]["lastname"]["S"];
-					membership["founding"].push({"firstname": firstname, "lastname": lastname});
-					if (i === length - 1) {
-						callback();
-					}
-				}
-			}
-		});
-	}
-		
-	var alpha_query = function(callback) {
-		dynamodb.query(alpha_query_params, function(error, data) {
-			if (error) {
-				console.log(error);
-			} else {
-				var list = data.Items;
-				var length = data.Count;
-				for (var i = 0; i < length; i++) {
-					var firstname = list[i]["firstname"]["S"];
-					var lastname = list[i]["lastname"]["S"];
-					membership["alpha"].push({"firstname": firstname, "lastname": lastname});
-					if (i === length - 1) {
-						callback();
-					}
-				}
-			}
-		});
-	}
+	var pledgeClasses = [];
+	var classes = [];
 
-	var beta_query = function(callback) {
-		dynamodb.query(beta_query_params, function(error, data) {
+	var scanParams = {
+		
+		TableName: 'membership',
+		IndexName: 'class',
+		AttributesToGet: ['class'],
+		
+	}
+	
+	//Scan the database for names of pledge classes
+	function classScan(scanParams, callback) {
+		dynamodb.scan(scanParams, function(error, data) {
 			if (error) {
-				console.log(error);
+				console.log(data);
 			} else {
 				var list = data.Items;
 				var length = data.Count;
 				for (var i = 0; i < length; i++) {
-					var firstname = list[i]["firstname"]["S"];
-					var lastname = list[i]["lastname"]["S"];
-					membership["beta"].push({"firstname": firstname, "lastname": lastname});
+					var found = false;
+					for (var j = 0; j < pledgeClasses.length; j++) {
+						if (list[i]["class"]["S"] == pledgeClasses[j]) {
+							found = true;
+							break;
+						}
+					}
+					if (!found || i === 0) {
+						pledgeClasses.push(list[i]["class"]["S"]);
+						membership[list[i]["class"]["S"]] = [];
+					}
 					if (i === length - 1) {
 						callback();
 					}
@@ -112,10 +53,56 @@ main_router.get('/about_us', function(request, response) {
 		});
 	}
 	
+	//Generate query parameters for each class
+	var classQuery = function(pledgeClasses, callback) {
+		for (var i = 0; i < pledgeClasses.length; i++) {
+			var queryParams = {
+				IndexName: "class",
+				KeyConditions: {
+					"class": {
+						ComparisonOperator: "EQ",
+						AttributeValueList: [{"S": pledgeClasses[i]}]
+					}
+				},
+				TableName: "membership",
+				AttributesToGet: ["firstname", "lastname"]
+			}
+			classes.push({pledgeClass: pledgeClasses[i], params: queryParams});
+			if (i === pledgeClasses.length - 1) {
+				callback();
+			}
+		}
+	}
+	
+	//Recursively query the database for classes
+	function dbQuery(classes, pledgeClassesToGo, callback) {
+		var pledgeClassIndex = pledgeClassesToGo - 1;
+		if (pledgeClassIndex >= 0) {
+			dynamodb.query(classes[pledgeClassIndex]["params"], function(error, data) {
+				if (error) {
+        	        console.log(error);
+        	    } else {
+        	        var list = data.Items;
+        	        var length = data.Count;
+					for (var i = 0; i < length; i++) {
+        	            var firstname = list[i]["firstname"]["S"];
+        	            var lastname = list[i]["lastname"]["S"];
+        	            membership[classes[pledgeClassIndex]["pledgeClass"]].push({"firstname": firstname, "lastname": lastname});
+        	        }
+        	    }
+				dbQuery(classes, pledgeClassesToGo - 1, callback);
+				
+        	});
+		} else {
+			callback();
+		}
+	}
+	
+	//Call all functions and load the page with data
 	function run() {
-		founding_query(function() {
-			alpha_query(function() {
-				beta_query(function() {
+		classScan(scanParams, function() {
+			classQuery(pledgeClasses, function() {
+				dbQuery(classes, classes.length, function() {
 					response.render('about_us', { members: membership });
 					console.log("GET '/about_us' successful\n");
 				});
@@ -123,6 +110,7 @@ main_router.get('/about_us', function(request, response) {
 		});
 	}
 	
+	//Go!
 	run();
 	
 });
@@ -135,7 +123,17 @@ main_router.get('/recruitment', function(request, response) {
 });
 
 main_router.get('/contact_us', function(request, response) {
-	
+	/*
+	var positions = {};
+	var scanParams = {
+		TableName: "membership",
+		IndexName: "active",
+		AttributesToGet: ["positions", "firstname", "lastname"]
+	}
+	function scan(params, callback) {
+		
+	}
+	*/
 	response.render('contact_us', {});
 	console.log("GET '/contact_us' successful\n");
 	

@@ -1,0 +1,26 @@
+extends base
+
+block append head
+	script(src="/js/events/Events.js")
+	script(src="/js/create_event.js")
+
+block main content
+	div
+		h1 Create Event
+		div#requiredInformation
+			h2 Required Information
+			form(action="#" onsubmit="return formSubmit(this)")
+				input(type="text" placeholder="Event Title")
+				input(type="text" placeholder="Event Location")
+				Start Time: 
+				input(type="datetime-local" placeholder="Test")
+				End Time: 
+				input(type="datetime-local" placeholder="AnotherTest")
+				select#eventSelect
+				select
+					option(value="public") Public
+					option(value="private") Private
+				textarea(cols=50 rows=6 placeholder="Description")
+				input(type="submit" value="Next")
+		div#eventSpecific
+			h2 Event Specific Information
