@@ -199,6 +199,7 @@ button {
 .middle_container div {
     border-bottom: 1px solid black;
 	padding: 1em 1em 0em 1em;
+	overflow: hidden;
 }
 
 #banner {
@@ -225,6 +226,10 @@ button {
 
 li img {
 	padding: 0em;
+}
+
+.position_data .name_data .email_data {
+	width: 33%;
 }
 
 /* News Column */

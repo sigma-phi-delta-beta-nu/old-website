@@ -8,5 +8,35 @@ block navbar contact us element
 block main content
 	div
 		h1 Elected Officials
+		table(style="width: 100%")
+			col(style="width: 30%")
+			col(style="width: 20%")
+			col(style="width: 25%")
+			col(style="width: 25%")
+			for val in positions.elected
+				tr
+					td
+						| #{ val["position"] }
+					td
+						| #{ val["firstname"] }
+						| #{ val["lastname"] }
+					td
+						| #{ val["email"] }
+					td
 	div
 		h1 Appointed Officials
+		table(style="width: 100%")
+			col(style="width: 30%")
+			col(style="width: 20%")
+			col(style="width: 25%")
+			col(style="width: 25%")
+			for val in positions.appointed
+				tr
+					td
+						| #{ val["position"] }
+					td
+						| #{ val["firstname"] }
+						| #{ val["lastname"] }
+					td
+						| #{ val["email"] }
+					td
