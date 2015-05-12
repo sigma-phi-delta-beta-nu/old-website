@@ -82,8 +82,8 @@ $(document).ready(function() {
                 } else {
                     alert("Sorry, that username/password combination was incorrect.");
 					//alert(pwd);
-					$("#login_form").find("input").val("");
-					$("#login_form").find("input").first().focus();
+					$("#login_form").find("input").first().next().val("");
+					$("#login_form").find("input").first().next().focus();
 				}
             },
             error: function(err) {
