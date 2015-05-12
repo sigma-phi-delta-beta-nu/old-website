@@ -7,10 +7,9 @@ block navbar members element
 
 block main content
 	div
+		h1
+			| Welcome, Brother #{ nickname }
 		span
-			h1
-				| Welcome, Brother 
-				name=nickname
 			h2
 				| Useful Links:
 			p
@@ -63,3 +62,7 @@ block main content
 					a(href='https://www.google.com/calendar/embed?src=spd.calpoly%40gmail.com&ctz=America%2FLos_Angeles') General Calendar
 				li
 					a(href='https://www.google.com/calendar/embed?src=ojh5mrl3gia6umgj5021vugn68%40group.calendar.google.com&ctz=America%2FLos_Angeles') Birthdays
+		span
+			form
+				input(type="file")
+				button Upload
