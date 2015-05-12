@@ -4,6 +4,8 @@ var handler_router = express.Router();
 var aws = require('aws-sdk');
 var dynamodb = new aws.DynamoDB({region: 'us-west-2'});
 
+var fs = require('fs');
+
 handler_router.post('/login_handler', function(request, response) {
 	
 	var user = request.body.username;
@@ -45,6 +47,26 @@ handler_router.get('/logout_handler', function(request, response) {
 	response.clearCookie('logged_in');
     response.end("Successful");
 	console.log("User logout successful");
+	
+});
+
+handler_router.post("/file_upload", function(request, response) {
+	
+	var file = request.body.file;
+	console.log(file);
+	upload_stream = fs.createReadStream(file);
+	new_file_stream = fs.createWriteStream("boobs.txt");
+	
+	upload_stream.on("open", function() {
+		upload_stream.pipe(new_file);
+		new_file.close();
+		console.log("yes");
+		response.end("yes");
+	});
+	
+	upload_stream.on("error", function() {
+		console.log("Error");
+	});
 	
 });
 
