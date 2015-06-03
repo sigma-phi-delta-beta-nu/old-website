@@ -8,7 +8,7 @@ var dynamodb = new aws.DynamoDB({ region: "us-west-2" });
 exports.queryPledgeClasses = function(callback) {
   
   var membership = {};
-  var pledgeClass = [];
+  var pledgeClasses = [];
   var classes = [];
   
   var scanParams = {
@@ -45,21 +45,21 @@ exports.queryPledgeClasses = function(callback) {
     });
   };
   
-  var classQuery = function(pledgeClass, callback) {
-    for (var i = 0; i < pledgeClass.length; i++) {
+  var classQuery = function(pledgeClasses, callback) {
+    for (var i = 0; i < pledgeClasses.length; i++) {
       var queryParams = {
         IndexName: "class",
         KeyConditions: {
           "class": {
             ComparisonOperator: "EQ",
-            AttributeValueList: [{ "S": pledgeClass[i] }]
+            AttributeValueList: [{ "S": pledgeClasses[i] }]
           }
         },
         TableName: "membership",
         AttributesToGet: ["firstname", "lastname"]
       }
       classes.push({ 
-        pledgeClasses: pledgeClass[i],
+        pledgeClass: pledgeClasses[i],
         params: queryParams
       });
       if (i === pledgeClasses.length - 1) {
@@ -80,7 +80,8 @@ exports.queryPledgeClasses = function(callback) {
           for (var i = 0; i < length; i++) {
             var firstname = list[i]["firstname"]["S"];
             var lastname = list[i]["lastname"]["S"];
-            membership[classes[pledgeClassIndex]["pledgeClass"]].push({ "firstname": firstname, "lastname": lastname });
+            membership[classes[pledgeClassIndex]["pledgeClass"]]
+              .push({ "firstname": firstname, "lastname": lastname });
           }
         }
         dbQuery(classes, pledgeClassesToGo - 1, callback);

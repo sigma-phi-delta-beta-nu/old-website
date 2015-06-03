@@ -17,6 +17,7 @@ router.get("/about_us", function(request, response) {
     response.render("about_us", {
       title: "About Us",
       error: "null",
+      members: data,
     });
   });
 });
