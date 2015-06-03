@@ -40,7 +40,7 @@ h4 {
 p {
 	text-align: left;
 	margin-bottom: 0.5em;
-    line-height: 1.5em;
+    line-height: 1.25em;
 }
 
 ol, ul {
@@ -49,10 +49,15 @@ ol, ul {
 
 li {
 	margin-left: 1.5em;
+    line-height: 1.25em;
 }
 
 table {
 	margin-bottom: 1em;
+}
+
+tr {
+    line-height: 1.25em;
 }
 
 input {

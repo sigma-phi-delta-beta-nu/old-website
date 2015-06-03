@@ -32,9 +32,12 @@ router.get("/recruitment", function(request, response) {
 
 /* GET contact us page */
 router.get("/contact_us", function(request, response) {
-  response.render("contact_us", {
-    title: "About Us",
-    error: null
+  FullQuerys.queryPositions(function(data) {
+    response.render("contact_us", {
+      title: "Contact Us",
+      error: null,
+      positions: data
+    });
   });
 });
 

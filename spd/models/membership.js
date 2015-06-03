@@ -99,3 +99,74 @@ exports.queryPledgeClasses = function(callback) {
     });
   });
 }
+
+exports.queryPositions = function(callback) {
+  
+  var positions = [];
+  var pos = [];
+  var scanParams = {
+    TableName: "membership",
+    IndexName: "status",
+    AttributesToGet: ["positions", "firstname", "lastname", "email"]
+  }
+  
+  var scan = function(params, callback) {
+    dynamodb.scan(params, function(error, data) {
+      if (error) {
+        console.log(error);
+      } else {
+        var membersList = data.Items;
+        var length = data.Count;
+        for (var i = 0; i < length; i++) {
+          var member = membersList[i];
+          for (var j = 0; j < member["positions"]["SS"].length; j++) {
+            var position = member["positions"]["SS"][j];
+            if (position != "(Empty)") {
+              positions.push({
+                position: position,
+                firstname: member["firstname"]["S"],
+                lastname: member["lastname"]["S"],
+                email: member["email"]["S"]
+              });
+            }
+          }
+          if (i === length - 1) {
+            callback();
+          }
+        }
+      }
+    });
+  }
+  
+  var positionSort = function(positions, callback) {
+    
+    var elected = ["Chief Engineer", "Vice Chief Engineer", "Business Manager", "Secretary", "Historian", "Chaplain", "Pledge Master", "Guide", "Recruitment Chairman"];
+    var appointed = ["Social Chairman", "Risk Reduction Chairman", "Fundraising Chairman", "Expansion Chairman", "Athletic Chairman", "Pledge Board Chairman", "Brotherhood Chairman", "Philanthropy Chairman", "Assistant Business Manager", "Sergeant At Arms", "Webmaster", "Engineering Governing Council Delegate"];
+    var pos = {};
+    pos["elected"] = [];
+    pos["appointed"] = [];
+    
+    for (var i = 0; i < positions.length; i++) {
+      for (var j = 0; j < elected.length; j++) {
+        if (positions[i]["position"] == elected[j]) {
+          pos["elected"][j] = positions[i];
+        }
+      }
+      for (var k = 0; k < appointed.length; k++) {
+        if (positions[i]["position"] == appointed[k]) {
+          pos["appointed"][k] = positions[i];
+        }
+      }
+      if (i == positions.length - 1) {
+        callback(pos);
+      }
+    }
+  }
+  
+  scan(scanParams, function() {
+    positionSort(positions, function(sorted) {
+      callback(sorted);
+    });
+  });
+  
+}

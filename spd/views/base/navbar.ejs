@@ -10,17 +10,19 @@
       </span>
     </div>
   </div>
-  <span>
-    <% if (title == "About Us") { %>
-      <a href="/about_us" class="active">
+  <% if (title == "About Us") { %>
+    <span class="active">
+      <a href="/about_us">
         <h4 class="active">About Us</h4>
       </a>
-    <% } else { %>
+    </span>
+  <% } else { %>
+    <span>
       <a href="/about_us">
         <h4>About Us</h4>
       </a>
-    <% } %>
-  </span>
+    </span>
+  <% } %>
   <span>
     <a href="/recruitment"><h4>Recruitment</h4></a>
   </span>
