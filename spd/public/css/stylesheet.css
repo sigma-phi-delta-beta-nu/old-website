@@ -66,10 +66,10 @@ input {
     margin: 0.5em auto;
 }
 
-#title {
-	padding-top: 1em;
-	padding-bottom: 1em;
+.container {
+    padding: 1em;
 }
+
 
 *:focus {
 	outline: 0;
@@ -101,7 +101,14 @@ input {
 
 .navbar .active {
     background-color: #000000;
-    color: #FA0000;
+}
+
+.navbar .active h3 {
+    color: #fa0000;
+}
+
+.navbar .active h4 {
+    color: #fa0000;
 }
 
 .navbar span {
@@ -129,7 +136,7 @@ input {
     padding: 0px;
 }
 
-/* Submenu */
+/* Columns */
 
 .column {
     width: 15%;
@@ -137,40 +144,22 @@ input {
     float: left;
 }
 
-.submenu_animate div {
-	padding: 0.5em;
-	text-align: center;
-	border-bottom: 1px solid black;
+.column .container div {
+    border-top: 1px solid black;
+	padding: 1em;
+	overflow: hidden;
 }
 
-.submenu_static div {
-	padding: 0.5em;
-	text-align: center;
-	border-bottom: 1px solid black;
-}
-
-#submenu_spacer {
-	display: block;
-	height: 3em;
-	border-bottom: 1px solid black;
-}
-
-.submenu a {
-    color: black;
+.column a {
     text-decoration: none;
+    color: #000000;
 }
 
-.submenu a:hover {
-    color: #FA0000;
+.column a:hover {
+    color: #fa0000;
 }
 
 /* Main Page container */
-
-#blank {
-    padding-top: 0em;
-    padding-bottom: 0em;
-	border-bottom: 1px solid black;
-}
 
 .main {
     width: 70%;
@@ -178,17 +167,13 @@ input {
     float: left;
 }
 
-.column .container {
-    padding: 1em 1em 0em 1em;
-}
-
 .main .container {
 	padding: 1em 0em 1em 0em;
 }
 
 .main .container div {
-    border-bottom: 1px solid black;
-	padding: 1em 1em 0em 1em;
+    border-top: 1px solid black;
+	padding: 1em;
 	overflow: hidden;
 }
 
@@ -210,26 +195,8 @@ input {
 	margin: 0em;
 }
 
-#bottom_element {
-	border-width: 0em;
-}
-
-li img {
+#flexslider li img {
 	padding: 0em;
-}
-
-/* News Column */
-
-.news_column {
-    width: 15%;
-    display: inline-block;
-    float: left;
-	text-align: center;
-}
-
-.news_column img {
-    width: 100%;
-	margin-bottom: 1em;
 }
 
 /* Footer */

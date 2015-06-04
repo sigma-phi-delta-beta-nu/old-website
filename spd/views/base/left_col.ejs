@@ -4,17 +4,31 @@
 
 <div class="column">
   <div class="container">
-    <div id="blank"></div>
-    <div class="container" style="text-align: center;">
-      <% if (user != null) { %>
-        <h4>Logout</h4>
-        <button id="logout" type="button">Submit</button>
-      <% } else { %>
+    <% if (user !== null) { %>
+      <div class="container" style="text-align: center;">
+        <h4>Logged in as: <%= user.username %></h4>
+        <button id="logout" type="button">Logout</button>
+      </div>
+      <div class="container" style="text-align: center;">
+        <a href="#"><h4>Personalized Links</h4></a>
+      </div>
+      <div class="container" style="text-align: center;">
+        <a href="#"><h4>SPD Drive</h4></a>
+      </div>
+      <div class="container" style="text-align: center;">
+        <a href="#"><h4>Email</h4></a>
+      </div>
+      <div class="container" style="text-align: center;">
+        <a href="#"><h4>Events</h4></a>
+      </div>
+    <% } else { %>
+      <div class="container" style="text-align: center;">
         <h4>Login</h4>
         <input type="text" placeholder="Username"/>
         <input type="password" placeholder="Password"/>
         <button id="login" type="button">Submit</button>
-      <% } %>
-    </div>
+      </div>
+    <% } %>
+    <div></div>
   </div>
 </div>

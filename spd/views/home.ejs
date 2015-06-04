@@ -14,16 +14,15 @@
     <% include base/left_col %>
     <div class="main">
       <div class="container">
-        <% if (error != null) { %>
+        <% if (error !== null) { %>
           <div>
             <% include error %>
           </div>
         <% } %>
-        <div id="blank"></div>
         <div id="banner">
           <img src="/images/spdbanner.png"/>
         </div>
-        <div class="container" id="bottom_element">
+        <div class="container">
           <div class="flexslider" id="flexslider">
             <ul class="slides">
               <li><img src="/images/spdcharter.jpg"/></li>
