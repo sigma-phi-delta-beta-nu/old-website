@@ -59,6 +59,22 @@
     </span>
   <% } %>
   
+  <% if (user !== null) { %>
+    <% if (title == "Dashboard") { %>
+      <span class="active">
+        <a href="/dashboard">
+          <h4 class="active">Dashboard</h4>
+        </a>
+      </span>
+    <% } else { %>
+      <span>
+        <a href="/dashboard">
+          <h4>Dashboard</h4>
+        </a>
+      </span>
+    <% } %>
+  <% } %>
+  
   <span id="school_nav_container">
     <div style="margin: auto; padding: 0.9em;">
       <a href="//www.calpoly.edu/"><h4>Cal Poly, SLO</h4></a>
