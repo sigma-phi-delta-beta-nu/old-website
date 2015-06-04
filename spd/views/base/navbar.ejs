@@ -5,11 +5,18 @@
 <div class="navbar">
   <div id="main_nav_container">
     <div id="main_nav_element">
-      <span id="main_active">
-        <a href="/"><h3>&#931&#934&#916</h3></a>
-      </span>
+      <% if (title == "Home") { %>
+        <span id="main_active" class="active">
+          <a href="/"><h3 class="active">&#931&#934&#916</h3></a>
+        </span>
+      <% } else { %>
+        <span id="main_active">
+          <a href="/"><h3>&#931&#934&#916</h3></a>
+        </span>
+      <% } %>
     </div>
   </div>
+  
   <% if (title == "About Us") { %>
     <span class="active">
       <a href="/about_us">
@@ -23,13 +30,39 @@
       </a>
     </span>
   <% } %>
-  <span>
-    <a href="/recruitment"><h4>Recruitment</h4></a>
-  </span>
-  <span>
-    <a href="/contact_us"><h4>Contact Us</h4></a>
-  </span>
+  
+  <% if (title == "Recruitment") { %>
+    <span class="active">
+      <a href="/recruitment">
+        <h4 class="active">Recruitment</h4>
+      </a>
+    </span>
+  <% } else { %>
+    <span>
+      <a href="/recruitment">
+        <h4>Recruitment</h4>
+      </a>
+    </span>
+  <% } %>
+  
+  <% if (title == "Contact Us") { %>
+    <span class="active">
+      <a href="/contact_us">
+        <h4 class="active">Contact Us</h4>
+      </a>
+    </span>
+  <% } else { %>
+    <span>
+      <a href="/contact_us">
+        <h4>Contact Us</h4>
+      </a>
+    </span>
+  <% } %>
+  
   <span id="school_nav_container">
-    <a href="//www.calpoly.edu/"><h4>Cal Poly, SLO</h4></a>
+    <div style="margin: auto; padding: 0.9em;">
+      <a href="//www.calpoly.edu/"><h4>Cal Poly, SLO</h4></a>
+    </div>
   </span>
+  
 </div>

@@ -1,6 +1,6 @@
 /* General Code */
 
-h1, h2, h3, h4, p, ul, ol, li, body, div, span {
+h1, h2, h3, h4, p, ul, ol, li, input, body, div, span {
 	margin: 0em;
 	padding: 0em;
 }
@@ -61,10 +61,8 @@ tr {
 }
 
 input {
-	display: block;
-	width: 50%;
-	margin: auto;
-	margin-top: 1em;
+	display: inline-block;
+    width: 30px;
 }
 
 button {
@@ -130,10 +128,8 @@ button {
 	float: right;
 	width: 15%;
 	text-align: center;
-}
-
-#school_nav {
-	padding-left: 28%;
+    margin: 0px;
+    padding: 0px;
 }
 
 /* Submenu */
