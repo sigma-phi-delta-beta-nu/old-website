@@ -7,7 +7,8 @@ var FullQuerys = require("../models/membership");
 router.get("/", function(req, res, next) {
   res.render("home", {
     title: "Home",
-    error: null
+    error: null,
+    user: null
   });
 });
 
@@ -17,7 +18,8 @@ router.get("/about_us", function(request, response) {
     response.render("about_us", {
       title: "About Us",
       error: "null",
-      members: data,
+      user: null,
+      members: data
     });
   });
 });
@@ -26,7 +28,8 @@ router.get("/about_us", function(request, response) {
 router.get("/recruitment", function(request, response) {
   response.render("recruitment", {
     title: "Recruitment",
-    error: null
+    error: null,
+    user: null
   });
 });
 
@@ -36,6 +39,7 @@ router.get("/contact_us", function(request, response) {
     response.render("contact_us", {
       title: "Contact Us",
       error: null,
+      user: null,
       positions: data
     });
   });
@@ -45,6 +49,7 @@ router.get("/contact_us", function(request, response) {
 router.get("/internal", function(request, response) {
   response.render("external", {
     title: "External",
+    user: null,
     error: null
   });
 });
