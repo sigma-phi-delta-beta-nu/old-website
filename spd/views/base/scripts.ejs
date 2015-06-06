@@ -1,8 +1,12 @@
-<!--          scripts.ejs         -->
-<!--  Scripts partial for pages   -->
-<!--  Written by Brandon Kelley   -->
+<%          /* scripts.ejs */         %>
+<%   /* Script inclusion partial */   %>
+<%   /* Written by Brandon Kelley */  %>
 
 <script src="/js/jquery-2.1.3.min.js"></script>
 <script src="/js/jquery.js"></script>
 <script src="/js/jquery.cookie.js"></script>
 <script src="/js/sha256.js"></script>
+<% if (title === "Home") { %>
+  <script src="/js/jquery.flexslider.js"></script>
+  <script src="/js/jquery.flexslider.start.js"></script>
+<% } %>

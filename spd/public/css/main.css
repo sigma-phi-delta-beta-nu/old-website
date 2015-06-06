@@ -77,57 +77,74 @@ input {
 
 /* Navigation Bar */
 
-.navbar {
+#mobile_navbar_button {
+    display: inline-block;
+    margin: 0.5em;
+    width: 2em;
+    height: 2em;
+    background-color: #000000;
+    border: 1px solid #fa0000;
+    border-radius: 5px;
+}
+
+#mobile_navbar {
+    display: none;
+}
+
+#navbar {
     display: block;
     width: 100%;
     height: 3em;
     background-color: #2A2A2A;
+    overflow: hidden;
 }
 
-#main_nav_container {
+#navbar_header {
 	display: inline-block;
 	width: 15%;
 	float: left;
+    text-align: center;
 }
 
-#main_nav_element {
-	padding-left: 28%;
-	padding-right: 28%;
+#navbar_header_container {
+    display: block;
+    width: 100px;
+    margin: 0em auto;
 }
 
-#main_active {
-	padding: 0.3em 10% 0.3em 10%;
+#navbar_header_container div {
+    padding: 0.35em 0em 0.35em 0em;
 }
 
-.navbar .active {
+#navbar .active {
     background-color: #000000;
 }
 
-.navbar .active h3 {
+#navbar .active h3 {
     color: #fa0000;
 }
 
-.navbar .active h4 {
+#navbar .active h4 {
     color: #fa0000;
 }
 
-.navbar span {
+#navbar_body span {
     display: inline-block;
 	float: left;
 	text-align: center;
 	padding: 0.9em 1em 0.9em 1em;
 }
 
-.navbar a {
+#navbar a {
     text-decoration: none;
     color: #FFFFFF;
 }
 
-.navbar a:hover {
+#navbar a:hover {
     color: #FA0000;
 }
 
-#school_nav_container {
+#navbar_school_container {
 	display: inline-block;
 	float: right;
 	width: 15%;
@@ -148,6 +165,7 @@ input {
     border-top: 1px solid black;
 	padding: 1em;
 	overflow: hidden;
+    text-align: center;
 }
 
 .column a {
@@ -189,6 +207,7 @@ input {
 #flexslider { 
 	border-width: 0px;
 	padding: 0em;
+    margin: 0em;
 }
 
 #flexslider ul li {

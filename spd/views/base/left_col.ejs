@@ -1,28 +1,31 @@
-<!--           left_col.ejs          -->
-<!--  Left column partial for pages  -->
-<!--    Written by Brandon Kelley    -->
+<%         /* left_col.ejs */         %>
+<%      /* Left column partial */     %>
+<%   /* Written by Brandon Kelley */  %>
 
-<div class="column">
+<span class="column">
   <div class="container">
     <% if (user !== null) { %>
-      <div class="container" style="text-align: center;">
+      <div>
         <h4>Logged in as: <%= user.username %></h4>
         <button id="logout" type="button">Logout</button>
       </div>
-      <div class="container" style="text-align: center;">
+      <div>
         <a href="#"><h4>Personalized Links</h4></a>
       </div>
-      <div class="container" style="text-align: center;">
+      <div>
         <a href="#"><h4>SPD Drive</h4></a>
       </div>
-      <div class="container" style="text-align: center;">
+      <div>
         <a href="#"><h4>Email</h4></a>
       </div>
-      <div class="container" style="text-align: center;">
+      <div>
         <a href="#"><h4>Events</h4></a>
       </div>
+      <div>
+        <a href="http://www.reddit.com"><h4>Reddit</h4></a>
+      </div>
     <% } else { %>
-      <div class="container" style="text-align: center;">
+      <div>
         <h4>Login</h4>
         <input type="text" placeholder="Username"/>
         <input type="password" placeholder="Password"/>
@@ -31,4 +34,4 @@
     <% } %>
     <div></div>
   </div>
-</div>
+</span>

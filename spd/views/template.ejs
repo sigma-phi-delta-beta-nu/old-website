@@ -1,0 +1,36 @@
+<%         /* template.ejs */         %>
+<%  /* Template for serving pages */  %>
+<%   /* Written by Brandon Kelley */  %>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sigma Phi Delta Fraternity</title>
+  <% include base/styles %>
+</head>
+
+<body>
+  <% include base/navbar %>
+  <div class="content">
+    <% include base/left_col %>
+    <% if (title === "Home") { %>
+      <% include content/home %>
+    <% } else if (title === "About Us") { %>
+      <% include content/about_us %>
+    <% } else if (title === "Recruitment") { %>
+      <% include content/recruitment %>
+    <% } else if (title === "Philanthropy") { %>
+      <% include content/philanthropy %>
+    <% } else if (title === "Contact Us") { %>
+      <% include content/contact_us %>
+    <% } else if (title === "Dashboard") { %>
+      <% include content/dashboard %>
+    <% } %>
+    <% include base/right_col %>
+  </div>
+  <% include base/footer %>
+  <% include base/scripts %>
+</body>
+
+</html>

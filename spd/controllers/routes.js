@@ -7,9 +7,8 @@ var authenticate = require("../models/item").authenticate;
 /* GET home page */
 router.get("/", function(request, response) {
   authenticate(request.cookies, function(authenticatedUser) {
-    response.render("home", {
+    response.render("template", {
       title: "Home",
-      error: null,
       user: authenticatedUser
     });
   });
@@ -19,9 +18,8 @@ router.get("/", function(request, response) {
 router.get("/about_us", function(request, response) {
   authenticate(request.cookies, function(authenticatedUser) {
     BatchQuerys.queryPledgeClasses(function(membership) {
-      response.render("about_us", {
+      response.render("template", {
         title: "About Us",
-        error: null,
         user: authenticatedUser,
         members: membership
       });
@@ -32,9 +30,18 @@ router.get("/about_us", function(request, response) {
 /* GET recruitment page */
 router.get("/recruitment", function(request, response) {
   authenticate(request.cookies, function(authenticatedUser) {
-    response.render("recruitment", {
+    response.render("template", {
       title: "Recruitment",
-      error: null,
+      user: authenticatedUser
+    });
+  });
+});
+
+/* GET philanthropy page */
+router.get("/philanthropy", function(request, response) {
+  authenticate(request.cookies, function(authenticatedUser) {
+    response.render("template", {
+      title: "Philanthropy",
       user: authenticatedUser
     });
   });
@@ -44,9 +51,8 @@ router.get("/recruitment", function(request, response) {
 router.get("/contact_us", function(request, response) {
   authenticate(request.cookies, function(authenticatedUser) {
     BatchQuerys.queryPositions(function(officers) {
-      response.render("contact_us", {
+      response.render("template", {
         title: "Contact Us",
-        error: null,
         user: authenticatedUser,
         positions: officers
       });
@@ -57,10 +63,9 @@ router.get("/contact_us", function(request, response) {
 /* GET profile page */
 router.get("/dashboard", function(request, response) {
   authenticate(request.cookies, function(authenticatedUser) {
-    response.render("dashboard", {
+    response.render("template", {
       title: "Dashboard",
-      user: authenticatedUser,
-      error: null
+      user: authenticatedUser
     });
   });
 });

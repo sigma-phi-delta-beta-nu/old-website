@@ -1,81 +1,102 @@
-<!--          navbar.ejs         -->
-<!--  Navbar partial for pages   -->
-<!--  Written by Brandon Kelley  -->
+<%          /* navbar.ejs */          %>
+<%        /* Navbar partial */        %>
+<%   /* Written by Brandon Kelley */  %>
 
-<div class="navbar">
-  <div id="main_nav_container">
-    <div id="main_nav_element">
-      <% if (title == "Home") { %>
-        <span id="main_active" class="active">
-          <a href="/"><h3>&#931&#934&#916</h3></a>
-        </span>
-      <% } else { %>
-        <span id="main_active">
-          <a href="/"><h3>&#931&#934&#916</h3></a>
-        </span>
-      <% } %>
-    </div>
-  </div>
+<div id="navbar">
   
-  <% if (title == "About Us") { %>
-    <span class="active">
-      <a href="/about_us">
-        <h4 class="active">About Us</h4>
-      </a>
-    </span>
-  <% } else { %>
-    <span>
+  <span id="mobile_navbar_button"></span>
+  
+  <span id="mobile_navbar">
+    <% if (title !== "Home") { %>
+      <div>
+        <a href="/"><p>Home</p></a>
+      </div>
+    <% } %>
+    <% if (title !== "About Us") { %>
+      <div>
+        <a href="/about_us"><p>About Us</p></a>
+      </div>
+    <% } %>
+    <% if (title !== "Recruitment") { %>
+      <div>
+        <a href="/recruitment"><p>Recruitment</p></a>
+      </div>
+    <% } %>
+    <% if (title !== "Philanthropy") { %>
+      <div>
+        <a href="/philanthropy"><p>Philanthropy</p></a>
+      </div>
+    <% } %>
+    <% if (title !== "Contact Us") { %>
+      <div>
+        <a href="/contact_us"><p>Contact Us</p></a>
+      </div>
+    <% } %>
+    <% if (title !== "Dashboard" && user !== null) { %>
+      <div>
+        <a href="/dashboard"><p>Dashboard</p></a>
+      </div>
+    <% } %>
+  </span>
+  
+  <span id="navbar_header">
+    <div id="navbar_header_container">
+      <div <% if (title === "Home") { %>class="active"<% } %>>
+        <a href="/"><h3>&#931&#934&#916</h3></a>
+      </div>
+    </div>
+  </span>
+  
+  <span id="navbar_body">
+    <span
+      <% if (title === "About Us") { %>
+        class="active"
+      <% } %>>
       <a href="/about_us">
         <h4>About Us</h4>
       </a>
     </span>
-  <% } %>
-  
-  <% if (title == "Recruitment") { %>
-    <span class="active">
-      <a href="/recruitment">
-        <h4 class="active">Recruitment</h4>
-      </a>
-    </span>
-  <% } else { %>
-    <span>
+    
+    <span 
+      <% if (title === "Recruitment") { %>
+        class="active"
+      <% } %>>
       <a href="/recruitment">
         <h4>Recruitment</h4>
       </a>
     </span>
-  <% } %>
-  
-  <% if (title == "Contact Us") { %>
-    <span class="active">
-      <a href="/contact_us">
-        <h4 class="active">Contact Us</h4>
+    
+    <span 
+      <% if (title === "Philanthropy") { %>
+        class="active"
+      <% } %>>
+      <a href="/philanthropy">
+        <h4>Philanthropy</h4>
       </a>
     </span>
-  <% } else { %>
-    <span>
+    
+    <span
+      <% if (title === "Contact Us") { %>
+        class="active"
+      <% } %>>
       <a href="/contact_us">
         <h4>Contact Us</h4>
       </a>
     </span>
-  <% } %>
-  
-  <% if (user !== null) { %>
-    <% if (title == "Dashboard") { %>
-      <span class="active">
-        <a href="/dashboard">
-          <h4 class="active">Dashboard</h4>
-        </a>
-      </span>
-    <% } else { %>
-      <span>
+    
+    <% if (user !== null) { %>
+      <span
+        <% if (title == "Dashboard") { %>
+          class="active"
+        <% } %>>
         <a href="/dashboard">
           <h4>Dashboard</h4>
         </a>
       </span>
     <% } %>
-  <% } %>
-  
-  <span id="school_nav_container">
+  </span>
+    
+  <span id="navbar_school_container">
     <div style="margin: auto; padding: 0.9em;">
       <a href="//www.calpoly.edu/"><h4>Cal Poly, SLO</h4></a>
     </div>
