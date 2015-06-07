@@ -7,22 +7,19 @@
     <% if (user !== null) { %>
       <div>
         <h4>Logged in as: <%= user.username %></h4>
+        <br/>
         <button id="logout" type="button">Logout</button>
       </div>
+      <div></div>
       <div>
-        <a href="#"><h4>Personalized Links</h4></a>
-      </div>
-      <div>
-        <a href="#"><h4>SPD Drive</h4></a>
-      </div>
-      <div>
-        <a href="#"><h4>Email</h4></a>
-      </div>
-      <div>
-        <a href="#"><h4>Events</h4></a>
-      </div>
-      <div>
-        <a href="http://www.reddit.com"><h4>Reddit</h4></a>
+        <h4>Personalized Links</h4>
+        <br/>
+        <ul style="margin-left: 1em;">
+          <li style="text-align: left"><a href="#">SPD Drive</a></li>
+          <li style="text-align: left"><a href="#">Email</a></li>
+          <li style="text-align: left"><a href="#">Events</a></li>
+          <li style="text-align: left"><a href="http://www.reddit.com">Reddit</a></li>
+        </ul>
       </div>
     <% } else { %>
       <div>

@@ -2,7 +2,7 @@
 
 This is the code for the Sigma Phi Delta Fraternity website.
 
-## To run: ##
+### To run: ###
 
 ```javascript
 npm start
