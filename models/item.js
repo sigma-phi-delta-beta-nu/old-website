@@ -46,7 +46,21 @@ exports.authenticate = function(cookies, callback) {
       console.log(error);
     } else {
       var brothername = data.Item.nickname["S"];
-      callback({ username: user, nickname: brothername });
+      
+      queryParams["TableName"] = "user_data";
+      queryParams["AttributesToGet"] = ["links"];
+      dynamodb.getItem(queryParams, function(error, data) {
+        if (error) {
+          console.log(error);
+        } else {
+          var userLinks = [];
+          var keys = Object.keys(data.Item.links["M"]);
+          for (var i = 0; i < keys.length; i++) {
+            userLinks[keys[i]] = data.Item.links["M"][keys[i]]["S"];
+          }
+          callback({ username: user, nickname: brothername, links: userLinks});
+        }
+      });
     }
   });
  

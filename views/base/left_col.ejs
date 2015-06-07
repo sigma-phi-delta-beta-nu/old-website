@@ -15,10 +15,14 @@
         <h4>Personalized Links</h4>
         <br/>
         <ul style="margin-left: 1em;">
-          <li style="text-align: left"><a href="#">SPD Drive</a></li>
-          <li style="text-align: left"><a href="#">Email</a></li>
-          <li style="text-align: left"><a href="#">Events</a></li>
-          <li style="text-align: left"><a href="http://www.reddit.com">Reddit</a></li>
+          <li style="text-align: left;"><a href="http://www.reddit.com">Reddit</a></li>
+          <% var keys = Object.keys(user.links) %> 
+          <% for (var i = 0; i < keys.length; i++) { %>
+            <% var link = "https://" + user.links[keys[i]] %>
+            <li style="text-align: left;">
+              <a href="<%= link %>"><%= keys[i] %></a>
+            </li>
+          <% } %>
         </ul>
       </div>
     <% } else { %>
