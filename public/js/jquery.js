@@ -47,6 +47,31 @@ $(document).ready(function() {
 
 	});
 	
+    $("#add_link").click(function() {
+      
+      var linkLabel = $(this).closest("div").find("input").first().val();
+      var linkURL = $(this).closest("div").find("input").last().val();
+      
+      var sendingData = {
+        label: linkLabel,
+        url: linkURL
+      }
+      console.log(sendingData);
+      
+      $.ajax({
+        type: "GET",
+        url: "/addLink",
+        data: sendingData,
+        success: function(returnedData) {
+          window.location.reload(true);
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+      
+    });
+    
 	$("#file_upload").click(function() {
 		
 		f = document.getElementById("file").files[0];

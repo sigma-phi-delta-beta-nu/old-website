@@ -1,6 +1,8 @@
-// These functions provide an interface to the database
-// that returns the entire membership, sorted in various
-// ways.
+/*  Functions provided by this file:  */
+/*   - queryPledgeClasses             */
+/*   - queryPositions                 */
+/*   - login                          */
+/*   - authenticate                   */
 
 var aws = require("aws-sdk");
 var dynamodb = new aws.DynamoDB({ region: "us-west-2" });
@@ -98,7 +100,7 @@ exports.queryPledgeClasses = function(callback) {
       });
     });
   });
-}
+};
 
 exports.queryPositions = function(callback) {
   
@@ -136,7 +138,7 @@ exports.queryPositions = function(callback) {
         }
       }
     });
-  }
+  };
   
   var positionSort = function(positions, callback) {
     
@@ -161,7 +163,7 @@ exports.queryPositions = function(callback) {
         callback(pos);
       }
     }
-  }
+  };
   
   scan(scanParams, function() {
     positionSort(positions, function(sorted) {
@@ -169,4 +171,65 @@ exports.queryPositions = function(callback) {
     });
   });
   
-}
+};
+
+exports.login = function(username, password, callback) {
+  
+  var queryParams = {
+    Key: {
+      username: {"S" : username}
+    },
+    TableName: "users",
+    AttributesToGet: ["password"]
+  }
+  
+  dynamodb.getItem(queryParams, function(error, data) {
+    if (error) {
+      //console.log(error);
+    } else {
+      if (data.Item != null) {
+        if (data.Item["password"]["S"] === password) {
+          callback(username);
+        } else {
+          callback(null);
+        }
+      }
+    }
+  });
+
+};
+
+exports.authenticate = function(cookies, callback) {
+  
+  if (cookies["logged_in"] === undefined) {
+    callback(null);
+    return;  //for some reason, this is necessary
+  }
+  
+  var user = cookies["logged_in"];
+  var queryParams = {
+    Key: { username: { "S": user }},
+    TableName: "membership",
+    AttributesToGet: ["nickname"]
+  }
+  
+  dynamodb.getItem(queryParams, function(error, data) {
+    if (error) {
+      console.log(error);
+    } else {
+      var brothername = data.Item.nickname["S"];
+      
+      queryParams["TableName"] = "user_data";
+      queryParams["AttributesToGet"] = ["links"];
+      dynamodb.getItem(queryParams, function(error, data) {
+        var keys = Object.keys(data.Item["links"]["M"]);
+        var userLinks = [];
+        for (var i = 0; i < keys.length; i++) {
+          userLinks[keys[i]] = data.Item["links"]["M"][keys[i]]["S"];
+        }
+        callback({ username: user, nickname: brothername, links: userLinks });
+      });
+    }
+  });
+ 
+};
