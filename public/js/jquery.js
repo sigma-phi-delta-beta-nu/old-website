@@ -49,19 +49,19 @@ $(document).ready(function() {
 	
     $("#add_link").click(function() {
       
-      var linkLabel = $(this).closest("div").find("input").first().val();
-      var linkURL = $(this).closest("div").find("input").last().val();
+      var linkLabel = $(this).closest("div").find("input").first().val().trim();
+      var linkURL = $(this).closest("div").find("input").last().val().trim();
       
       var sendingData = {
-        label: linkLabel,
-        url: linkURL
+        "label": linkLabel,
+        "url": linkURL
       }
-      console.log(sendingData);
       
       $.ajax({
-        type: "GET",
+        type: "POST",
         url: "/addLink",
-        data: sendingData,
+        data: JSON.stringify(sendingData),
+        contentType: "application/json",
         success: function(returnedData) {
           window.location.reload(true);
         },

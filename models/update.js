@@ -10,7 +10,7 @@ exports.addLink = function(username, label, url, callback) {
     }
   };
   var updateParams = {
-    "Key": { "username": { "S": username } },
+    "Key": { "username": { "S": username }},
     "TableName": "user_data",
     "AttributeUpdates": {
       "links": {

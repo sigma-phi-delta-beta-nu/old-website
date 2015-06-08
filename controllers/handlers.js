@@ -29,7 +29,7 @@ router.get("/logout", function(request, response) {
 
 });
 
-router.get("/addLink", function(request, response) {
+router.post("/addLink", function(request, response) {
   
   var username = request.cookies["logged_in"];
   var label = request.body.label;
