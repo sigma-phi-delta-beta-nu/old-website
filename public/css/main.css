@@ -181,6 +181,10 @@ input {
     display: none;
 }
 
+#username {
+    color: #FA0000;
+}
+
 /* Main Page container */
 
 .main {

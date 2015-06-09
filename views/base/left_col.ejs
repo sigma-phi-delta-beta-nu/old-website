@@ -6,7 +6,7 @@
   <div class="container">
     <% if (user !== null) { %>
       <div>
-        <h4>Logged in as: <%= user.username %></h4>
+        <h4>Logged in as: </h4><h4 id="username"><%= user.username %></h4>
         <br/>
         <button id="logout" type="button">Logout</button>
       </div>

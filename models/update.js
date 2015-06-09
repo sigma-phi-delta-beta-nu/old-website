@@ -3,12 +3,18 @@ var dynamodb = new aws.DynamoDB({ region: "us-west-2" });
 
 exports.addLink = function(username, label, url, callback) {
   
+  var checkedUrl = url;
+  
+  if (url[0] !== 'h') {
+    checkedUrl = "http://" + url;
+  }
+  
   var updateData = {
     "L": [
       {
         "M": {
           "label": { "S": label },
-          "url": { "S": url }
+          "url": { "S": checkedUrl }
         }
       }
     ]
