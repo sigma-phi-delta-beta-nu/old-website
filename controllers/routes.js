@@ -37,10 +37,20 @@ router.get("/recruitment", function(request, response) {
 });
 
 /* GET philanthropy page */
-router.get("/philanthropy", function(request, response) {
+router.get("/events", function(request, response) {
   DBGet.authenticate(request.cookies, function(authenticatedUser) {
     response.render("template", {
-      title: "Philanthropy",
+      title: "Events",
+      user: authenticatedUser
+    });
+  });
+});
+
+/* GET philanthropy page */
+router.get("/gallery", function(request, response) {
+  DBGet.authenticate(request.cookies, function(authenticatedUser) {
+    response.render("template", {
+      title: "Gallery",
       user: authenticatedUser
     });
   });

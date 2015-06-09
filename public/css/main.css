@@ -101,7 +101,7 @@ input {
 
 #navbar_header {
 	display: inline-block;
-	width: 15%;
+	width: 20%;
 	float: left;
     text-align: center;
 }
@@ -147,7 +147,7 @@ input {
 #navbar_school_container {
 	display: inline-block;
 	float: right;
-	width: 15%;
+	width: 20%;
 	text-align: center;
     margin: 0px;
     padding: 0px;
@@ -156,12 +156,12 @@ input {
 /* Columns */
 
 .column {
-    width: 15%;
+    width: 20%;
     display: inline-block;
     float: left;
 }
 
-.column .container div {
+.column_section {
     border-top: 1px solid black;
 	padding: 1em;
 	overflow: hidden;
@@ -188,7 +188,7 @@ input {
 /* Main Page container */
 
 .main {
-    width: 70%;
+    width: 60%;
     display: inline-block;
     float: left;
 }
@@ -197,7 +197,7 @@ input {
 	padding: 1em 0em 1em 0em;
 }
 
-.main .container div {
+.main_section {
     border-top: 1px solid black;
 	padding: 1em;
 	overflow: hidden;
@@ -224,6 +224,10 @@ input {
 
 #flexslider li img {
 	padding: 0em;
+}
+
+#membership span{
+    margin-right: 30px;
 }
 
 /* Footer */
