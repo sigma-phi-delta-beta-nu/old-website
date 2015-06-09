@@ -1,0 +1,7 @@
+@media screen and (min-width: 1200px) {
+  
+  #mobile_navbar_button {
+    display: none;
+  }
+  
+}

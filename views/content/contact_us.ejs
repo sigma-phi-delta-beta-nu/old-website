@@ -1,0 +1,40 @@
+<%         /* contact_us.ejs */         %>
+<%       /* Contact Us partial */       %>
+<%    /* Written by Brandon Kelley */   %>
+
+<span class="main">
+  <div class="container">
+    <div>
+      <h1>Elected Officials</h1>
+      <table style="width: 80%">
+        <col style="width: 35%"/>
+        <col style="width: 30%"/>
+        <col style="width: 30%"/>
+        <% var elected = positions.elected %>
+        <% for(var i = 0; i < elected.length; i++) { %>
+          <tr>
+            <td><%= elected[i]["position"] %></td>
+            <td><%= elected[i]["firstname"] %> <%= elected[i]["lastname"] %></td>
+            <td><%= elected[i]["email"] %></td>
+          </tr>
+        <% } %>
+      </table>
+    </div>
+    <div>
+      <h1>Appointed Officials</h1>
+      <table style="width: 80%">
+        <col style="width: 35%"/>
+        <col style="width: 30%"/>
+        <col style="width: 30%"/>
+        <% var appointed = positions.appointed %>
+        <% for(var i = 0; i < appointed.length; i++) { %>
+          <tr>
+            <td><%= appointed[i]["position"] %></td>
+            <td><%= appointed[i]["firstname"] %> <%= appointed[i]["lastname"] %></td>
+            <td><%= appointed[i]["email"] %></td>
+          </tr>
+        <% } %>
+      </table>
+    </div>
+  </div>
+</span>

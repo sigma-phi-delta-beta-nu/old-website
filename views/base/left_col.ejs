@@ -1,0 +1,45 @@
+<%         /* left_col.ejs */         %>
+<%      /* Left column partial */     %>
+<%   /* Written by Brandon Kelley */  %>
+
+<span class="column">
+  <div class="container">
+    <% if (user !== null) { %>
+      <div>
+        <h4>Logged in as: </h4><h4 id="username"><%= user.username %></h4>
+        <br/>
+        <button id="logout" type="button">Logout</button>
+      </div>
+      <div></div>
+      <div>
+        <h4>Personalized Links</h4>
+        <br/>
+        <ul style="margin-left: 1em;">
+          <% var keys = Object.keys(user.links) %>
+          <% for (var i = 0; i < keys.length; i++) { %>
+            <% var link = user.links[keys[i]]; %>
+            <li style="text-align: left;">
+              <a href="<%= link %>"><%= keys[i] %></a>
+              <img src="/images/remove.png" width="10px" class="remove"/>
+            </li>
+          <% } %>
+        </ul>
+        <button type="button" id="remove_link">Remove a link</button>
+      </div>
+      <div>
+        <h4>Add a link</h4>
+        <input type="text" placeholder="Label"/>
+        <input type="text" placeholder="URL"/>
+        <button id="add_link" type="button">Submit</button>
+      </div>
+    <% } else { %>
+      <div>
+        <h4>Login</h4>
+        <input type="text" placeholder="Username"/>
+        <input type="password" placeholder="Password"/>
+        <button id="login" type="button">Submit</button>
+      </div>
+    <% } %>
+    <div></div>
+  </div>
+</span>

@@ -1,27 +1,6 @@
 $(document).ready(function() {
-
-	if ($.cookie('logged_in')) {
-		$("#login_form").hide();
-		$("#logout_form").show();
-	} else {
-		$("#login_form").show();
-		$("#logout_form").hide();
-		$("#login_form").find("input").first().focus();
-	}
-
-	$('.submenu_animate div').mouseenter(function() {
-		$(this).animate({
-			padding: '0.7em',
-		}, 100);
-	});
-	
-	$('.submenu_animate div').mouseleave(function() {
-		$(this).animate({
-			padding: '0.5em',
-		}, 100);
-	});
-	
-	$('input').keypress(function(event) {
+    
+    $('input').keypress(function(event) {
 		
 		if (event.keyCode == 13) {
 			event.preventDefault();
@@ -56,14 +35,77 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: 'GET',
-			url: '/logout_handler',
+			url: '/logout',
 			success: function() {
-				location.reload(true);
+				if (window.location.pathname === "/dashboard") {
+                    window.location = "/";
+                } else {
+                    location.reload(true);
+                }
 			}
 		});
 
 	});
 	
+    $("#add_link").click(function() {
+      
+      var linkLabel = $(this).closest("div").find("input").first().val().trim();
+      var linkURL = $(this).closest("div").find("input").last().val().trim();
+      
+      var sendingData = {
+        "label": linkLabel,
+        "url": linkURL
+      }
+      
+      $.ajax({
+        type: "POST",
+        url: "/addLink",
+        data: JSON.stringify(sendingData),
+        contentType: "application/json",
+        success: function(returnedData) {
+          window.location.reload(true);
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+      
+    });
+    
+    $("#remove_link").click(function() {
+      
+      if ($(this).text() == "Remove a link") {
+        $(".remove").show();
+        $(this).text("Done");
+      } else {
+        $(".remove").hide();
+        $(this).text("Remove a link");
+      }
+      
+    });
+    
+    $(".remove").click(function() {
+      
+      var linkLabel = $(this).closest("li").find("a").text();
+      var sendingData = {
+        "label": linkLabel
+      }
+      
+      $.ajax({
+        type: "POST",
+        url: "/removeLink",
+        data: JSON.stringify(sendingData),
+        contentType: "application/json",
+        success: function(returnedData) {
+          window.location.reload(true);
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+      
+    });
+    
 	$("#file_upload").click(function() {
 		
 		f = document.getElementById("file").files[0];
@@ -98,12 +140,12 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '/login_handler',
+            url: '/login',
             data: JSON.stringify(sendingData),
 			contentType: 'application/json',
             success: function(returnedData) {
-                if (returnedData !== "Failed") {
-                    location.reload(true);
+                if (returnedData === true) {
+                    window.location.reload(true);
                 } else {
                     alert("Sorry, that username/password combination was incorrect.");
 					//alert(pwd);
