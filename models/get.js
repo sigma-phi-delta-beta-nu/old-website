@@ -222,9 +222,11 @@ exports.authenticate = function(cookies, callback) {
       queryParams["TableName"] = "user_data";
       queryParams["AttributesToGet"] = ["links"];
       dynamodb.getItem(queryParams, function(error, data) {
-        var userLinks = data.Item["links"];
+        var userLinks = data.Item["links"]["L"];
         var links = [];
-        links[userLinks["M"]["label"]["S"]] = userLinks["M"]["url"]["S"];
+        for (var i = 0; i < userLinks.length; i++) {
+          links[userLinks[i]["M"]["label"]["S"]] = userLinks[i]["M"]["url"]["S"];
+        }
         callback({ "username": user, "nickname": brothername, "links": links });
       });
     }

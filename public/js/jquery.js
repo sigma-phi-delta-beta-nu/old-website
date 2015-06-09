@@ -1,6 +1,6 @@
 $(document).ready(function() {
-
-	$('input').keypress(function(event) {
+    
+    $('input').keypress(function(event) {
 		
 		if (event.keyCode == 13) {
 			event.preventDefault();
@@ -60,6 +60,40 @@ $(document).ready(function() {
       $.ajax({
         type: "POST",
         url: "/addLink",
+        data: JSON.stringify(sendingData),
+        contentType: "application/json",
+        success: function(returnedData) {
+          window.location.reload(true);
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+      
+    });
+    
+    $("#remove_link").click(function() {
+      
+      if ($(this).text() == "Remove a link") {
+        $(".remove").show();
+        $(this).text("Done");
+      } else {
+        $(".remove").hide();
+        $(this).text("Remove a link");
+      }
+      
+    });
+    
+    $(".remove").click(function() {
+      
+      var linkLabel = $(this).closest("li").find("a").text();
+      var sendingData = {
+        "label": linkLabel
+      }
+      
+      $.ajax({
+        type: "POST",
+        url: "/removeLink",
         data: JSON.stringify(sendingData),
         contentType: "application/json",
         success: function(returnedData) {

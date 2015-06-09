@@ -35,8 +35,19 @@ router.post("/addLink", function(request, response) {
   var label = request.body.label;
   var url = request.body.url;
   
-  DBUpdate.addLink(username, label, url, function(result) {
-    response.send(result);
+  DBUpdate.addLink(username, label, url, function() {
+    response.end();
+  });
+  
+});
+
+router.post("/removeLink", function(request, response) {
+  
+  var username = request.cookies["logged_in"];
+  var label = request.body.label;
+  var url = request.body.url;
+  
+  DBUpdate.removeLink(username, label, function() {
     response.end();
   });
   
