@@ -5,13 +5,15 @@
 <span class="column">
   <div class="container">
     <% if (user !== null) { %>
-      <div>
+      <div class="column_section">
         <h4>Logged in as: </h4><h4 id="username"><%= user.username %></h4>
         <br/>
         <button id="logout" type="button">Logout</button>
       </div>
-      <div></div>
-      <div>
+      <div class="column_section">
+        <% /* This is a divider */ %>
+      </div>
+      <div class="column_section">
         <h4>Personalized Links</h4>
         <br/>
         <ul style="margin-left: 1em;">
@@ -26,20 +28,22 @@
         </ul>
         <button type="button" id="remove_link">Remove a link</button>
       </div>
-      <div>
+      <div class="column_section">
         <h4>Add a link</h4>
         <input type="text" placeholder="Label"/>
         <input type="text" placeholder="URL"/>
         <button id="add_link" type="button">Submit</button>
       </div>
     <% } else { %>
-      <div>
+      <div class="column_section">
         <h4>Login</h4>
         <input type="text" placeholder="Username"/>
         <input type="password" placeholder="Password"/>
         <button id="login" type="button">Submit</button>
       </div>
     <% } %>
-    <div></div>
+    <div class="column_section">
+      <% /* This is the bottom line */ %>
+    </div>
   </div>
 </span>
