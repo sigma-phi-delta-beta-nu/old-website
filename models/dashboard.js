@@ -1,3 +1,7 @@
+/*  Functions provided by this file:  */
+/*   - addLink                        */
+/*   - removeLink                     */
+
 var aws = require("aws-sdk");
 var dynamodb = new aws.DynamoDB({ region: "us-west-2" });
 
@@ -41,38 +45,6 @@ exports.addLink = function(username, label, url, callback) {
 };
 
 exports.removeLink = function(username, label, callback) {
-  
-  /*
-  var updateData = {
-    "L": [
-      {
-        "M": {
-          "label": { "S": label},
-          "url": { "S": url }
-        }
-      }
-    ]
-  };
-  
-  var updateParams = {
-    "Key": { "username": { "S": username } },
-    "TableName": "user_data",
-    "AttributeUpdates": {
-      "links": {
-        "Action": "DELETE",
-        "Value": updateData
-      }
-    }
-  };
-  
-  dynamodb.updateItem(updateParams, function(error) {
-    if (error) {
-      console.log(error);
-    } else {
-      callback();
-    }
-  });
-  */
   
   var getParams = {
     Key: { "username": { "S": username } },
