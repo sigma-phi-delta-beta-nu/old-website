@@ -189,6 +189,7 @@ input {
 
 .main {
     width: 60%;
+    min-height: 750px;
     display: inline-block;
     float: left;
 }
@@ -243,13 +244,32 @@ input {
     float: right;
 }
 
+.gallery_thumb {
+    width: 200px;
+    text-align: center;
+}
+
+.gallery_thumb div {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.gallery_thumb img {
+    height: 200px;
+    position: relative;
+    left: 50%;
+    margin-left: -100%;
+}
+
 /* Footer */
 
 .footer {
     display: block;
+    clear: both;
     width: 100%;
     background-color: #2A2A2A;
-    clear: both;
     padding: 1em 0em 1em 0em;
     color: #FFFFFF;
     text-align: center;

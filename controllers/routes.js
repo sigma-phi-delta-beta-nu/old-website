@@ -5,6 +5,7 @@ var authenticate = require("../models/auth").authenticate;
 var queryMembershipByClasses = require("../models/membership").queryClasses;
 var queryMembershipByPositions = require("../models/membership").queryPositions;
 var queryEventsByCategories = require("../models/events").queryCategories;
+var queryPhotoAlbums = require("../models/gallery").queryAlbums;
 
 /* GET home page */
 router.get("/", function(request, response) {
@@ -39,7 +40,7 @@ router.get("/recruitment", function(request, response) {
   });
 });
 
-/* GET philanthropy page */
+/* GET events page */
 router.get("/events", function(request, response) {
   authenticate(request.cookies, function(user) {
     queryEventsByCategories(user, function(events) {
@@ -52,12 +53,15 @@ router.get("/events", function(request, response) {
   });
 });
 
-/* GET philanthropy page */
+/* GET gallery page */
 router.get("/gallery", function(request, response) {
   authenticate(request.cookies, function(user) {
-    response.render("template", {
-      "title": "Gallery",
-      "user": user
+    queryPhotoAlbums(user, function(gallery) {
+      response.render("template", {
+        "title": "Gallery",
+        "user": user,
+        "gallery": gallery
+      });
     });
   });
 });

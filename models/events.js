@@ -42,11 +42,13 @@ exports.queryCategories = function(user, callback) {
             for (var i = 0; i < rawList.length; i++) {
               events.push(deDynamoItem(rawList[i]));
             }
+            callback(events);
           }
         });
+      } else {
+        callback(events);
       }
     }
-    callback(events);
     
   });
   
