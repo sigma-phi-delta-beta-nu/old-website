@@ -38,9 +38,18 @@ exports.authenticate = function(cookies, callback) {
     return;  //for some reason, this is necessary
   }
   
-  var user = cookies["logged_in"];
+  var basicUser = { "username": cookies["logged_in"] };
+  
+  getUserData(basicUser, function(user) {
+    callback(user);
+  });
+ 
+};
+
+var getUserData = function(user, callback) {
+
   var queryParams = {
-    Key: { username: { "S": user }},
+    Key: { username: { "S": user["username"] } },
     TableName: "membership",
     AttributesToGet: ["nickname"]
   }
@@ -49,19 +58,47 @@ exports.authenticate = function(cookies, callback) {
     if (error) {
       console.log(error);
     } else {
-      var brothername = data.Item.nickname["S"];
+      user["nickname"] = data.Item.nickname["S"];
       
       queryParams["TableName"] = "user_data";
-      queryParams["AttributesToGet"] = ["links"];
+      queryParams["AttributesToGet"] = ["links", "events"];
+      
       dynamodb.getItem(queryParams, function(error, data) {
+        console.log(data);
         var userLinks = data.Item["links"]["L"];
         var links = [];
         for (var i = 0; i < userLinks.length; i++) {
           links[userLinks[i]["M"]["label"]["S"]] = userLinks[i]["M"]["url"]["S"];
         }
-        callback({ "username": user, "nickname": brothername, "links": links });
+        user["links"] = links;
+        
+        queryParams = {
+          "TableName": "events",
+          "IndexName": "event_id",
+          "AttributesToGet": [{ "S": "name" }],
+          "KeyConditions": {
+            "events_id": {
+              "ComparisonOperator": "EQ",
+              "AttributeValueList": data.Item["events"]["L"]
+            }
+          }
+        }
+        
+        console.log(data.Item["events"]["L"]);
+        dynamodb.query(queryParams, function(error, data) {
+          if (error) {
+            console.log(error);
+          }
+          var names = [];
+          console.log(data);
+          
+          
+        });
+        
+        callback(user);
+        
       });
     }
   });
- 
+
 };
