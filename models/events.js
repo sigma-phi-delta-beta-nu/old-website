@@ -52,17 +52,57 @@ exports.queryCategories = function(user, callback) {
     
   });
   
-  var deDynamoItem = function(item) {
-    var attrKeys = Object.keys(item);
-    var attrTypeKeys = [];
-    for (var j = 0; j < attrKeys.length; j++) {
-      attrTypeKeys[attrKeys[j]] = Object.keys(item[attrKeys[j]])[0];
-    } 
-    var current = {};
-    for (var j = 0; j < attrKeys.length; j++) {
-      current[attrKeys[j]] = item[attrKeys[j]][attrTypeKeys[attrKeys[j]]];
-    }
-    return current;
-  }
   
 };
+
+exports.queryEvent = function(user, url, callback) {
+  
+  var queryParams = {
+    "TableName": "events",
+    "IndexName": "url",
+    "Select": "ALL_ATTRIBUTES",
+    "KeyConditions": {
+      "url": {
+        "ComparisonOperator": "EQ",
+        "AttributeValueList": [{ "S": url }]
+      }
+    }
+  }
+  
+  dynamodb.query(queryParams, function(error, data) {
+    if (error) {
+      console.log(error);
+    } else {
+      var foundEvent = deDynamoItem(data.Items[0]);
+      if (foundEvent === null) {
+        callback(null);
+        return;
+      }
+      if (foundEvent["type"] === "private" && user === null) {
+        callback(null);
+        return;
+      }
+      var attending = [];
+      var rawAttending = foundEvent["attending"];
+      for (var i = 0; i < rawAttending.length; i++) {
+        attending.push(rawAttending[i]["S"]);
+      }
+      foundEvent["attending"] = attending;
+      callback(foundEvent);
+    }
+  });
+
+};
+
+var deDynamoItem = function(item) {
+  var attrKeys = Object.keys(item);
+  var attrTypeKeys = [];
+  for (var j = 0; j < attrKeys.length; j++) {
+    attrTypeKeys[attrKeys[j]] = Object.keys(item[attrKeys[j]])[0];
+  } 
+  var current = {};
+  for (var j = 0; j < attrKeys.length; j++) {
+    current[attrKeys[j]] = item[attrKeys[j]][attrTypeKeys[attrKeys[j]]];
+  }
+  return current;
+}

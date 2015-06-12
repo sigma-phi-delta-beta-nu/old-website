@@ -64,39 +64,49 @@ var getUserData = function(user, callback) {
       queryParams["AttributesToGet"] = ["links", "events"];
       
       dynamodb.getItem(queryParams, function(error, data) {
-        console.log(data);
-        var userLinks = data.Item["links"]["L"];
-        var links = [];
-        for (var i = 0; i < userLinks.length; i++) {
-          links[userLinks[i]["M"]["label"]["S"]] = userLinks[i]["M"]["url"]["S"];
-        }
-        user["links"] = links;
         
-        queryParams = {
-          "TableName": "events",
-          "IndexName": "event_id",
-          "AttributesToGet": [{ "S": "name" }],
-          "KeyConditions": {
-            "events_id": {
-              "ComparisonOperator": "EQ",
-              "AttributeValueList": data.Item["events"]["L"]
+        if (error) {
+          console.log(error);
+        } else {
+          var userLinks = data.Item["links"]["L"];
+          var links = [];
+          
+          for (var i = 0; i < userLinks.length; i++) {
+            links[userLinks[i]["M"]["label"]["S"]] = userLinks[i]["M"]["url"]["S"];
+          }
+          
+          user["links"] = links;
+          
+          var scanParams = {
+            "TableName": "events",
+            "IndexName": "url",
+            "AttributesToGet": ["name", "url"],
+            "ScanFilter": {
+              "url": {
+                "ComparisonOperator": "IN",
+                "AttributeValueList": data.Item["events"]["L"]
+              }
             }
-          }
+          };
+          
+          var events = [];
+          
+          dynamodb.scan(scanParams, function(error, data) {
+            if (error) {
+              console.log(error);
+            } else {
+              var userEvents = data.Items;
+              for (var i = 0; i < userEvents.length; i++) {
+                events.push({
+                  "url": "/events/" + userEvents[i]["url"]["S"],
+                  "name": userEvents[i]["name"]["S"]
+                });
+              }
+              user["events"] = events;
+            }
+            callback(user);
+          });
         }
-        
-        console.log(data.Item["events"]["L"]);
-        dynamodb.query(queryParams, function(error, data) {
-          if (error) {
-            console.log(error);
-          }
-          var names = [];
-          console.log(data);
-          
-          
-        });
-        
-        callback(user);
-        
       });
     }
   });

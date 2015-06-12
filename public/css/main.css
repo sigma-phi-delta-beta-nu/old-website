@@ -177,6 +177,15 @@ input {
     color: #fa0000;
 }
 
+.column ul {
+    width: 150px;
+    margin: auto;
+}
+
+.column li {
+    text-align: left;
+}
+
 .remove {
     display: none;
 }

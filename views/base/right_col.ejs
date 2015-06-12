@@ -5,6 +5,16 @@
 <span class="column">
   <div class="container">
     <div class="column_section">
+      <% if (user !== null) { %>
+        <h4>Events</h4>
+        <ul>
+          <% for (var i = 0; i < user["events"].length; i++) { %>
+            <li><a href=<%= user["events"][i]["url"] %>>
+              <%= user["events"][i]["name"] %>
+            </a></li>
+          <% } %>
+        </ul>
+      <% } %>
     </div>
   </div>
 </span>

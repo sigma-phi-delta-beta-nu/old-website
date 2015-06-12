@@ -10,8 +10,9 @@
       <% for (var i = 0; i < events.length; i++) { %>
         <% if (events[i]["category"] === "professional") { %>
           <% var event = events[i] %>
+          <% var link = "/events/" + events[i]["url"] %>
           <span class="event">
-            <a href="#">Details</a>
+            <a href=<%= link %>>Details</a>
             <h3><%= event["name"] %></h4>
             <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
             <p><%= event["description"] %></p>
@@ -24,8 +25,9 @@
       <% for (var i = 0; i < events.length; i++) { %>
         <% if (events[i]["category"] === "social") { %>
           <% var event = events[i] %>
+          <% var link = "/events/" + events[i]["url"] %>
           <span class="event">
-            <a href="#">Details</a>
+            <a href=<%= link %>>Details</a>
             <h3><%= event["name"] %></h4>
             <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
             <p><%= event["description"] %></p>
@@ -38,8 +40,9 @@
       <% for (var i = 0; i < events.length; i++) { %>
         <% if (events[i]["category"] === "philanthropy") { %>
           <% var event = events[i] %>
+          <% var link = "/events/" + events[i]["url"] %>
           <span class="event">
-            <a href="#">Details</a>
+            <a href=<%= link %>>Details</a>
             <h3><%= event["name"] %></h4>
             <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
             <p><%= event["description"] %></p>

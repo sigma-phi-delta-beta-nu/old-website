@@ -5,6 +5,7 @@ var authenticate = require("../models/auth").authenticate;
 var queryMembershipByClasses = require("../models/membership").queryClasses;
 var queryMembershipByPositions = require("../models/membership").queryPositions;
 var queryEventsByCategories = require("../models/events").queryCategories;
+var queryEvent = require("../models/events").queryEvent;
 var queryPhotoAlbums = require("../models/gallery").queryAlbums;
 
 /* GET home page */
@@ -48,6 +49,26 @@ router.get("/events", function(request, response) {
         "title": "Events",
         "user": user,
         "events": events
+      });
+    });
+  });
+});
+
+/* GET single event page */
+router.get("/events/*", function(request, response) {
+  authenticate(request.cookies, function(user) {
+    var eventPath = request.path.substring(8, request.path.length);
+    queryEvent(user, eventPath, function(eventFound) {
+      if (eventFound === null) {
+        response.render("template", {
+          "error": "404: Page not found",
+          "message": "Sorry, we couldn't find your page. Please try your request again, or contact us if needed."
+        });
+      }
+      response.render("template", {
+        "title": "Event",
+        "user": user,
+        "event": eventFound
       });
     });
   });
