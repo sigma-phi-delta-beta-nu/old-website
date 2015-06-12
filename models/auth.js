@@ -90,7 +90,6 @@ var getUserData = function(user, callback) {
           };
           
           var events = [];
-          
           dynamodb.scan(scanParams, function(error, data) {
             if (error) {
               console.log(error);

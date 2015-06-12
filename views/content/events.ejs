@@ -11,7 +11,7 @@
         <% if (events[i]["category"] === "professional") { %>
           <% var event = events[i] %>
           <% var link = "/events/" + events[i]["url"] %>
-          <span class="event">
+          <span class="event_thumb">
             <a href=<%= link %>>Details</a>
             <h3><%= event["name"] %></h4>
             <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
@@ -26,7 +26,7 @@
         <% if (events[i]["category"] === "social") { %>
           <% var event = events[i] %>
           <% var link = "/events/" + events[i]["url"] %>
-          <span class="event">
+          <span class="event_thumb">
             <a href=<%= link %>>Details</a>
             <h3><%= event["name"] %></h4>
             <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
@@ -41,7 +41,7 @@
         <% if (events[i]["category"] === "philanthropy") { %>
           <% var event = events[i] %>
           <% var link = "/events/" + events[i]["url"] %>
-          <span class="event">
+          <span class="event_thumb">
             <a href=<%= link %>>Details</a>
             <h3><%= event["name"] %></h4>
             <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>

@@ -12,6 +12,11 @@ body {
     font-size: 100%;
 }
 
+div {
+    display: block;
+    overflow: auto;
+}
+
 span {
 	display: inline-block;
 	float: left;
@@ -63,7 +68,13 @@ tr {
 input {
 	display: block;
     width: 100px;
-    margin: 0.5em auto;
+    margin: 8px auto;
+}
+
+select {
+    display: block;
+    width: 110px;
+    margin: 8px auto;
 }
 
 .container {
@@ -240,7 +251,7 @@ input {
     margin-right: 30px;
 }
 
-.event {
+.event_thumb {
     margin: 0px 10px 10px 10px;
     padding: 10px;
     border: 1px solid #FA0000;
@@ -249,8 +260,14 @@ input {
     overflow: hidden;
 }
 
-.event a {
+.event_thumb a {
     float: right;
+}
+
+#event img {
+    margin-right: 32px;
+    margin-bottom: 16px;
+    border: 1px solid #FA0000;
 }
 
 .gallery_thumb {
