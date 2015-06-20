@@ -106,31 +106,18 @@ $(document).ready(function() {
       
     });
     
-	$("#file_upload").click(function() {
-		
-		f = document.getElementById("file").files[0];
-		
-		var sending_data = {
-			file: f
-		}
-		
-		$.ajax({
-			type: "POST",
-			url: "/file_upload",
-			data: JSON.stringify(sending_data),
-			contentType: "application/json",
-			success: function(returnedData) {
-				if (returnedData == "yes") {
-					console.log("Niggaaa");
-				}
-			},
-			error: function(err) {
-				console.log(err);
-			}
-		});
-		
-	});
-	
+    $("#newEvent").click(function() {
+      
+      var name = $("#newEventInput").find("input").first().val();
+      
+      var sendingData = {
+        "name": name,
+      }
+      
+      console.log(sendingData);
+      
+    });
+    
 	function authenticate(usr, pwd) {
 		
         var sendingData = {

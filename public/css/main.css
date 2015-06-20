@@ -68,13 +68,13 @@ tr {
 input {
 	display: block;
     width: 100px;
-    margin: 8px auto;
+    margin: auto;
 }
 
 select {
     display: block;
     width: 110px;
-    margin: 8px auto;
+    margin: auto;
 }
 
 .container {
@@ -195,6 +195,14 @@ select {
 
 .column li {
     text-align: left;
+}
+
+.column input {
+    margin-top: 9px;
+}
+
+.column select {
+    margin-top: 9px;
 }
 
 .remove {
