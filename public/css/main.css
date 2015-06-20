@@ -245,6 +245,7 @@ select {
 	border-width: 0px;
 	padding: 0em;
     margin: 0em;
+    overflow: hidden;
 }
 
 #flexslider ul li {
