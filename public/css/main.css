@@ -65,18 +65,6 @@ tr {
     line-height: 1.25em;
 }
 
-input {
-	display: block;
-    width: 100px;
-    margin: auto;
-}
-
-select {
-    display: block;
-    width: 110px;
-    margin: auto;
-}
-
 .container {
     padding: 1em;
 }
@@ -179,30 +167,44 @@ select {
     text-align: center;
 }
 
-.column a {
+.column_section a {
     text-decoration: none;
     color: #000000;
 }
 
-.column a:hover {
+.column_section a:hover {
     color: #fa0000;
 }
 
-.column ul {
+.column_section ul {
     width: 150px;
     margin: auto;
 }
 
-.column li {
+.column_section li {
     text-align: left;
 }
 
-.column input {
-    margin-top: 9px;
+.column_section input {
+	display: block;
+    width: 100px;
+    margin: 10px auto 0px auto;
 }
 
-.column select {
-    margin-top: 9px;
+.column_section select {
+    display: block;
+    width: 105px;
+    margin: 10px auto 0px auto;
+}
+
+.column_section textarea {
+    display: block;
+    margin: 10px auto 0px auto;
+}
+
+.column_section button {
+    display: block;
+    margin: 10px auto 0px auto;
 }
 
 .remove {
