@@ -108,14 +108,39 @@ $(document).ready(function() {
     
     $("#newEvent").click(function() {
       
-      var name = $("#newEventInput").find("input").first().val();
+      var $name = $("#newEventInput").find("input").first();
+      var $location = $name.next();
+      var $date = $location.next();
+      var $time = $date.next();
+      var $category = $time.next();
+      var $privacy = $category.next();
+      var $cost = $privacy.next();
+      var $description = $cost.closest("div").next().find("textarea");
       
       var sendingData = {
-        "name": name,
+        "name": $name.val(),
+        "location": $location.val(),
+        "date": $date.val(),
+        "time": $time.val(),
+        "category": $category.val(),
+        "type": $privacy.val(),
+        "cost": $cost.val(),
+        "description": $description.val()
       }
       
-      console.log(sendingData);
-      
+      $.ajax({
+        "type": "POST",
+        "url": "/addEvent",
+        "data": JSON.stringify(sendingData),
+        "contentType": "application/json",
+        "success": function() {
+          window.location.reload(true);
+        },
+        "error": function(err) {
+          console.log(err);
+        }
+      });
+
     });
     
 	function authenticate(usr, pwd) {

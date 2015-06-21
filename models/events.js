@@ -94,6 +94,37 @@ exports.queryEvent = function(user, url, callback) {
 
 };
 
+exports.addEvent = function(user, eventData, callback) {
+    
+  var putParams = {
+    "Item": {
+      "url": { "S": eventData["url"] },
+      "attending": { "L": [ { "S": "Somebody"} ] },
+      "category": { "S": eventData["category"] },
+      "cost": { "N": eventData["cost"] },
+      "date": { "S": eventData["date"] },
+      "description": { "S": eventData["description"] },
+      "location": { "S": eventData["location"] },
+      "name": { "S": eventData["name"] },
+      "picture": { "S": eventData["picture"] },
+      "time": { "S": eventData["time"] },
+      "type": { "S": eventData["type"] }
+    },
+    "TableName": "events"
+  }
+  
+  dynamodb.putItem(putParams, function(error, data) {
+    if (error) {
+      console.log(error);
+      console.log(error.stack);
+      console.log(error.message);
+    } else {
+      callback();
+    }
+  });
+  
+};
+
 var deDynamoItem = function(item) {
   var attrKeys = Object.keys(item);
   var attrTypeKeys = [];
