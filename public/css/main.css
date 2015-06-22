@@ -279,8 +279,8 @@ tr {
     overflow: hidden;
 }
 
-.event_thumb a {
-    float: right;
+a .event_thumb * {
+    color: #000000;
 }
 
 #event img {

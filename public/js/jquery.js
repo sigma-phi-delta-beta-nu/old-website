@@ -199,6 +199,14 @@ $(document).ready(function() {
       
     });
     
+    $(".event_thumb").mouseenter(function() {
+      $(this).css("background", "#FADDDD").css("border", "2px solid #FA0000");
+    });
+    
+    $(".event_thumb").mouseleave(function() {
+      $(this).css("background", "#FFFFFF").css("border", "1px solid #FA0000");
+    });
+    
 	function authenticate(usr, pwd) {
 		
         var sendingData = {
