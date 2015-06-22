@@ -33,7 +33,7 @@
       <span>
         <p>Founding Class</p>
         <ul>
-          <% var founders = members.founding %>
+          <% var founders = membership.founding %>
           <% for(var i = 0; i < founders.length; i++) { %>
             <li><%= founders[i]["firstname"] %> <%= founders[i]["lastname"] %></li>
           <% } %>
@@ -42,7 +42,7 @@
       <span>
         <p>Alpha Class</p>
         <ul>
-          <% var alphas = members.alpha %>
+          <% var alphas = membership.alpha %>
           <% for(var i = 0; i < alphas.length; i++) { %>
             <li><%= alphas[i]["firstname"] %> <%= alphas[i]["lastname"] %></li>
           <% } %>
@@ -51,7 +51,7 @@
       <span>
         <p>Beta Class</p>
         <ul>
-          <% var betas = members.beta %>
+          <% var betas = membership.beta %>
           <% for(var i = 0; i < betas.length; i++) { %>
             <li><%= betas[i]["firstname"] %> <%= betas[i]["lastname"] %></li>
           <% } %>

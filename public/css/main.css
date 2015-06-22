@@ -12,6 +12,11 @@ body {
     font-size: 100%;
 }
 
+div {
+    display: block;
+    overflow: auto;
+}
+
 span {
 	display: inline-block;
 	float: left;
@@ -33,6 +38,10 @@ h3 {
     font-size: 2em;
 }
 
+a:hover h2 {
+    color: #FA0000;
+}
+
 h4 {
     font-size: 1em;
 }
@@ -41,6 +50,10 @@ p {
 	text-align: left;
 	margin-bottom: 0.5em;
     line-height: 1.25em;
+}
+
+a {
+    text-decoration: none;
 }
 
 ol, ul {
@@ -58,12 +71,6 @@ table {
 
 tr {
     line-height: 1.25em;
-}
-
-input {
-	display: block;
-    width: 100px;
-    margin: 0.5em auto;
 }
 
 .container {
@@ -168,13 +175,44 @@ input {
     text-align: center;
 }
 
-.column a {
+.column_section a {
     text-decoration: none;
     color: #000000;
 }
 
-.column a:hover {
+.column_section a:hover {
     color: #fa0000;
+}
+
+.column_section ul {
+    width: 150px;
+    margin: auto;
+}
+
+.column_section li {
+    text-align: left;
+}
+
+.column_section input {
+	display: block;
+    width: 100px;
+    margin: 10px auto 0px auto;
+}
+
+.column_section select {
+    display: block;
+    width: 105px;
+    margin: 10px auto 0px auto;
+}
+
+.column_section textarea {
+    display: block;
+    margin: 10px auto 0px auto;
+}
+
+.column_section button {
+    display: block;
+    margin: 10px auto 0px auto;
 }
 
 .remove {
@@ -189,6 +227,7 @@ input {
 
 .main {
     width: 60%;
+    min-height: 750px;
     display: inline-block;
     float: left;
 }
@@ -216,6 +255,7 @@ input {
 	border-width: 0px;
 	padding: 0em;
     margin: 0em;
+    overflow: hidden;
 }
 
 #flexslider ul li {
@@ -230,13 +270,55 @@ input {
     margin-right: 30px;
 }
 
+.event_thumb {
+    margin: 0px 10px 10px 10px;
+    padding: 10px;
+    border: 1px solid #FA0000;
+    width: 40%;
+    height: 155px;
+    overflow: hidden;
+}
+
+.event_thumb a {
+    float: right;
+}
+
+#event img {
+    margin-right: 32px;
+    margin-bottom: 16px;
+    border: 1px solid #FA0000;
+}
+
+.gallery_thumb {
+    width: 200px;
+    height: 250px;
+    overflow: hidden;
+    border: 1px solid #FA0000;
+    text-align: center;
+    padding: 16px;
+}
+
+.gallery_thumb div {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.gallery_thumb img {
+    height: 200px;
+    position: relative;
+    left: 50%;
+    margin-left: -100%;
+}
+
 /* Footer */
 
 .footer {
     display: block;
+    clear: both;
     width: 100%;
     background-color: #2A2A2A;
-    clear: both;
     padding: 1em 0em 1em 0em;
     color: #FFFFFF;
     text-align: center;
