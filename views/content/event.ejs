@@ -9,9 +9,9 @@
           <p><%= event["description"] %></p>
           <% if (user !== null) { %>
             <p>This is a <strong><%= event["type"] %></strong> event</p>
-          <% } %>
-          <% if (user["username"] === event["author"]) { %>
-            <button id="removeEvent" type="button">Remove This Event</button>
+            <% if (user["username"] === event["author"]) { %>
+              <button id="removeEvent" type="button">Remove This Event</button>
+            <% } %>
           <% } %>
         </div>
         <div>
