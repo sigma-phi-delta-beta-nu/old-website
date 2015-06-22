@@ -1,0 +1,21 @@
+<%          /* gallery.ejs */         %>
+<%     /* Photo Gallery partial */    %>
+<%   /* Written by Brandon Kelley */  %>
+
+<span class="main">
+  <div class="container">
+    <div class="main_section">
+      <h1>Photo Gallery</h1>
+      <% var keys = Object.keys(gallery) %>
+      <% for (var i = 0; i < keys.length; i++) { %>
+        <% var imgUrl = "/images" + gallery[keys[i]][0]["url"] %>
+        <span class="gallery_thumb" style="margin-right: 16px;">
+          <div>
+            <img src=<%= imgUrl %> />
+          </div>
+          <a href="#"><h2><%= keys[i] %></h2></a>
+        </span>
+      <% } %>
+    </div>
+  </div>
+</span>

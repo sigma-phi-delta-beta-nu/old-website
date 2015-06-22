@@ -4,6 +4,56 @@
 
 <span class="column">
   <div class="container">
-    <div></div>
+    <% if (user !== null) { %>
+      <div class="column_section">
+        <h4>Events</h4>
+        <br/>
+        <ul>
+          <% for (var i = 0; i < user["events"].length; i++) { %>
+            <li><a href=<%= user["events"][i]["url"] %>>
+              <%= user["events"][i]["name"] %>
+            </a></li>
+          <% } %>
+        </ul>
+      </div>
+      <div class="column_section">
+        <h4>Create a New Event</h4>
+        <br/>
+        <div style="width: 210px; margin: auto;">
+          <span style="padding-right: 5px; padding-top: 5px;">
+            <p>Event Name: </p>
+            <p>Location: </p>
+            <p>Date: </p>
+            <p>Time: </p>
+            <p>Category: </p>
+            <p>Privacy: </p>
+            <p>Cost: </p>
+          </span>
+          <span id="newEventInput" style="padding-left: 5px;">
+            <input type="text" placeholder="Event Name"/>
+            <input type="text" placeholder="Location"/>
+            <input type="text" placeholder="Date"/>
+            <input type="text" placeholder="Time"/>
+            <select>
+              <option>Social</option>
+              <option>Professional</option>
+              <option>Philanthropy</option>
+            </select>
+            <select>
+              <option>Public</option>
+              <option>Private</option>
+            </select>
+            <input type="text" placeholder="Cost"/>
+          </span>
+        </div>
+        <div>
+          <textarea cols="25" rows="5" placeholder="Description"></textarea>
+          <button id="newEvent" type="button">Submit</button>
+        </div>
+      </div>
+    <% } %>
+    <div class="column_section">
+      <% /* The bottom line */ %>
+    </div>
   </div>
 </span>

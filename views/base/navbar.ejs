@@ -22,6 +22,16 @@
         <a href="/recruitment"><p>Recruitment</p></a>
       </div>
     <% } %>
+    <% if (title !== "Events") { %>
+      <div>
+        <a href="/events"><p>Events</p></a>
+      </div>
+    <% } %>
+    <% if (title !== "Gallery") { %>
+      <div>
+        <a href="/gallery"><p>Gallery</p></a>
+      </div>
+    <% } %>
     <% if (title !== "Contact Us") { %>
       <div>
         <a href="/contact_us"><p>Contact Us</p></a>
@@ -60,16 +70,25 @@
         <h4>Recruitment</h4>
       </a>
     </span>
-    <% /* %>
+    
     <span 
-      <% if (title === "Philanthropy") { %>
+      <% if (title === "Events" || title === "Event") { %>
         class="active"
       <% } %>>
-      <a href="/philanthropy">
-        <h4>Philanthropy</h4>
+      <a href="/events">
+        <h4>Events</h4>
       </a>
     </span>
-    <% */ %>
+    
+    <span 
+      <% if (title === "Gallery") { %>
+        class="active"
+      <% } %>>
+      <a href="/gallery">
+        <h4>Gallery</h4>
+      </a>
+    </span>
+    
     <span
       <% if (title === "Contact Us") { %>
         class="active"

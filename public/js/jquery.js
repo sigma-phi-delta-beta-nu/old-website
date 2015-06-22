@@ -106,31 +106,99 @@ $(document).ready(function() {
       
     });
     
-	$("#file_upload").click(function() {
-		
-		f = document.getElementById("file").files[0];
-		
-		var sending_data = {
-			file: f
-		}
-		
-		$.ajax({
-			type: "POST",
-			url: "/file_upload",
-			data: JSON.stringify(sending_data),
-			contentType: "application/json",
-			success: function(returnedData) {
-				if (returnedData == "yes") {
-					console.log("Niggaaa");
-				}
-			},
-			error: function(err) {
-				console.log(err);
-			}
-		});
-		
-	});
-	
+    $("#newEvent").click(function() {
+      
+      var $name = $("#newEventInput").find("input").first();
+      var $location = $name.next();
+      var $date = $location.next();
+      var $time = $date.next();
+      var $category = $time.next();
+      var $privacy = $category.next();
+      var $cost = $privacy.next();
+      var $description = $cost.closest("div").next().find("textarea");
+      
+      var sendingData = {
+        "name": $name.val(),
+        "location": $location.val(),
+        "date": $date.val(),
+        "time": $time.val(),
+        "category": $category.val(),
+        "type": $privacy.val(),
+        "cost": $cost.val(),
+        "description": $description.val()
+      }
+      
+      $.ajax({
+        "type": "POST",
+        "url": "/addEvent",
+        "data": JSON.stringify(sendingData),
+        "contentType": "application/json",
+        "success": function() {
+          window.location.reload(true);
+        },
+        "error": function(err) {
+          console.log(err);
+        }
+      });
+
+    });
+    
+    $("#removeEvent").click(function() {
+      
+      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      $.ajax({
+        "type": "POST",
+        "url": "/removeEvent",
+        "data": JSON.stringify({ "url": url }),
+        "contentType": "application/json",
+        "success": function() {
+          window.location = "/events";
+        },
+        "error": function(err) {
+          console.log(err);
+        }
+      });
+      
+    });
+    
+    $("#addAttendee").click(function() {
+      
+      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      
+      $.ajax({
+        "type": "POST",
+        "url": "/addAttendee",
+        "data": JSON.stringify({ "url": url }),
+        "contentType": "application/json",
+        "success": function() {
+          window.location.reload(true);
+        },
+        "error": function(err) {
+          console.log(err);
+        }
+      });
+      
+    });
+    
+    $("#removeAttendee").click(function() {
+      
+      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      
+      $.ajax({
+        "type": "POST",
+        "url": "/removeAttendee",
+        "data": JSON.stringify({ "url": url }),
+        "contentType": "application/json",
+        "success": function() {
+          window.location.reload(true);
+        },
+        "error": function(err) {
+          console.log(err);
+        }
+      });
+      
+    });
+    
 	function authenticate(usr, pwd) {
 		
         var sendingData = {
