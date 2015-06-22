@@ -107,7 +107,10 @@ router.post("/removeEvent", function(request, response) {
 router.post("/addAttendee", function(request, response) {
   
   var url = request.body.url;
-  var attendee = request.cookies["name"].replace("_", " ");
+  var attendee = {
+    "name": request.cookies["name"].replace("_", " "),
+    "username": request.cookies["logged_in"]
+  };
   
   addAttendee(url, attendee, function() {
     response.end();
@@ -118,7 +121,10 @@ router.post("/addAttendee", function(request, response) {
 router.post("/removeAttendee", function(request, response) {
   
   var url = request.body.url;
-  var attendee = request.cookies["name"].replace("_", " ");
+  var attendee = {
+    "name": request.cookies["name"].replace("_", " "),
+    "username": request.cookies["logged_in"]
+  };
   
   removeAttendee(url, attendee, function() {
     response.end();

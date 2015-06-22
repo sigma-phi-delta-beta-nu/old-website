@@ -147,7 +147,7 @@ exports.addAttendee = function(url, attendee, callback) {
   
   var updateData = {
     "L": [
-      { "S": attendee }
+      { "S": attendee["name"] }
     ]
   };
   
@@ -166,7 +166,27 @@ exports.addAttendee = function(url, attendee, callback) {
     if (error) {
       console.log(error);
     } else {
-      callback();
+      
+      updateData["L"][0]["S"] = url;
+      updateParams = {
+        "Key": { "username": { "S": attendee["username"] } },
+        "TableName": "user_data",
+        "AttributeUpdates": {
+          "events": {
+            "Action": "ADD",
+            "Value": updateData
+          }
+        }
+      };
+      
+      dynamodb.updateItem(updateParams, function(error) {
+        if (error) {
+          console.log(error);
+        } else {
+          callback();
+        }
+      });
+      
     }
   });
   
@@ -189,8 +209,8 @@ exports.removeAttendee = function(url, attendee, callback) {
       var attendees = { "L": [] };
       
       for (var i = 0; i < oldAttendees.length; i++) {
-        if (oldAttendees[i]["S"] != attendee) {
-          attendees["L"].push({ "S": oldAttendees[i]["S"] });
+        if (oldAttendees[i]["S"] != attendee["name"]) {
+          attendees["L"].push(oldAttendees[i]);
         }
       }
       
@@ -209,7 +229,47 @@ exports.removeAttendee = function(url, attendee, callback) {
         if (error) {
           console.log(error);
         } else {
-          callback();
+          
+          getParams = {
+            "Key": { "username": { "S": attendee["username"] } },
+            "TableName": "user_data",
+            "AttributesToGet": ["events"]
+          };
+          
+          dynamodb.getItem(getParams, function(error, data) {
+            if (error) {
+              console.log(error);
+            } else {
+              var oldEvents = data.Item["events"]["L"];
+              var events = { "L": [] };
+              for (var i = 0; i < oldEvents.length; i++) {
+                if (oldEvents[i]["S"] != url) {
+                  events["L"].push(oldEvents[i]);
+                }
+              }
+              
+              updateParams = {
+                "Key": { "username": { "S": attendee["username"] } },
+                "TableName": "user_data",
+                "AttributeUpdates": {
+                  "events": {
+                    "Action": "PUT",
+                    "Value": events
+                  }
+                }
+              };
+              
+              dynamodb.updateItem(updateParams, function(error, data) {
+                if (error) {
+                  console.log(error);
+                } else {
+                  callback();
+                }
+              });
+              
+            }
+          });
+          
         }
       });
       
