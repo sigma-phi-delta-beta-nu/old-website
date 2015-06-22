@@ -91,35 +91,44 @@ var getUserData = function(user, callback) {
           }
           
           user["links"] = links;
-          
-          var scanParams = {
-            "TableName": "events",
-            "IndexName": "url",
-            "AttributesToGet": ["name", "url"],
-            "ScanFilter": {
-              "url": {
-                "ComparisonOperator": "IN",
-                "AttributeValueList": data.Item["events"]["L"]
-              }
-            }
-          };
-          
           var events = [];
-          dynamodb.scan(scanParams, function(error, data) {
-            if (error) {
-              console.log(error);
-            } else {
-              var userEvents = data.Items;
-              for (var i = 0; i < userEvents.length; i++) {
-                events.push({
-                  "url": "/events/" + userEvents[i]["url"]["S"],
-                  "name": userEvents[i]["name"]["S"]
-                });
-              }
-              user["events"] = events;
-            }
+          
+          if (data.Item["events"]["L"].length === 0) {
+            
+            user["events"] = events;
             callback(user);
-          });
+          
+          } else {
+          
+            var scanParams = {
+              "TableName": "events",
+              "IndexName": "url",
+              "AttributesToGet": ["name", "url"],
+              "ScanFilter": {
+                "url": {
+                  "ComparisonOperator": "IN",
+                  "AttributeValueList": data.Item["events"]["L"]
+                }
+              }
+            };
+            
+            dynamodb.scan(scanParams, function(error, data) {
+              if (error) {
+                console.log(error);
+              } else {
+                var userEvents = data.Items;
+                for (var i = 0; i < userEvents.length; i++) {
+                  events.push({
+                    "url": "/events/" + userEvents[i]["url"]["S"],
+                    "name": userEvents[i]["name"]["S"]
+                  });
+                }
+                user["events"] = events;
+              }
+              callback(user);
+            });
+            
+          }
         }
       });
     }
