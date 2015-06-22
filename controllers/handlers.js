@@ -5,6 +5,9 @@ var login = require("../models/auth").login;
 var addLink = require("../models/dashboard").addLink;
 var removeLink = require("../models/dashboard").removeLink;
 var addEvent = require("../models/events").addEvent;
+var removeEvent = require("../models/events").removeEvent;
+var addAttendee = require("../models/events").addAttendee;
+var removeAttendee = require("../models/events").removeAttendee;
 
 router.post("/login", function(request, response) {
   
@@ -13,7 +16,8 @@ router.post("/login", function(request, response) {
   
   login(username, password, function(user) {
     if (user !== null) {
-      response.cookie("logged_in", user, { maxAge: 100 * 60 * 60 * 24 });
+      response.cookie("logged_in", user.username, { maxAge: 100 * 60 * 60 * 24 });
+      response.cookie("name", user.name, { maxAge: 100 * 60 * 60 * 24 });
       response.send(true);
     } else {
       response.send(false);
@@ -57,6 +61,10 @@ router.post("/removeLink", function(request, response) {
 
 router.post("/addEvent", function(request, response) {
   
+  var user = {
+    "username": request.cookies["logged_in"],
+    "name": request.cookies["name"]
+  };
   var category = request.body.category.toLowerCase();
   var cost = request.body.cost;
   var date = request.body.date;
@@ -80,7 +88,39 @@ router.post("/addEvent", function(request, response) {
     "url": url
   }
   
-  addEvent(request.body.user, newEvent, function() {
+  addEvent(user, newEvent, function() {
+    response.end();
+  });
+  
+});
+
+router.post("/removeEvent", function(request, response) {
+  
+  var url = request.body.url;
+  
+  removeEvent(url, function() {
+    response.end();
+  });
+  
+});
+
+router.post("/addAttendee", function(request, response) {
+  
+  var url = request.body.url;
+  var attendee = request.cookies["name"].replace("_", " ");
+  
+  addAttendee(url, attendee, function() {
+    response.end();
+  });
+  
+});
+
+router.post("/removeAttendee", function(request, response) {
+  
+  var url = request.body.url;
+  var attendee = request.cookies["name"].replace("_", " ");
+  
+  removeAttendee(url, attendee, function() {
     response.end();
   });
   

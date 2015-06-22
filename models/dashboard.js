@@ -42,6 +42,7 @@ exports.addLink = function(username, label, url, callback) {
       callback();
     }
   });
+
 };
 
 exports.removeLink = function(username, label, callback) {

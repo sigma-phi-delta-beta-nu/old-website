@@ -143,6 +143,62 @@ $(document).ready(function() {
 
     });
     
+    $("#removeEvent").click(function() {
+      
+      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      $.ajax({
+        "type": "POST",
+        "url": "/removeEvent",
+        "data": JSON.stringify({ "url": url }),
+        "contentType": "application/json",
+        "success": function() {
+          window.location = "/events";
+        },
+        "error": function(err) {
+          console.log(err);
+        }
+      });
+      
+    });
+    
+    $("#addAttendee").click(function() {
+      
+      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      
+      $.ajax({
+        "type": "POST",
+        "url": "/addAttendee",
+        "data": JSON.stringify({ "url": url }),
+        "contentType": "application/json",
+        "success": function() {
+          window.location.reload(true);
+        },
+        "error": function(err) {
+          console.log(err);
+        }
+      });
+      
+    });
+    
+    $("#removeAttendee").click(function() {
+      
+      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      
+      $.ajax({
+        "type": "POST",
+        "url": "/removeAttendee",
+        "data": JSON.stringify({ "url": url }),
+        "contentType": "application/json",
+        "success": function() {
+          window.location.reload(true);
+        },
+        "error": function(err) {
+          console.log(err);
+        }
+      });
+      
+    });
+    
 	function authenticate(usr, pwd) {
 		
         var sendingData = {

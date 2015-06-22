@@ -95,11 +95,12 @@ exports.queryEvent = function(user, url, callback) {
 };
 
 exports.addEvent = function(user, eventData, callback) {
-    
+  
   var putParams = {
     "Item": {
       "url": { "S": eventData["url"] },
-      "attending": { "L": [ { "S": "Somebody"} ] },
+      "author": { "S": user.username },
+      "attending": { "L": [ { "S": user.name.replace("_", " ") } ] },
       "category": { "S": eventData["category"] },
       "cost": { "N": eventData["cost"] },
       "date": { "S": eventData["date"] },
@@ -116,10 +117,102 @@ exports.addEvent = function(user, eventData, callback) {
   dynamodb.putItem(putParams, function(error, data) {
     if (error) {
       console.log(error);
-      console.log(error.stack);
-      console.log(error.message);
     } else {
       callback();
+    }
+  });
+  
+};
+
+exports.removeEvent = function(url, callback) {
+  
+  var deleteParams = {
+    "Key": {
+      "url": { "S": url }
+    },
+    "TableName": "events"
+  };
+  
+  dynamodb.deleteItem(deleteParams, function(error, data) {
+    if (error) {
+      console.log(error);
+    } else {
+      callback();
+    }
+  });
+  
+};
+
+exports.addAttendee = function(url, attendee, callback) {
+  
+  var updateData = {
+    "L": [
+      { "S": attendee }
+    ]
+  };
+  
+  var updateParams = {
+    "Key": { "url": { "S": url } },
+    "TableName": "events",
+    "AttributeUpdates": {
+      "attending": {
+        "Action": "ADD",
+        "Value": updateData
+      }
+    }
+  };
+  
+  dynamodb.updateItem(updateParams, function(error) {
+    if (error) {
+      console.log(error);
+    } else {
+      callback();
+    }
+  });
+  
+};
+
+exports.removeAttendee = function(url, attendee, callback) {
+  
+  var getParams = {
+    "Key": { "url": { "S": url } },
+    "TableName": "events",
+    "AttributesToGet": ["attending"]
+  };
+  
+  dynamodb.getItem(getParams, function(error, data) {
+    if (error) {
+      console.log(error);
+    } else {
+      
+      var oldAttendees = data.Item["attending"]["L"];
+      var attendees = { "L": [] };
+      
+      for (var i = 0; i < oldAttendees.length; i++) {
+        if (oldAttendees[i]["S"] != attendee) {
+          attendees["L"].push({ "S": oldAttendees[i]["S"] });
+        }
+      }
+      
+      var updateParams = {
+        "Key": { "url": { "S": url } },
+        "TableName": "events",
+        "AttributeUpdates": {
+          "attending": {
+            "Action": "PUT",
+            "Value": attendees
+          }
+        }
+      };
+      
+      dynamodb.updateItem(updateParams, function(error, data) {
+        if (error) {
+          console.log(error);
+        } else {
+          callback();
+        }
+      });
+      
     }
   });
   

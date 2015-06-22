@@ -8,20 +8,34 @@ var dynamodb = new aws.DynamoDB({ region: "us-west-2" });
 exports.login = function(username, password, callback) {
   
   var queryParams = {
-    Key: {
-      username: {"S" : username}
+    "Key": {
+      "username": { "S" : username }
     },
-    TableName: "users",
-    AttributesToGet: ["password"]
+    "TableName": "users",
+    "AttributesToGet": ["password"]
   }
   
   dynamodb.getItem(queryParams, function(error, data) {
     if (error) {
-      //console.log(error);
+      console.log(error);
     } else {
       if (data.Item != null) {
         if (data.Item["password"]["S"] === password) {
-          callback(username);
+          queryParams["TableName"] = "membership";
+          queryParams["AttributesToGet"][0] = "firstname";
+          queryParams["AttributesToGet"].push("lastname");
+          dynamodb.getItem(queryParams, function(error, data) {
+            if (error) {
+              console.log(error);
+            } else {
+              var name = data.Item["firstname"]["S"] + "_" + data.Item["lastname"]["S"];
+              var user = {
+                "username": username,
+                "name": name
+              };
+              callback(user);
+            }
+          });
         } else {
           callback(null);
         }
@@ -51,14 +65,15 @@ var getUserData = function(user, callback) {
   var queryParams = {
     Key: { username: { "S": user["username"] } },
     TableName: "membership",
-    AttributesToGet: ["nickname"]
+    AttributesToGet: ["nickname", "firstname", "lastname"]
   }
   
   dynamodb.getItem(queryParams, function(error, data) {
     if (error) {
       console.log(error);
     } else {
-      user["nickname"] = data.Item.nickname["S"];
+      user["nickname"] = data.Item["nickname"]["S"];
+      user["name"] = data.Item["firstname"]["S"] + " " + data.Item["lastname"]["S"];
       
       queryParams["TableName"] = "user_data";
       queryParams["AttributesToGet"] = ["links", "events"];

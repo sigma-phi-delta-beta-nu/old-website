@@ -38,6 +38,10 @@ h3 {
     font-size: 2em;
 }
 
+a:hover h2 {
+    color: #FA0000;
+}
+
 h4 {
     font-size: 1em;
 }
@@ -46,6 +50,10 @@ p {
 	text-align: left;
 	margin-bottom: 0.5em;
     line-height: 1.25em;
+}
+
+a {
+    text-decoration: none;
 }
 
 ol, ul {
@@ -267,7 +275,7 @@ tr {
     padding: 10px;
     border: 1px solid #FA0000;
     width: 40%;
-    height: 150px;
+    height: 155px;
     overflow: hidden;
 }
 
