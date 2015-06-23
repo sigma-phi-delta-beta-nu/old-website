@@ -1,44 +1,40 @@
-<span class="main">
-  <div class="container">
-    <div class="main_section">
-      <div id="event">
-        <div>
-          <img width=200px height=200px align=left src=<%= event["picture"] %> />
-          <h1><%= event["name"] %></h1>
-          <h2><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></h2>
-          <p><%= event["description"] %></p>
+<section>
+  <div id="event">
+    <div>
+      <img width=200px height=200px align=left src=<%= event["picture"] %> />
+      <h1><%= event["name"] %></h1>
+      <h2><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></h2>
+      <p><%= event["description"] %></p>
+      <% if (user !== null) { %>
+        <p>This is a <strong><%= event["type"] %></strong> event</p>
+        <% if (user["username"] === event["author"]) { %>
+          <button id="removeEvent" type="button">Remove This Event</button>
+        <% } %>
+      <% } %>
+    </div>
+    <div>
+      <% if (event["cost"] !== "0") { %>
+        <p>Cost: $<%= event["cost"] %></p>
+      <% } %>
+      <p>List of Attendees:</p>
+      <ul>
+        <% var userInList = false %>
+        <% for (var i = 0; i < event["attending"].length; i++) { %>
+          <li><%= event["attending"][i] %></li>
           <% if (user !== null) { %>
-            <p>This is a <strong><%= event["type"] %></strong> event</p>
-            <% if (user["username"] === event["author"]) { %>
-              <button id="removeEvent" type="button">Remove This Event</button>
+            <% if (user["name"] == event["attending"][i]) { %>
+              <% userInList = true %>
             <% } %>
           <% } %>
-        </div>
-        <div>
-          <% if (event["cost"] !== "0") { %>
-            <p>Cost: $<%= event["cost"] %></p>
-          <% } %>
-          <p>List of Attendees:</p>
-          <ul>
-            <% var userInList = false %>
-            <% for (var i = 0; i < event["attending"].length; i++) { %>
-              <li><%= event["attending"][i] %></li>
-              <% if (user !== null) { %>
-                <% if (user["name"] == event["attending"][i]) { %>
-                  <% userInList = true %>
-                <% } %>
-              <% } %>
-            <% } %>
-          </ul>
-          <% if (user !== null) { %>
-            <% if (userInList) { %>
-              <button type="button" id="removeAttendee">Leave This Event</button>
-            <% } else { %>
-              <button type="button" id="addAttendee">Join This Event</button>
-            <% } %>
-          <% } %>
-        </div>
-      </div>
+        <% } %>
+      </ul>
+      <% if (user !== null) { %>
+        <% if (userInList) { %>
+          <button type="button" id="removeAttendee">Leave This Event</button>
+        <% } else { %>
+          <button type="button" id="addAttendee">Join This Event</button>
+        <% } %>
+      <% } %>
     </div>
   </div>
-</span>
+</section>

@@ -11,29 +11,49 @@
 </head>
 
 <body>
-  <% include base/navbar %>
-  <div class="content">
-    <% include base/left_col %>
-    <% if (title === "Home") { %>
-      <% include content/home %>
-    <% } else if (title === "About Us") { %>
-      <% include content/about_us %>
-    <% } else if (title === "Recruitment") { %>
-      <% include content/recruitment %>
-    <% } else if (title === "Events") { %>
-      <% include content/events %>
-    <% } else if (title === "Event") { %>
-      <% include content/event %>
-    <% } else if (title === "Gallery") { %>
-      <% include content/gallery %>
-    <% } else if (title === "Contact Us") { %>
-      <% include content/contact_us %>
-    <% } else if (title === "Dashboard") { %>
-      <% include content/dashboard %>
-    <% } %>
-    <% include base/right_col %>
+  <div id="navbar">
+    <% include base/navbar %>
   </div>
-  <% include base/footer %>
+  <div class="content">
+    <span class="column">
+      <div class="container">
+        <% include base/left_col %>
+      </div>
+    </span>
+    <span id="main">
+      <div class="container">
+        <% if (title === "Home") { %>
+          <% include content/home %>
+        <% } else if (title === "About Us") { %>
+          <% include content/about_us %>
+        <% } else if (title === "Recruitment") { %>
+          <% include content/recruitment %>
+        <% } else if (title === "Events") { %>
+          <% include content/events %>
+        <% } else if (title === "Event") { %>
+          <% include content/event %>
+        <% } else if (title === "New Event") { %>
+          <% include content/new_event %>
+        <% } else if (title === "Gallery") { %>
+          <% include content/gallery %>
+        <% } else if (title === "Contact Us") { %>
+          <% include content/contact_us %>
+        <% } else if (title === "Dashboard") { %>
+          <% include content/dashboard %>
+        <% } else if (title === "Not Found") { %>
+          <% include content/not_found %>
+        <% } %>
+      </div>
+    </span>
+    <span class="column">
+      <div class="container">
+        <% include base/right_col %>
+      </div>
+    </span>
+  </div>
+  <div id="footer">
+    <% include base/footer %>
+  </div>
   <% include base/scripts %>
 </body>
 

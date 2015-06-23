@@ -168,49 +168,49 @@ tr {
     float: left;
 }
 
-.column_section {
+.column section {
     border-top: 1px solid black;
 	padding: 1em;
 	overflow: hidden;
     text-align: center;
 }
 
-.column_section a {
+.column section a {
     text-decoration: none;
     color: #000000;
 }
 
-.column_section a:hover {
+.column section a:hover {
     color: #fa0000;
 }
 
-.column_section ul {
+.column section ul {
     width: 150px;
     margin: auto;
 }
 
-.column_section li {
+.column section li {
     text-align: left;
 }
 
-.column_section input {
+.column section input {
 	display: block;
     width: 100px;
     margin: 10px auto 0px auto;
 }
 
-.column_section select {
+.column section select {
     display: block;
     width: 105px;
     margin: 10px auto 0px auto;
 }
 
-.column_section textarea {
+.column section textarea {
     display: block;
     margin: 10px auto 0px auto;
 }
 
-.column_section button {
+.column section button {
     display: block;
     margin: 10px auto 0px auto;
 }
@@ -225,21 +225,26 @@ tr {
 
 /* Main Page container */
 
-.main {
+#main {
     width: 60%;
     min-height: 750px;
     display: inline-block;
     float: left;
 }
 
-.main .container {
+#main .container {
 	padding: 1em 0em 1em 0em;
 }
 
-.main_section {
+#main section {
     border-top: 1px solid black;
 	padding: 1em;
 	overflow: hidden;
+}
+
+#main section input {
+    display: inline-block;
+    margin-bottom: 0.5em;
 }
 
 #banner {
@@ -314,7 +319,7 @@ a .event_thumb * {
 
 /* Footer */
 
-.footer {
+#footer {
     display: block;
     clear: both;
     width: 100%;

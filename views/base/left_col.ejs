@@ -2,48 +2,44 @@
 <%      /* Left column partial */     %>
 <%   /* Written by Brandon Kelley */  %>
 
-<span class="column">
-  <div class="container">
-    <% if (user !== null) { %>
-      <div class="column_section">
-        <h4>Logged in as: </h4><h4 id="username"><%= user.username %></h4>
-        <br/>
-        <button id="logout" type="button">Logout</button>
-      </div>
-      <div class="column_section">
-        <% /* This is a divider */ %>
-      </div>
-      <div class="column_section">
-        <h4>Personalized Links</h4>
-        <br/>
-        <ul style="width: 150px; margin: auto;">
-          <% var keys = Object.keys(user.links) %>
-          <% for (var i = 0; i < keys.length; i++) { %>
-            <% var link = user.links[keys[i]]; %>
-            <li style="text-align: left;">
-              <a href="<%= link %>"><%= keys[i] %></a>
-              <img src="/images/remove.png" width="10px" class="remove"/>
-            </li>
-          <% } %>
-        </ul>
-        <button type="button" id="remove_link">Remove a link</button>
-      </div>
-      <div class="column_section">
-        <h4>Add a link</h4>
-        <input type="text" placeholder="Label"/>
-        <input type="text" placeholder="URL"/>
-        <button id="add_link" type="button">Submit</button>
-      </div>
-    <% } else { %>
-      <div class="column_section">
-        <h4>Login</h4>
-        <input type="text" placeholder="Username"/>
-        <input type="password" placeholder="Password"/>
-        <button id="login" type="button">Submit</button>
-      </div>
-    <% } %>
-    <div class="column_section">
-      <% /* This is the bottom line */ %>
-    </div>
-  </div>
-</span>
+<% if (user !== null) { %>
+  <section>
+    <h4>Logged in as: </h4><h4 id="username"><%= user.username %></h4>
+    <br/>
+    <button id="logout" type="button">Logout</button>
+  </section>
+  <section>
+    <% /* This is a divider */ %>
+  </section>
+  <section>
+    <h4>Personalized Links</h4>
+    <br/>
+    <ul style="width: 150px; margin: auto;">
+      <% var keys = Object.keys(user.links) %>
+      <% for (var i = 0; i < keys.length; i++) { %>
+        <% var link = user.links[keys[i]]; %>
+        <li style="text-align: left;">
+          <a href="<%= link %>"><%= keys[i] %></a>
+          <img src="/images/remove.png" width="10px" class="remove"/>
+        </li>
+      <% } %>
+    </ul>
+    <button type="button" id="remove_link">Remove a link</button>
+  </section>
+  <section>
+    <h4>Add a link</h4>
+    <input type="text" placeholder="Label"/>
+    <input type="text" placeholder="URL"/>
+    <button id="add_link" type="button">Submit</button>
+  </section>
+<% } else { %>
+  <section>
+    <h4>Login</h4>
+    <input type="text" placeholder="Username"/>
+    <input type="password" placeholder="Password"/>
+    <button id="login" type="button">Submit</button>
+  </section>
+<% } %>
+<section>
+  <% /* This is the bottom line */ %>
+</section>

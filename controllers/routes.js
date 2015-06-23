@@ -54,6 +54,15 @@ router.get("/events", function(request, response) {
   });
 });
 
+router.get("/new_event", function(request, response) {
+  authenticate(request.cookies, function(user) {
+    response.render("template", {
+      "title": "New Event",
+      "user": user
+    });
+  });
+});
+
 /* GET single event page */
 router.get("/events/*", function(request, response) {
   authenticate(request.cookies, function(user) {
