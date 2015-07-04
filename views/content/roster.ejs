@@ -1,0 +1,28 @@
+<section>
+  <table>
+    <col style="width: 15%;"/>
+    <col style="width: 15%;"/>
+    <col style="width: 20%;"/>
+    <col style="width: 15%;"/>
+    <col style="width: 15%;"/>
+    <col style="width: 15%;"/>
+    <tr>
+      <td><strong>First Name</strong></td>
+      <td><strong>Last Name</strong></td>
+      <td><strong>Nickname</strong></td>
+      <td><strong>Pledge Class</strong></td>
+      <td><strong>Status</strong></td>
+      <td><strong>Email</strong></td>
+    </tr>
+    <% for (var i = 0; i < membership.length; i++) { %>
+      <tr>
+        <td><%= membership[i]["firstname"] %></td>
+        <td><%= membership[i]["lastname"] %></td>
+        <td><%= membership[i]["nickname"] %></td>
+        <td><%= membership[i]["class"] %></td>
+        <td><%= membership[i]["status"] %></td>
+        <td><%= membership[i]["email"] %></td>
+      </tr>
+    <% } %>
+  </table>
+</section>

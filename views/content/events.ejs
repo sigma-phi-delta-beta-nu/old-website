@@ -2,53 +2,52 @@
 <%        /* Events partial */        %>
 <%   /* Written by Brandon Kelley */  %>
 
-<span class="main">
-  <div class="container">
-    <div class="main_section">
-      <h1>Sigma Phi Delta Events</h1>
-      <h2>Professional</h2>
-      <% for (var i = 0; i < events.length; i++) { %>
-        <% if (events[i]["category"] === "professional") { %>
-          <% var event = events[i] %>
-          <% var link = "/events/" + events[i]["url"] %>
-          <span class="event_thumb">
-            <a href=<%= link %>>Details</a>
-            <h3><%= event["name"] %></h4>
-            <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
-            <p><%= event["description"] %></p>
-          </span>
-        <% } %>
-      <% } %>
-    </div>
-    <div class="main_section">
-      <h2>Social</h2>
-      <% for (var i = 0; i < events.length; i++) { %>
-        <% if (events[i]["category"] === "social") { %>
-          <% var event = events[i] %>
-          <% var link = "/events/" + events[i]["url"] %>
-          <span class="event_thumb">
-            <a href=<%= link %>>Details</a>
-            <h3><%= event["name"] %></h4>
-            <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
-            <p><%= event["description"] %></p>
-          </span>
-        <% } %>
-      <% } %>
-    </div>
-    <div class="main_section">
-      <h2>Philanthropy</h2>
-      <% for (var i = 0; i < events.length; i++) { %>
-        <% if (events[i]["category"] === "philanthropy") { %>
-          <% var event = events[i] %>
-          <% var link = "/events/" + events[i]["url"] %>
-          <span class="event_thumb">
-            <a href=<%= link %>>Details</a>
-            <h3><%= event["name"] %></h4>
-            <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
-            <p><%= event["description"] %></p>
-          </span>
-        <% } %>
-      <% } %>
-    </div>
-  </div>
-</span>
+<section>
+  <h1>Sigma Phi Delta Events</h1>
+  <h2>Professional</h2>
+  <% for (var i = 0; i < events.length; i++) { %>
+    <% if (events[i]["category"] === "professional") { %>
+      <% var event = events[i] %>
+      <% var link = "/events/" + events[i]["url"] %>
+      <a href=<%= link %>>
+        <span class="event_thumb">
+          <h3><%= event["name"] %></h4>
+          <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
+          <p><%= event["description"] %></p>
+        </span>
+      </a>
+    <% } %>
+  <% } %>
+</section>
+<section>
+  <h2>Social</h2>
+  <% for (var i = 0; i < events.length; i++) { %>
+    <% if (events[i]["category"] === "social") { %>
+      <% var event = events[i] %>
+      <% var link = "/events/" + events[i]["url"] %>
+      <a href=<%= link %>>
+        <span class="event_thumb">
+          <h3><%= event["name"] %></h4>
+          <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
+          <p><%= event["description"] %></p>
+        </span>
+      </a>
+    <% } %>
+  <% } %>
+</section>
+<section>
+  <h2>Philanthropy</h2>
+  <% for (var i = 0; i < events.length; i++) { %>
+    <% if (events[i]["category"] === "philanthropy") { %>
+      <% var event = events[i] %>
+      <% var link = "/events/" + events[i]["url"] %>
+      <a href=<%= link %>>
+        <span class="event_thumb">
+          <h3><%= event["name"] %></h4>
+          <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
+          <p><%= event["description"] %></p>
+        </span>
+      </a>
+    <% } %>
+  <% } %>
+</section>

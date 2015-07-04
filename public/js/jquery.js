@@ -37,7 +37,8 @@ $(document).ready(function() {
 			type: 'GET',
 			url: '/logout',
 			success: function() {
-				if (window.location.pathname === "/dashboard") {
+				if (window.location.pathname === "/dashboard"
+                 || window.location.pathname === "/roster") {
                     window.location = "/";
                 } else {
                     location.reload(true);
@@ -106,16 +107,16 @@ $(document).ready(function() {
       
     });
     
-    $("#newEvent").click(function() {
+    $("#addEvent").click(function() {
       
-      var $name = $("#newEventInput").find("input").first();
-      var $location = $name.next();
-      var $date = $location.next();
-      var $time = $date.next();
-      var $category = $time.next();
-      var $privacy = $category.next();
-      var $cost = $privacy.next();
-      var $description = $cost.closest("div").next().find("textarea");
+      var $name = $("label[for='eventName']").find("input");
+      var $location = $("label[for='location']").find("input");
+      var $date = $("label[for='date']").find("input");
+      var $time = $("label[for='time']").find("input");
+      var $category = $("label[for='category']").find("select");
+      var $privacy = $("label[for='privacy']").find("select");
+      var $cost = $("label[for='cost']").find("input");
+      var $description = $("label[for='description']").find("textarea");
       
       var sendingData = {
         "name": $name.val(),
@@ -197,6 +198,14 @@ $(document).ready(function() {
         }
       });
       
+    });
+    
+    $(".event_thumb").mouseenter(function() {
+      $(this).css("background", "#FADDDD");
+    });
+    
+    $(".event_thumb").mouseleave(function() {
+      $(this).css("background", "#FFFFFF");
     });
     
 	function authenticate(usr, pwd) {

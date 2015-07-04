@@ -2,118 +2,123 @@
 <%        /* Navbar partial */        %>
 <%   /* Written by Brandon Kelley */  %>
 
-<div id="navbar">
-  
-  <span id="mobile_navbar_button"></span>
-  
-  <span id="mobile_navbar">
-    <% if (title !== "Home") { %>
-      <div>
-        <a href="/"><p>Home</p></a>
-      </div>
-    <% } %>
-    <% if (title !== "About Us") { %>
-      <div>
-        <a href="/about_us"><p>About Us</p></a>
-      </div>
-    <% } %>
-    <% if (title !== "Recruitment") { %>
-      <div>
-        <a href="/recruitment"><p>Recruitment</p></a>
-      </div>
-    <% } %>
-    <% if (title !== "Events") { %>
-      <div>
-        <a href="/events"><p>Events</p></a>
-      </div>
-    <% } %>
-    <% if (title !== "Gallery") { %>
-      <div>
-        <a href="/gallery"><p>Gallery</p></a>
-      </div>
-    <% } %>
-    <% if (title !== "Contact Us") { %>
-      <div>
-        <a href="/contact_us"><p>Contact Us</p></a>
-      </div>
-    <% } %>
-    <% if (title !== "Dashboard" && user !== null) { %>
-      <div>
-        <a href="/dashboard"><p>Dashboard</p></a>
-      </div>
-    <% } %>
-  </span>
-  
-  <span id="navbar_header">
-    <div id="navbar_header_container">
-      <div <% if (title === "Home") { %>class="active"<% } %>>
-        <a href="/"><h3>&#931&#934&#916</h3></a>
-      </div>
+<span id="mobile_navbar_button"></span>
+
+<span id="mobile_navbar">
+  <% if (title !== "Home") { %>
+    <div>
+      <a href="/"><p>Home</p></a>
     </div>
-  </span>
-  
-  <span id="navbar_body">
-    <span
-      <% if (title === "About Us") { %>
-        class="active"
-      <% } %>>
-      <a href="/about_us">
-        <h4>About Us</h4>
-      </a>
-    </span>
-    
-    <span 
-      <% if (title === "Recruitment") { %>
-        class="active"
-      <% } %>>
-      <a href="/recruitment">
-        <h4>Recruitment</h4>
-      </a>
-    </span>
-    
-    <span 
-      <% if (title === "Events" || title === "Event") { %>
-        class="active"
-      <% } %>>
-      <a href="/events">
-        <h4>Events</h4>
-      </a>
-    </span>
-    
-    <span 
-      <% if (title === "Gallery") { %>
-        class="active"
-      <% } %>>
-      <a href="/gallery">
-        <h4>Gallery</h4>
-      </a>
-    </span>
-    
-    <span
-      <% if (title === "Contact Us") { %>
-        class="active"
-      <% } %>>
-      <a href="/contact_us">
-        <h4>Contact Us</h4>
-      </a>
-    </span>
-    
-    <% if (user !== null) { %>
-      <span
-        <% if (title == "Dashboard") { %>
-          class="active"
-        <% } %>>
-        <a href="/dashboard">
-          <h4>Dashboard</h4>
-        </a>
-      </span>
-    <% } %>
-  </span>
-    
-  <span id="navbar_school_container">
-    <div style="margin: auto; padding: 0.9em;">
-      <a href="//www.calpoly.edu/"><h4>Cal Poly, SLO</h4></a>
+  <% } %>
+  <% if (title !== "About Us") { %>
+    <div>
+      <a href="/about_us"><p>About Us</p></a>
     </div>
+  <% } %>
+  <% if (title !== "Recruitment") { %>
+    <div>
+      <a href="/recruitment"><p>Recruitment</p></a>
+    </div>
+  <% } %>
+  <% if (title !== "Events") { %>
+    <div>
+      <a href="/events"><p>Events</p></a>
+    </div>
+  <% } %>
+  <% if (title !== "Gallery") { %>
+    <div>
+      <a href="/gallery"><p>Gallery</p></a>
+    </div>
+  <% } %>
+  <% if (title !== "Contact Us") { %>
+    <div>
+      <a href="/contact_us"><p>Contact Us</p></a>
+    </div>
+  <% } %>
+  <% if (title !== "Dashboard" && user !== null) { %>
+    <div>
+      <a href="/dashboard"><p>Dashboard</p></a>
+    </div>
+  <% } %>
+</span>
+
+<span id="navbar_header">
+  <div id="navbar_header_container">
+    <div <% if (title === "Home") { %>class="active"<% } %>>
+      <a href="/"><h3>&#931&#934&#916</h3></a>
+    </div>
+  </div>
+</span>
+
+<span id="navbar_body">
+  <span
+    <% if (title === "About Us") { %>
+      class="active"
+    <% } %>>
+    <a href="/about_us">
+      <h4>About Us</h4>
+    </a>
   </span>
   
-</div>
+  <span 
+    <% if (title === "Recruitment") { %>
+      class="active"
+    <% } %>>
+    <a href="/recruitment">
+      <h4>Recruitment</h4>
+    </a>
+  </span>
+  
+  <span 
+    <% if (title === "Events" || title === "Event") { %>
+      class="active"
+    <% } %>>
+    <a href="/events">
+      <h4>Events</h4>
+    </a>
+  </span>
+  
+  <span 
+    <% if (title === "Gallery") { %>
+      class="active"
+    <% } %>>
+    <a href="/gallery">
+      <h4>Gallery</h4>
+    </a>
+  </span>
+  
+  <span
+    <% if (title === "Contact Us") { %>
+      class="active"
+    <% } %>>
+    <a href="/contact_us">
+      <h4>Contact Us</h4>
+    </a>
+  </span>
+  
+  <% if (user !== null) { %>
+    <span
+      <% if (title === "Dashboard") { %>
+        class="active"
+      <% } %>>
+      <a href="/dashboard">
+        <h4>Dashboard</h4>
+      </a>
+    </span>
+    
+    <span
+      <% if (title === "Roster") { %>
+        class="active"
+      <% } %>>
+      <a href="/roster">
+        <h4>Roster</h4>
+      </a>
+    </span>
+  <% } %>
+</span>
+  
+<span id="navbar_school_container">
+  <div style="margin: auto; padding: 0.9em;">
+    <a href="//www.calpoly.edu/"><h4>Cal Poly, SLO</h4></a>
+  </div>
+</span>

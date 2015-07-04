@@ -7,6 +7,7 @@ h1, h2, h3, h4, p, ul, ol, li, input, body, div, span {
 
 body {
     width: 100%;
+    min-height: 100vh;
     background-color: #FFFFFF;
     font-family: 'Charcoal', Times, serif;
     font-size: 100%;
@@ -168,51 +169,38 @@ tr {
     float: left;
 }
 
-.column_section {
+.column section {
     border-top: 1px solid black;
 	padding: 1em;
 	overflow: hidden;
     text-align: center;
 }
 
-.column_section a {
+.column section a {
     text-decoration: none;
     color: #000000;
 }
 
-.column_section a:hover {
+.column section a:hover {
     color: #fa0000;
 }
 
-.column_section ul {
+.column section ul {
     width: 150px;
     margin: auto;
 }
 
-.column_section li {
+.column section li {
     text-align: left;
 }
 
-.column_section input {
-	display: block;
-    width: 100px;
-    margin: 10px auto 0px auto;
+.column section input {
+    display: block;
+    margin: 5px auto;
 }
 
-.column_section select {
-    display: block;
-    width: 105px;
-    margin: 10px auto 0px auto;
-}
-
-.column_section textarea {
-    display: block;
-    margin: 10px auto 0px auto;
-}
-
-.column_section button {
-    display: block;
-    margin: 10px auto 0px auto;
+.column section button {
+    margin: auto;
 }
 
 .remove {
@@ -225,21 +213,51 @@ tr {
 
 /* Main Page container */
 
-.main {
+#main {
     width: 60%;
     min-height: 750px;
     display: inline-block;
     float: left;
 }
 
-.main .container {
+#main .container {
 	padding: 1em 0em 1em 0em;
 }
 
-.main_section {
+#main section {
     border-top: 1px solid black;
 	padding: 1em;
 	overflow: hidden;
+}
+
+#newEvent label {
+    display: block;
+    width: 300px;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+#newEvent input {
+    display: inline-block;
+    float: right;
+    width: 150px;
+}
+
+#newEvent select {
+    display: inline-block;
+    float: right;
+    width: 150px;
+}
+
+#newEvent textarea {
+    display: inline-block;
+    float: right;
+    width: 150px;
+}
+
+#newEvent button {
+    display: block;
+    margin: 10px auto 0px auto;
 }
 
 #banner {
@@ -266,7 +284,7 @@ tr {
 	padding: 0em;
 }
 
-#membership span{
+#membership span {
     margin-right: 30px;
 }
 
@@ -279,8 +297,8 @@ tr {
     overflow: hidden;
 }
 
-.event_thumb a {
-    float: right;
+a .event_thumb * {
+    color: #000000;
 }
 
 #event img {
@@ -314,7 +332,7 @@ tr {
 
 /* Footer */
 
-.footer {
+#footer {
     display: block;
     clear: both;
     width: 100%;
