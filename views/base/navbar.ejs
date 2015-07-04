@@ -98,11 +98,20 @@
   
   <% if (user !== null) { %>
     <span
-      <% if (title == "Dashboard") { %>
+      <% if (title === "Dashboard") { %>
         class="active"
       <% } %>>
       <a href="/dashboard">
         <h4>Dashboard</h4>
+      </a>
+    </span>
+    
+    <span
+      <% if (title === "Roster") { %>
+        class="active"
+      <% } %>>
+      <a href="/roster">
+        <h4>Roster</h4>
       </a>
     </span>
   <% } %>

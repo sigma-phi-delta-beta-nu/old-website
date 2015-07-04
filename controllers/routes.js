@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var authenticate = require("../models/auth").authenticate;
+var queryMembershipByNames = require("../models/membership").queryNames;
 var queryMembershipByClasses = require("../models/membership").queryClasses;
 var queryMembershipByPositions = require("../models/membership").queryPositions;
 var queryEventsByCategories = require("../models/events").queryCategories;
@@ -106,9 +107,36 @@ router.get("/contact_us", function(request, response) {
 /* GET profile page */
 router.get("/dashboard", function(request, response) {
   authenticate(request.cookies, function(user) {
-    response.render("template", {
-      "title": "Dashboard",
-      "user": user
+    if (user === null) {
+      response.render("template", {
+        "title": "Home",
+        "user": user
+      });
+    } else {
+      response.render("template", {
+        "title": "Dashboard",
+        "user": user
+      });
+    }
+  });
+});
+
+/* GET roster */
+router.get("/roster", function(request, response) {
+  authenticate(request.cookies, function(user) {
+    queryMembershipByNames(function(membership) {
+      if (user === null) {
+        response.render("template", {
+          "title": "Home",
+          "user": user
+        });
+      } else {
+        response.render("template", {
+          "title": "Roster",
+          "user": user,
+          "membership": membership
+        });
+      }
     });
   });
 });

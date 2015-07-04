@@ -170,3 +170,57 @@ exports.queryPositions = function(callback) {
   });
   
 };
+
+exports.queryNames = function(callback) {
+  
+  var scanParams = {
+    "TableName": "membership",
+    "Select": "ALL_ATTRIBUTES"
+  };
+  
+  dynamodb.scan(scanParams, function(error, data) {
+    if (error) {
+      console.log(error);
+    } else {
+      
+      var membership = [];
+      var members = data.Items;
+      
+      for (var i = 0; i < members.length; i++) {
+        
+        var keys = Object.keys(members[i]);
+        var member = {};
+        
+        for (var j = 0; j < keys.length; j++) {
+          
+          if (typeof members[i][keys[j]]["S"]) {
+            member[keys[j]] = members[i][keys[j]]["S"];
+          }
+          
+        }
+        
+        membership.push(member);
+        member = {};
+        
+      }
+      
+      membership.sort(function(a, b) {
+        
+        var aName = a["firstname"].toLowerCase() + a["lastname"].toLowerCase();
+        var bName = b["firstname"].toLowerCase() + b["lastname"].toLowerCase();
+        if (aName < bName) {
+          return -1;
+        } else if (aName > bName) {
+          return 1;
+        } else {
+          return 0;
+        }
+        
+      });
+      
+      callback(membership);
+      
+    }
+  });
+  
+};

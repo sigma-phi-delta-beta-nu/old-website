@@ -7,6 +7,7 @@ h1, h2, h3, h4, p, ul, ol, li, input, body, div, span {
 
 body {
     width: 100%;
+    min-height: 100vh;
     background-color: #FFFFFF;
     font-family: 'Charcoal', Times, serif;
     font-size: 100%;
@@ -194,25 +195,12 @@ tr {
 }
 
 .column section input {
-	display: block;
-    width: 100px;
-    margin: 10px auto 0px auto;
-}
-
-.column section select {
     display: block;
-    width: 105px;
-    margin: 10px auto 0px auto;
-}
-
-.column section textarea {
-    display: block;
-    margin: 10px auto 0px auto;
+    margin: 5px auto;
 }
 
 .column section button {
-    display: block;
-    margin: 10px auto 0px auto;
+    margin: auto;
 }
 
 .remove {
@@ -242,9 +230,34 @@ tr {
 	overflow: hidden;
 }
 
-#main section input {
+#newEvent label {
+    display: block;
+    width: 300px;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+#newEvent input {
     display: inline-block;
-    margin-bottom: 0.5em;
+    float: right;
+    width: 150px;
+}
+
+#newEvent select {
+    display: inline-block;
+    float: right;
+    width: 150px;
+}
+
+#newEvent textarea {
+    display: inline-block;
+    float: right;
+    width: 150px;
+}
+
+#newEvent button {
+    display: block;
+    margin: 10px auto 0px auto;
 }
 
 #banner {
@@ -271,7 +284,7 @@ tr {
 	padding: 0em;
 }
 
-#membership span{
+#membership span {
     margin-right: 30px;
 }
 
