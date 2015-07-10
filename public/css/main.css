@@ -74,6 +74,10 @@ tr {
     line-height: 1.25em;
 }
 
+th {
+    text-align: left;
+}
+
 .container {
     padding: 1em;
 }
@@ -328,6 +332,19 @@ a .event_thumb * {
     position: relative;
     left: 50%;
     margin-left: -100%;
+}
+
+#photo img {
+    width: 100%;
+}
+
+#roster {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+#roster table {
+    width: 2000px;
 }
 
 /* Footer */

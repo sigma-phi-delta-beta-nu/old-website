@@ -174,7 +174,7 @@ exports.queryPositions = function(callback) {
 exports.queryNames = function(callback) {
   
   var scanParams = {
-    "TableName": "membership",
+    "TableName": "roster",
     "Select": "ALL_ATTRIBUTES"
   };
   
@@ -183,28 +183,30 @@ exports.queryNames = function(callback) {
       console.log(error);
     } else {
       
-      var membership = [];
-      var members = data.Items;
+      var roster = [];
+      var rawRoster = data.Items;
       
-      for (var i = 0; i < members.length; i++) {
+      for (var i = 0; i < rawRoster.length; i++) {
         
-        var keys = Object.keys(members[i]);
+        var keys = Object.keys(rawRoster[i]);
         var member = {};
         
         for (var j = 0; j < keys.length; j++) {
           
-          if (typeof members[i][keys[j]]["S"]) {
-            member[keys[j]] = members[i][keys[j]]["S"];
+          if (rawRoster[i][keys[j]]["S"] !== null) {
+            member[keys[j]] = rawRoster[i][keys[j]]["S"];
+          } else {
+            member[keys[j]] = "";
           }
           
         }
         
-        membership.push(member);
+        roster.push(member);
         member = {};
         
       }
       
-      membership.sort(function(a, b) {
+      roster.sort(function(a, b) {
         
         var aName = a["firstname"].toLowerCase() + a["lastname"].toLowerCase();
         var bName = b["firstname"].toLowerCase() + b["lastname"].toLowerCase();
@@ -218,7 +220,7 @@ exports.queryNames = function(callback) {
         
       });
       
-      callback(membership);
+      callback(roster);
       
     }
   });

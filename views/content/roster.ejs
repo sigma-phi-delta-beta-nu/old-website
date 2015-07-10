@@ -1,28 +1,61 @@
 <section>
-  <table>
-    <col style="width: 15%;"/>
-    <col style="width: 15%;"/>
-    <col style="width: 20%;"/>
-    <col style="width: 15%;"/>
-    <col style="width: 15%;"/>
-    <col style="width: 15%;"/>
-    <tr>
-      <td><strong>First Name</strong></td>
-      <td><strong>Last Name</strong></td>
-      <td><strong>Nickname</strong></td>
-      <td><strong>Pledge Class</strong></td>
-      <td><strong>Status</strong></td>
-      <td><strong>Email</strong></td>
-    </tr>
-    <% for (var i = 0; i < membership.length; i++) { %>
-      <tr>
-        <td><%= membership[i]["firstname"] %></td>
-        <td><%= membership[i]["lastname"] %></td>
-        <td><%= membership[i]["nickname"] %></td>
-        <td><%= membership[i]["class"] %></td>
-        <td><%= membership[i]["status"] %></td>
-        <td><%= membership[i]["email"] %></td>
-      </tr>
-    <% } %>
-  </table>
+  <div id="roster">
+    <table>
+      <colgroup>
+        <col style="width: 7%;"/>
+        <col style="width: 7%;"/>
+        <col style="width: 8%;"/>
+        <col style="width: 7%;"/>
+        <col style="width: 12%;"/>
+        <col style="width: 8%;"/>
+        <col style="width: 6%;"/>
+        <col style="width: 22%;"/>
+        <col style="width: 22%;"/>
+      </colgroup>
+      <tbody>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Nickname</th>
+          <th>Pledge Class</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Birthday</th>
+          <th>Current Address</th>
+          <th>Home Address</th>
+        </tr>
+        <% for (var i = 0; i < roster.length; i++) { %>
+          <tr>
+            <td><%= roster[i]["firstname"] %></td>
+            <td><%= roster[i]["lastname"] %></td>
+            <td><%= roster[i]["nickname"] %></td>
+            <td><%= roster[i]["class"] %></td>
+            <td><%= roster[i]["email"] %></td>
+            <td><%= roster[i]["phone"] %></td>
+            <td><%= roster[i]["birthday"] %></td>
+            <% var currentAddress %>
+            <% if (roster[i]["currentAddress"] !== undefined) { %>
+              <% currentAddress = roster[i]["currentAddress"] %>
+              <% currentAddress += ", " + roster[i]["currentCity"] %>
+              <% currentAddress += ", " + roster[i]["currentState"] %>
+              <% currentAddress += ", " + roster[i]["currentPostal"] %>
+            <% } else { %>
+              <% currentAddress = "" %>
+            <% } %>
+            <td><%= currentAddress %></td>
+            <% var homeAddress %>
+            <% if (roster[i]["homeAddress"] !== undefined) { %>
+              <% homeAddress = roster[i]["homeAddress"] %>
+              <% homeAddress += ", " + roster[i]["homeCity"] %>
+              <% homeAddress += ", " + roster[i]["homeState"] %>
+              <% homeAddress += ", " + roster[i]["homePostal"] %>
+            <% } else { %>
+              <% homeAddress = "" %>
+            <% } %>
+            <td><%= homeAddress %></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
 </section>
