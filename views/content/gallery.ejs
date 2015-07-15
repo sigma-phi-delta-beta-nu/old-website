@@ -9,10 +9,12 @@
     <% var imgUrl = "/images" + gallery[keys[i]][0]["url"] %>
     <% var albumUrl = "/gallery/" + gallery[keys[i]][0]["albumUrl"] %>
     <span class="gallery_thumb" style="margin-right: 16px;">
-      <div>
-        <img src=<%= imgUrl %> />
-      </div>
-      <a href=<%= albumUrl %>><h2><%= keys[i] %></h2></a>
+      <a href=<%= albumUrl %>>
+        <div>
+          <img src=<%= imgUrl %> />
+        </div>
+        <h2><%= keys[i] %></h2>
+      </a>
     </span>
   <% } %>
 </section>
