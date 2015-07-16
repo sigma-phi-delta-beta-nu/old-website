@@ -37,8 +37,10 @@ exports.login = function(username, password, callback) {
             }
           });
         } else {
-          callback(null);
+          callback(false);
         }
+      } else {
+        callback(null);
       }
     }
   });

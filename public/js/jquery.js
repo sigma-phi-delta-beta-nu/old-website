@@ -4,20 +4,24 @@ $(document).ready(function() {
 		
 		if (event.keyCode == 13) {
 			event.preventDefault();
-			var $inputs = $(this).closest("div").find("input");
-			var usr = $inputs.first().val();
-			if (usr === "") {
-				alert("Please enter a username.");
-				return;
-			}
-			var pwd = $inputs.last().val();
-			if (pwd === "") {
-				alert("Please enter a password");
-				return;
-			}
-			var hash = Sha256.hash(pwd);
-			authenticate(usr, hash);
-		}
+            var $submit = $(this).closest("div").find("button");
+            if ($submit.attr("id") === "login") {
+			  var $inputs = $(this).closest("div").find("input");
+			  var usr = $inputs.first().val();
+			  if (usr === "") {
+			  	alert("Please enter a username.");
+			  	return;
+			  }
+			  var pwd = $inputs.last().val();
+			  if (pwd === "") {
+			  	alert("Please enter a password");
+                $inputs.last().focus();
+			  	return;
+			  }
+			  var hash = Sha256.hash(pwd);
+			  authenticate(usr, hash);
+		    }
+        }
 
 	});
 	
@@ -276,11 +280,16 @@ $(document).ready(function() {
             success: function(returnedData) {
                 if (returnedData === true) {
                     window.location.reload(true);
-                } else {
-                    alert("Sorry, that username/password combination was incorrect.");
-					//alert(pwd);
-					$("#login_form").find("input").first().next().val("");
-					$("#login_form").find("input").first().next().focus();
+                } else if (returnedData === "") {
+                    alert("Sorry, we don't have that username on file");
+                    $("#login").closest("div").find("input").first().val("");
+                    $("#login").closest("div").find("input").first().next().val("");
+					$("#login").closest("div").find("input").first().focus();
+                } else if (returnedData === false) {
+                    alert("Sorry, that password is incorrect.");
+                    $("#login").closest("div").find("input").first().next().val("");
+					$("#login").closest("div").find("input").first().next().focus();
+				
 				}
             },
             error: function(err) {

@@ -15,12 +15,12 @@ router.post("/login", function(request, response) {
   var password = request.body.password;
   
   login(username, password, function(user) {
-    if (user !== null) {
+    if (user !== null && user !== false) {
       response.cookie("logged_in", user.username, { maxAge: 100 * 60 * 60 * 24 });
       response.cookie("name", user.name, { maxAge: 100 * 60 * 60 * 24 });
       response.send(true);
     } else {
-      response.send(false);
+      response.send(user);
     }
     response.end();
   });
