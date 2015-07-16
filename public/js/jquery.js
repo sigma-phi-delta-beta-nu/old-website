@@ -208,6 +208,59 @@ $(document).ready(function() {
       $(this).css("background", "#FFFFFF");
     });
     
+    $(".gallery_thumb").mouseenter(function() {
+      $(this).css("background", "#FADDDD");
+    });
+    
+    $(".gallery_thumb").mouseleave(function() {
+      $(this).css("background", "#FFFFFF");
+    });
+    
+    $(".hyper_select").find("div").mouseenter(function() {
+      $(this).css("background", "#FADDDD");
+    });
+    
+    $(".hyper_select").find("div").mouseleave(function() {
+      $(this).css("background", "#EAEAEA");
+    });
+    
+    $(".hyper_select").find("div").first().css("color", "#FA0000");
+    
+    $(".hyper_select").find("div").click(function() {
+      if ($(this).css("color") === "rgb(0, 0, 0)") {
+        $(this).closest(".hyper_select").find("div").css("color", "#000000");
+        $(this).css("color", "#FA0000");
+        console.log($(this).html());
+        if ($(this).text() === "Hyperlink") {
+          var currentRow = $("tr").first();
+          var rowCount = $("tr").length;
+          for (var i = 0; i < rowCount; i++) {
+            var email = currentRow.find("td").last().text();
+            currentRow.find("td").last().html("<a href='mailto:" + 
+              email + "'>" + email + "</a>");
+            if (i === 8) {
+              currentRow = $("tbody").last().find("tr").first();
+            } else {
+              currentRow = currentRow.next();
+            }
+          }
+        } else {
+          var currentRow = $("tr").first();
+          var rowCount = $("tr").length;
+          for (var i = 0; i < rowCount; i++) {
+            currentRow.find("td").last().html(
+              currentRow.find("td").last().find("a").text()
+            );
+            if (i === 8) {
+              currentRow = $("tbody").last().find("tr").first();
+            } else {
+              currentRow = currentRow.next();
+            }
+          }
+        }
+      }
+    });
+    
 	function authenticate(usr, pwd) {
 		
         var sendingData = {

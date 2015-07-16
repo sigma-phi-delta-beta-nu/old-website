@@ -11,9 +11,11 @@
       <% var link = "/events/" + events[i]["url"] %>
       <a href=<%= link %>>
         <span class="event_thumb">
-          <h3><%= event["name"] %></h4>
-          <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
-          <p><%= event["description"] %></p>
+          <img align="left" src=<%= events[i]["picture"] %> />
+          <h3><%= event["name"] %></h3>
+          <p>Date: <%= event["date"] %></p>
+          <p>Time: <%= event["time"] %></p>
+          <p>Location: <%= event["location"] %></p>
         </span>
       </a>
     <% } %>
@@ -27,9 +29,11 @@
       <% var link = "/events/" + events[i]["url"] %>
       <a href=<%= link %>>
         <span class="event_thumb">
-          <h3><%= event["name"] %></h4>
-          <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
-          <p><%= event["description"] %></p>
+          <img align="left" src=<%= events[i]["picture"] %> />
+          <h3><%= event["name"] %></h3>
+          <p>Date: <%= event["date"] %></p>
+          <p>Time: <%= event["time"] %></p>
+          <p>Location: <%= event["location"] %></p>
         </span>
       </a>
     <% } %>
@@ -43,9 +47,11 @@
       <% var link = "/events/" + events[i]["url"] %>
       <a href=<%= link %>>
         <span class="event_thumb">
-          <h3><%= event["name"] %></h4>
-          <p><strong><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></strong></p>
-          <p><%= event["description"] %></p>
+          <img align="left" src=<%= events[i]["picture"] %> />
+          <h3><%= event["name"] %></h3>
+          <p>Date: <%= event["date"] %></p>
+          <p>Time: <%= event["time"] %></p>
+          <p>Location: <%= event["location"] %></p>
         </span>
       </a>
     <% } %>

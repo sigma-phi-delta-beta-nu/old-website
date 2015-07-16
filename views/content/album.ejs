@@ -4,10 +4,12 @@
     <% var imgUrl = "/images" + album[i]["url"] %>
     <% var imgPage = "/gallery/" + albumUrl + album[i]["url"] %>
     <span class="gallery_thumb" style="margin-right: 16px;">
-      <div>
-        <img src=<%= imgUrl %> />
-      </div>
-      <a href=<%= imgPage %>><h2><%= album[i]["caption"] %></h2></a>
+      <a href=<%= imgPage %>>
+        <div>
+          <img src=<%= imgUrl %> />
+        </div>
+        <h2><%= album[i]["caption"] %></h2>
+      </a>
     </span>
   <% } %>
 </section>
