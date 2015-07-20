@@ -111,7 +111,7 @@ router.get("/gallery/*", function(request, response) {
       });
     } else {
       // Query a single photo
-      var imagePath = path.substring(imageIndex, path.length);
+      var imagePath = path.substring(imageIndex + 1, path.length);
       queryPhoto(user, imagePath, function(photoFound) {
         response.render("template", {
           "title": "Photo",

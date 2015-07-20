@@ -1,9 +1,10 @@
 <section>
   <div id="photo">
-    <% var imgUrl = "/images" + photo["url"] %>
+    <% var imgUrl = "/images/" + photo["url"] %>
     <img src=<%= imgUrl %> />
   </div>
-  <h2><%= photo["caption"] %></h2>
+  <h2><%= photo["title"] %></h2>
+  <p><%= photo["caption"] %></p>
   <p>This picture belongs to <%= photo["album"] %>.<p>
   <% if (user !== null) { %>
     <p>This image is <strong><%= photo["type"] %></strong>.</p>

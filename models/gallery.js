@@ -94,6 +94,7 @@ exports.queryAlbum = function(user, albumUrl, callback) {
         "url": list[i]["url"]["S"],
         "caption": list[i]["caption"]["S"],
         "type": list[i]["type"]["S"],
+        "title": list[i]["title"]["S"],
         "album": list[i]["album"]["S"]
       });
     }
