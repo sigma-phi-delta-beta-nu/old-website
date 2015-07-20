@@ -337,6 +337,7 @@ a .event_thumb * {
     border: 1px solid #FA0000;
     text-align: center;
     padding: 16px;
+    margin-bottom: 16px;
 }
 
 .gallery_thumb div {
