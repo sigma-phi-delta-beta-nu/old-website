@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd ~/website/
 
 screen -S server -d -m npm run-script http
