@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "http": "node ./bin/server/http",
-    "https": "node ./bin/server/https",
-    "test": "node ./bin/server/test"
+    "http": "node ./bin/server/http >> ./bin/logs/http.log",
+    "https": "node ./bin/server/https >> ./bin/logs/https.log",
+    "test": "node ./bin/server/test >> ./bin/logs/test.log"
   },
   "dependencies": {
     "body-parser": "~1.12.4",

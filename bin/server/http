@@ -8,3 +8,5 @@ http.createServer(function(request, response) {
   response.end();
 
 }).listen(9000);
+
+console.log("Http server started.");
