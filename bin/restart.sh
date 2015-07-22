@@ -9,7 +9,7 @@ if (($(ps -ef | grep "node ./bin/server/http" | grep -v "sh -c" | grep -v grep |
     cd ~/website/
     screen -X -S server kill
     screen -X -S secure_server kill
-    ../start.sh
+    ./start.sh
     echo "Servers restarted."
     echo
 fi
