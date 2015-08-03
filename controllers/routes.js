@@ -94,6 +94,16 @@ router.get("/gallery", function(request, response) {
   });
 });
 
+/* GET new photo page */
+router.get("/new_photo", function(request, response) {
+  authenticate(request.cookies, function(user) {
+    response.render("template", {
+      "title": "New Photo",
+      "user": user
+    });
+  });
+});
+
 /* GET single gallery album or image page */
 router.get("/gallery/*", function(request, response) {
   authenticate(request.cookies, function(user) {

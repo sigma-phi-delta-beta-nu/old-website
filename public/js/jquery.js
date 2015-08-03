@@ -204,6 +204,16 @@ $(document).ready(function() {
       
     });
     
+    $("#addPhoto").click(function() {
+      
+      var photo = $("label[for='photo']").find("input");
+      
+      var file = photo[0]["files"][0];
+      var reader = new FileReader();
+      reader.readAsText(file);
+      console.log(reader["result"]);
+    });
+    
     $(".event_thumb").mouseenter(function() {
       $(this).css("background", "#FADDDD");
     });
