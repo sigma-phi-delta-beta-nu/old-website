@@ -91,7 +91,7 @@ th {
 /* Navigation Bar */
 
 #mobile_navbar_button {
-    display: inline-block;
+    display: none;
     margin: 0.5em;
     width: 2em;
     height: 2em;
@@ -238,6 +238,10 @@ th {
     border-top: 1px solid black;
 	padding: 1em;
 	overflow: hidden;
+}
+
+.no_bullet {
+  list-style-type: none;
 }
 
 #newEvent label {

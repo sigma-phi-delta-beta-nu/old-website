@@ -6,7 +6,7 @@ if (($(ps -ef | grep "node ./bin/server/http" | grep -v "sh -c" | grep -v grep |
     echo
   else
     echo "One of the servers was down... restarting."
-    cd ~/website/
+    cd ~/website/bin/
     screen -X -S server kill
     screen -X -S secure_server kill
     ./start.sh
