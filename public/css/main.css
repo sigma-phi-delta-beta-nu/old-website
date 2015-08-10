@@ -240,8 +240,12 @@ th {
 	overflow: hidden;
 }
 
-.no_bullet {
+ul.no_bullet {
   list-style-type: none;
+}
+
+ul.no_bullet li {
+  margin-left: 0px;
 }
 
 #newEvent label {
