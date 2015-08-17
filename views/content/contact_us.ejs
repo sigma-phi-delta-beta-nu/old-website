@@ -15,6 +15,7 @@
     <% var elected = positions.elected %>
     <% for(var i = 0; i < elected.length; i++) { %>
       <tr>
+        <% console.log(elected[i]) %>
         <td><%= elected[i]["position"] %></td>
         <td><%= elected[i]["firstname"] %> <%= elected[i]["lastname"] %></td>
         <td><%= elected[i]["email"] %></td>
