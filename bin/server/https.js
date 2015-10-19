@@ -1,9 +1,6 @@
 var app = require("../../app");
 var https = require("https");
 var fs = require("fs");
-var minifier = require("../../util/minifier.js");
-
-minifier();
 
 var ssl_options = {
   key: fs.readFileSync(__dirname + "/../keys/ssl.key"),
