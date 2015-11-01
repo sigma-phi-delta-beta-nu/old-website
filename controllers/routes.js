@@ -183,4 +183,14 @@ router.get("/roster", function(request, response) {
   });
 });
 
+/* GET hackathon page */
+router.get("/jquery_hackathon", function(request, response) {
+  authenticate(request.cookies, function(user) {
+    response.render("template", {
+      "title": "Hackathon",
+      "user": user
+    });
+  });
+});
+
 module.exports = router;
