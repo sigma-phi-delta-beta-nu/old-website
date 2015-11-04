@@ -31,7 +31,7 @@ var apiController = function(router, context) {
     response.clearCookie("logged_in");
     response.send(true);
     response.end();
-  
+    
   });
   
   router.post("/addLink", function(request, response) {

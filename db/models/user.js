@@ -5,7 +5,13 @@ var createSchema = function(Schema) {
     "firstname": String,
     "lastname": String,
     "username": String,
-    "password": String
+    "password": String,
+    "links": [
+      {
+        "name": String,
+        "url": String
+      }
+    ]
   });
   
   // Create the Schema functions
@@ -34,6 +40,12 @@ var createSchema = function(Schema) {
       }
       
     });
+    
+  };
+
+  userSchema.statics.addLink = function(name, url, callback) {
+    
+    // Do mad stuffs
     
   };
   
