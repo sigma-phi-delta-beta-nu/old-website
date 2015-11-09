@@ -1,27 +1,20 @@
 var createSchema = function(Schema) {
   
   // Create the Schema fields
-  var eventSchema = new Schema({
-    "url": String,
-    "author": String,
-    "category": String,
-    "cost": Number,
-    "date": String,
-    "description": String,
-    "location": String,
+  var photoSchema = new Schema({
     "title": String,
-    "picture": String,
-    "time": String,
-    "type": String,
-    "attending": [String]
+    "caption": String,
+    "url": String,
+    "album": String,
+    "type": String
   });
   
   // Create the Schema functions
-  // Get an event
-  userSchema.statics.get = function(username, url, callback) {
+  // Get a photo
+  photoSchema.statics.get = function(username, url, callback) {
     
     this.findOne({
-      "url": url,
+      "url": url
     }).exec(function(error, data) {
       
       // Check the result
@@ -49,27 +42,16 @@ var createSchema = function(Schema) {
       }
       
     });
-  };
-  
-  // Remove an event
-  userSchema.methods.remove = function(callback) {
     
   };
   
-  // Add an attendee to an event
-  userSchema.methods.addAttendee = function(callback) {
+  // Get photos from a specific album
+  photoSchema.statics.getAlbum = function(username, album, callback) {
     
   };
   
-  // Remove an attendee from an event
-  userSchema.methods.removeAttendee = function(callback) {
-    
-  };
-  
-  // Get events, sorted by category
-  userSchema.statics.getByCategories = function(username, callback) {
-    
-    
+  // Get photos, grouped in albums
+  photoSchema.statics.getAlbums = function(username, callback) {
     
   };
   
