@@ -5,7 +5,7 @@
   "scripts": {
     "http": "node ./server/http.js",
     "https": "node ./server/https.js",
-    "test": "node ./server/test.js"
+    "test": "node ./server/test.js 8000"
   },
   "dependencies": {
     "body-parser": "~1.12.4",
@@ -13,6 +13,7 @@
     "ejs": "~2.3.1",
     "express": "~4.12.4",
     "mongoose": "^4.2.4",
+    "random-string": "^0.1.2",
     "serve-favicon": "~2.2.1"
   }
 }

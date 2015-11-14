@@ -1,18 +1,13 @@
 var renderController = function(router, context) {
   
-  var authenticate = require("../models/auth").authenticate;
-  var queryMembershipByNames = require("../models/membership").queryNames;
-  var queryMembershipByClasses = require("../models/membership").queryClasses;
-  var queryMembershipByPositions = require("../models/membership").queryPositions;
-  var queryEventsByCategories = require("../models/events").queryCategories;
-  var queryEvent = require("../models/events").queryEvent;
-  var queryPhotoAlbums = require("../models/gallery").queryAlbums;
-  var queryPhotoAlbum = require("../models/gallery").queryAlbum;
-  var queryPhoto = require("../models/gallery").queryPhoto;
+  var auth = context.sessionManager.authenticate;
+  var User = context.models.User;
+  var Event = context.models.Event;
+  var Photo = context.models.Photo;
   
   /* GET home page */
   router.get("/", function(request, response) {
-    authenticate(request.cookies, function(user) {
+    auth(request.cookies, function(user) {
       response.render("template", {
         "title": "Home",
         "user": user
@@ -22,12 +17,12 @@ var renderController = function(router, context) {
   
   /* GET about us page */
   router.get("/about_us", function(request, response) {
-    authenticate(request.cookies, function(user) {
-      queryMembershipByClasses(function(membership) {
+    auth(request.cookies, function(user) {
+      User.getClasses(function(classes) {
         response.render("template", {
           "title": "About Us",
           "user": user,
-          "membership": membership
+          "classes": classes
         });
       });
     });
@@ -35,7 +30,7 @@ var renderController = function(router, context) {
   
   /* GET recruitment page */
   router.get("/recruitment", function(request, response) {
-    authenticate(request.cookies, function(user) {
+    auth(request.cookies, function(user) {
       response.render("template", {
         "title": "Recruitment",
         "user": user
@@ -45,8 +40,8 @@ var renderController = function(router, context) {
   
   /* GET events page */
   router.get("/events", function(request, response) {
-    authenticate(request.cookies, function(user) {
-      queryEventsByCategories(user, function(events) {
+    auth(request.cookies, function(user) {
+      Event.getCategories(user, function(events) {
         response.render("template", {
           "title": "Events",
           "user": user,
@@ -58,7 +53,7 @@ var renderController = function(router, context) {
   
   /* GET new event form page */
   router.get("/new_event", function(request, response) {
-    authenticate(request.cookies, function(user) {
+    auth(request.cookies, function(user) {
       response.render("template", {
         "title": "New Event",
         "user": user
@@ -68,9 +63,9 @@ var renderController = function(router, context) {
   
   /* GET single event page */
   router.get("/events/*", function(request, response) {
-    authenticate(request.cookies, function(user) {
+    auth(request.cookies, function(user) {
       var eventPath = request.path.substring(8, request.path.length);
-      queryEvent(user, eventPath, function(eventFound) {
+      Event.get(user, eventPath, function(eventFound) {
         response.render("template", {
           "title": "Event",
           "user": user,
@@ -82,12 +77,12 @@ var renderController = function(router, context) {
   
   /* GET gallery page */
   router.get("/gallery", function(request, response) {
-    authenticate(request.cookies, function(user) {
-      queryPhotoAlbums(user, function(gallery) {
+    auth(request.cookies, function(user) {
+      Photo.getAlbums(user, function(albums) {
         response.render("template", {
           "title": "Gallery",
           "user": user,
-          "gallery": gallery
+          "gallery": albums
         });
       });
     });
@@ -95,7 +90,7 @@ var renderController = function(router, context) {
   
   /* GET new photo page */
   router.get("/new_photo", function(request, response) {
-    authenticate(request.cookies, function(user) {
+    auth(request.cookies, function(user) {
       response.render("template", {
         "title": "New Photo",
         "user": user
@@ -105,28 +100,28 @@ var renderController = function(router, context) {
   
   /* GET single gallery album or image page */
   router.get("/gallery/*", function(request, response) {
-    authenticate(request.cookies, function(user) {
+    auth(request.cookies, function(user) {
       var path = request.path.substring(9, request.path.length);
       var imageIndex = path.indexOf("/");
       if (imageIndex === -1) {
         // Query a photo album
-        queryPhotoAlbum(user, path, function(albumFound) {
+        Photo.getAlbum(user, path, function(album) {
           response.render("template", {
             "title": "Album",
             "user": user,
-            "album": albumFound,
+            "album": album,
             "albumUrl": path
           });
         });
       } else {
         // Query a single photo
         var imagePath = path.substring(imageIndex + 1, path.length);
-        queryPhoto(user, imagePath, function(photoFound) {
+        Photo.getPhoto(user, imagePath, function(photoFound) {
           response.render("template", {
             "title": "Photo",
             "user": user,
             "photo": photoFound
-          });
+          }); 
         });
       }
     });
@@ -134,12 +129,12 @@ var renderController = function(router, context) {
   
   /* GET contact us page */
   router.get("/contact_us", function(request, response) {
-    authenticate(request.cookies, function(user) {
-      queryMembershipByPositions(function(positions) {
+    auth(request.cookies, function(user) {
+      User.getPositions(function(positions) {
         response.render("template", {
           "title": "Contact Us",
           "user": user,
-          "positions": positions
+          "positions": null
         });
       });
     });
@@ -147,7 +142,7 @@ var renderController = function(router, context) {
   
   /* GET profile page */
   router.get("/dashboard", function(request, response) {
-    authenticate(request.cookies, function(user) {
+    auth(request.cookies, function(user) {
       if (user === null) {
         response.render("template", {
           "title": "Home",
@@ -164,14 +159,14 @@ var renderController = function(router, context) {
   
   /* GET roster */
   router.get("/roster", function(request, response) {
-    authenticate(request.cookies, function(user) {
+    auth(request.cookies, function(user) {
       if (user === null) {
         response.render("template", {
           "title": "Home",
           "user": user
         });
       } else {
-        queryMembershipByNames(function(roster) {
+        User.getPrivate(function(roster) {
           response.render("template", {
             "title": "Roster",
             "user": user,
@@ -184,7 +179,7 @@ var renderController = function(router, context) {
   
   /* GET hackathon page */
   router.get("/jquery_hackathon", function(request, response) {
-    authenticate(request.cookies, function(user) {
+    auth(request.cookies, function(user) {
       response.render("template", {
         "title": "Hackathon",
         "user": user

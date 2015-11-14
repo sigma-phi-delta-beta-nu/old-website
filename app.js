@@ -40,7 +40,7 @@ var createApplication = function() {
   app.use("/", renderController(express.Router(), context));
   app.use("/", apiController(express.Router(), context));
   app.use(express.static(__dirname + "/public"));
-  
+
   // Serve unmapped urls
   app.use(function(request, response) {
     response.render("error", {

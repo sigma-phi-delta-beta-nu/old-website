@@ -74,3 +74,5 @@ var SessionManager = function() {
   return this;
   
 };
+
+module.exports = SessionManager;
