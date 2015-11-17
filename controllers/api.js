@@ -4,30 +4,41 @@ var apiController = function(router, context) {
     
     var username = request.body.username;
     var password = request.body.password;
-    
+    console.log(username + " " + password);
     // Check if user is in the database
     context.models.User.login(username, password, function(user) {
+      
+      console.log(user);
+      var success;
       
       // If they are, create a cookie
       if (user !== null) {
         context.sessionManager.add(user, function(sid) {
           response.cookie("sid", sid, { "maxAge": 100 * 60 * 60 * 24 });
-          response.send(true);
+          response.end(JSON.stringify({ "success": true }));
         });
       } else {
-        response.send(false);
+        response.end(JSON.stringify({ "success": false }));
       }
       
     });
     
-    response.end();
-    
   });
   
   router.get("/logout", function(request, response) {
-    response.clearCookie("sid");
-    response.send(true);
-    response.end();
+    
+    if (request.cookies === null) {
+      response.end(JSON.stringify({ "success": false }));
+      return;
+    }
+    
+    context.sessionManager.remove(request.cookies["sid"], function(success) {
+      if (success) {
+        response.clearCookie("sid");
+      }
+      response.end(JSON.stringify({ "success": success }));
+    });
+    
   });
   
   router.post("/addLink", function(request, response) {

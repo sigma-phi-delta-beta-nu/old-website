@@ -18,7 +18,7 @@ var createSchema = function(Schema) {
   
   // Create the Schema functions
   // Get an event
-  userSchema.statics.get = function(username, url, callback) {
+  eventSchema.statics.get = function(username, url, callback) {
     
     this.findOne({
       "url": url,
@@ -52,26 +52,28 @@ var createSchema = function(Schema) {
   };
   
   // Remove an event
-  userSchema.methods.remove = function(callback) {
+  eventSchema.methods.remove = function(callback) {
     
   };
   
   // Add an attendee to an event
-  userSchema.methods.addAttendee = function(callback) {
+  eventSchema.methods.addAttendee = function(callback) {
     
   };
   
   // Remove an attendee from an event
-  userSchema.methods.removeAttendee = function(callback) {
+  eventSchema.methods.removeAttendee = function(callback) {
     
   };
   
   // Get events, sorted by category
-  userSchema.statics.getByCategories = function(username, callback) {
+  eventSchema.statics.getByCategories = function(username, callback) {
     
     
     
   };
+  
+  return eventSchema;
   
 };
 

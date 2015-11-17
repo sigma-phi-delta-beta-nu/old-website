@@ -55,6 +55,8 @@ var createSchema = function(Schema) {
     
   };
   
+  return photoSchema;
+  
 };
 
 module.exports = createSchema;

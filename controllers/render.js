@@ -41,7 +41,7 @@ var renderController = function(router, context) {
   /* GET events page */
   router.get("/events", function(request, response) {
     auth(request.cookies, function(user) {
-      Event.getCategories(user, function(events) {
+      Event.getCategories(user.username, function(events) {
         response.render("template", {
           "title": "Events",
           "user": user,
@@ -65,7 +65,7 @@ var renderController = function(router, context) {
   router.get("/events/*", function(request, response) {
     auth(request.cookies, function(user) {
       var eventPath = request.path.substring(8, request.path.length);
-      Event.get(user, eventPath, function(eventFound) {
+      Event.get(user.username, eventPath, function(eventFound) {
         response.render("template", {
           "title": "Event",
           "user": user,
@@ -78,7 +78,7 @@ var renderController = function(router, context) {
   /* GET gallery page */
   router.get("/gallery", function(request, response) {
     auth(request.cookies, function(user) {
-      Photo.getAlbums(user, function(albums) {
+      Photo.getAlbums(user.username, function(albums) {
         response.render("template", {
           "title": "Gallery",
           "user": user,
@@ -105,7 +105,7 @@ var renderController = function(router, context) {
       var imageIndex = path.indexOf("/");
       if (imageIndex === -1) {
         // Query a photo album
-        Photo.getAlbum(user, path, function(album) {
+        Photo.getAlbum(user.username, path, function(album) {
           response.render("template", {
             "title": "Album",
             "user": user,
@@ -116,7 +116,7 @@ var renderController = function(router, context) {
       } else {
         // Query a single photo
         var imagePath = path.substring(imageIndex + 1, path.length);
-        Photo.getPhoto(user, imagePath, function(photoFound) {
+        Photo.getPhoto(user.username, imagePath, function(photoFound) {
           response.render("template", {
             "title": "Photo",
             "user": user,
@@ -166,7 +166,7 @@ var renderController = function(router, context) {
           "user": user
         });
       } else {
-        User.getPrivate(function(roster) {
+        User.getAllPrivate(function(roster) {
           response.render("template", {
             "title": "Roster",
             "user": user,

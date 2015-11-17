@@ -16,7 +16,7 @@ var SessionManager = function() {
     
     // Add session and clean session list
     sessions.push(session);
-    this.cleanSessions();
+    this.clean();
     callback(session.sid);
     
   }
@@ -34,6 +34,21 @@ var SessionManager = function() {
     
     // Otherwise, return null
     callback(null);
+    
+  };
+  
+  // Remove a session
+  this.remove = function(sid, callback) {
+    
+    var cleanedSessions = []
+    
+    for (var i = 0; i < sessions.length; i++) {
+      if (sessions[i] !== sid) {
+        cleanedSessions.push(sessions[i]);
+      }
+    }
+    
+    sessions = cleanedSessions;
     
   };
   
