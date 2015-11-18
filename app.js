@@ -18,7 +18,7 @@ var createApplication = function() {
   
   // Create application servers
   var app = express();
-  mongoose.connect("mongodb://127.0.0.1/local/spd");
+  mongoose.connect("mongodb://localhost/spd");
   
   // Templating engine
   app.set("views", __dirname + "/views");
@@ -40,7 +40,15 @@ var createApplication = function() {
     "sessionManager": sessionManager,
     "sanitizer": sanitizer
   };
-  
+/*  
+  new context.models.User({
+    "firstname": "Brandon",
+    "lastname": "Kelley",
+    "username": "14bmkelley",
+    "password": "test",
+    "links": [ { "name": "Reddit", "url": "www.reddit.com" } ]
+  }).save();
+  */
   // Serve mapped urls
   app.use("/", renderController(express.Router(), context));
   app.use("/", apiController(express.Router(), context));

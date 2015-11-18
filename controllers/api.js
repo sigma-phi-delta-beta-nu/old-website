@@ -4,11 +4,10 @@ var apiController = function(router, context) {
     
     var username = request.body.username;
     var password = request.body.password;
-    console.log(username + " " + password);
+    
     // Check if user is in the database
     context.models.User.login(username, password, function(user) {
       
-      console.log(user);
       var success;
       
       // If they are, create a cookie
@@ -32,11 +31,9 @@ var apiController = function(router, context) {
       return;
     }
     
-    context.sessionManager.remove(request.cookies["sid"], function(success) {
-      if (success) {
-        response.clearCookie("sid");
-      }
-      response.end(JSON.stringify({ "success": success }));
+    context.sessionManager.remove(request.cookies["sid"], function() {
+      response.clearCookie("sid");
+      response.end(JSON.stringify({ "success": true }));
     });
     
   });

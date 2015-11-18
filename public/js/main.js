@@ -41,7 +41,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: 'GET',
 			url: '/logout',
-			success: function() {
+			success: function(result) {
 				if (window.location.pathname === "/dashboard"
                  || window.location.pathname === "/roster") {
                     window.location = "/";

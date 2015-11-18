@@ -22,7 +22,16 @@ var SessionManager = function() {
   }
   
   // Authenticate a session
-  this.authenticate = function(sid, callback) {
+  this.authenticate = function(cookies, callback) {
+    
+    var sid = "";
+    
+    if (cookies === null) {
+      callback(null);
+      return;
+    } else {
+      sid = cookies["sid"];
+    }
     
     // Find the session for this sid (if there is one)
     for (var i = 0; i < sessions.length; i++) {
@@ -49,6 +58,7 @@ var SessionManager = function() {
     }
     
     sessions = cleanedSessions;
+    callback();
     
   };
   

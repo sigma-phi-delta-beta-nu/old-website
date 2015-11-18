@@ -11,8 +11,19 @@ var createSchema = function(Schema) {
         "name": String,
         "url": String
       }
-    ]
+    ],
+    "events": []
   });
+  
+  userSchema.statics.findall = function() {
+    this.find().exec(function(error, data) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+    });
+  }
   
   // Create the Schema functions
   // Login a user
@@ -45,7 +56,7 @@ var createSchema = function(Schema) {
 
   userSchema.statics.addLink = function(name, url, callback) {
     
-    // Do mad stuffs
+    
     
   };
   
