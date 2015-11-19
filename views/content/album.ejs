@@ -1,12 +1,13 @@
 <section>
   <h1><%= album[0]["album"] %></h1>
   <% for (var i = 0; i < album.length; i++) { %>
-    <% var imgUrl = "/images/" + album[i]["url"] %>
-    <% var imgPage = "/gallery/" + albumUrl + "/" + album[i]["url"] %>
+    <% var urls = album[i]["url"] %>
+    <% var img = "/images" + urls["photo"] %>
+    <% var link = "/gallery" + urls["album"] + urls["photo"] %>
     <span class="gallery_thumb" style="margin-right: 16px;">
-      <a href=<%= imgPage %>>
+      <a href=<%= link %>>
         <div>
-          <img src=<%= imgUrl %> />
+          <img src=<%= img %> />
         </div>
         <h2><%= album[i]["title"] %></h2>
       </a>

@@ -41,19 +41,19 @@ var createApplication = function() {
     "sanitizer": sanitizer
   };
 /*  
-  new context.models.User({
-    "firstname": "Brandon",
-    "lastname": "Kelley",
-    "username": "14bmkelley",
-    "password": "test",
-    "links": [ { "name": "Reddit", "url": "www.reddit.com" } ]
+  new context.models.Photo({
+    "title": "Stuff",
+    "caption": "Lots of stuff and junk",
+    "album": "junk",
+    "type": "public",
+    "url": { "album": "/junk", "photo": "/spdbanner.png" }
   }).save();
-  */
+*/
   // Serve mapped urls
   app.use("/", renderController(express.Router(), context));
   app.use("/", apiController(express.Router(), context));
   app.use(express.static(__dirname + "/public"));
-
+/*
   // Serve unmapped urls
   app.use(function(request, response) {
     sessionManager.authenticate(request.cookies, function(user) {
@@ -63,7 +63,7 @@ var createApplication = function() {
       });
     });
   });
-  
+  */
   return app;
   
 };

@@ -78,7 +78,8 @@ var renderController = function(router, context) {
   /* GET gallery page */
   router.get("/gallery", function(request, response) {
     auth(request.cookies, function(user) {
-      Photo.getAlbums(user.username, function(albums) {
+      var username = (user) ? user.username : null;
+      Photo.getAlbums(username, function(albums) {
         response.render("template", {
           "title": "Gallery",
           "user": user,
@@ -101,11 +102,12 @@ var renderController = function(router, context) {
   /* GET single gallery album or image page */
   router.get("/gallery/*", function(request, response) {
     auth(request.cookies, function(user) {
+      var username = (user) ? user.username : null;
       var path = request.path.substring(9, request.path.length);
       var imageIndex = path.indexOf("/");
       if (imageIndex === -1) {
         // Query a photo album
-        Photo.getAlbum(user.username, path, function(album) {
+        Photo.getAlbum(username, path, function(album) {
           response.render("template", {
             "title": "Album",
             "user": user,
@@ -115,8 +117,8 @@ var renderController = function(router, context) {
         });
       } else {
         // Query a single photo
-        var imagePath = path.substring(imageIndex + 1, path.length);
-        Photo.getPhoto(user.username, imagePath, function(photoFound) {
+        var imagePath = path.substring(imageIndex, path.length);
+        Photo.get(username, imagePath, function(photoFound) {
           response.render("template", {
             "title": "Photo",
             "user": user,
