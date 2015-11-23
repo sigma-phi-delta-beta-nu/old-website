@@ -18,7 +18,7 @@ var createSchema = function(Schema) {
   
   // Create the Schema functions
   // Get an event
-  userSchema.statics.get = function(username, url, callback) {
+  eventSchema.statics.get = function(username, url, callback) {
     
     this.findOne({
       "url": url,
@@ -52,26 +52,57 @@ var createSchema = function(Schema) {
   };
   
   // Remove an event
-  userSchema.methods.remove = function(callback) {
+  eventSchema.methods.remove = function(callback) {
     
   };
   
   // Add an attendee to an event
-  userSchema.methods.addAttendee = function(callback) {
+  eventSchema.methods.addAttendee = function(callback) {
     
   };
   
   // Remove an attendee from an event
-  userSchema.methods.removeAttendee = function(callback) {
+  eventSchema.methods.removeAttendee = function(callback) {
     
   };
   
   // Get events, sorted by category
-  userSchema.statics.getByCategories = function(username, callback) {
+  eventSchema.statics.getCategories = function(username, callback) {
     
+    var searchParams;
+    if (username) {
+      searchParams = {};
+    } else {
+      searchParams = { "type": "public" };
+    }
     
+    this.find(searchParams).exec(function(error, data) {
+      if (error) {
+        console.log(error);
+        callback([]);
+      } else {
+        var result = {};
+        for (var i = 0; i < data.length; i++) {
+          var categories = Object.keys(result);
+          var found = false;
+          for (var j = 0; j < categories.length; j++) {
+            if (categories[i] === data[i].category) {
+              found = true;
+            }
+          }
+          if (found) {
+            result[data[i].category].push(data[i]);
+          } else {
+            result[data[i].category] = [data[i]];
+          }
+        }
+        callback(result);
+      }
+    });
     
   };
+  
+  return eventSchema;
   
 };
 

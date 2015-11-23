@@ -1,7 +1,7 @@
 <section>
   <div id="photo">
-    <% var imgUrl = "/images/" + photo["url"] %>
-    <img src=<%= imgUrl %> />
+    <% var img = "/images" + photo["url"]["photo"] %>
+    <img src=<%= img %> />
   </div>
   <h2><%= photo["title"] %></h2>
   <p><%= photo["caption"] %></p>

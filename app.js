@@ -13,9 +13,12 @@ var createApplication = function() {
   var renderController = require(__dirname + "/controllers/render");
   var apiController = require(__dirname + "/controllers/api");
   var userSchema = require(__dirname + "/db/models/user")(mongoose.Schema);
+  var eventSchema = require(__dirname + "/db/models/event")(mongoose.Schema);
+  var photoSchema = require(__dirname + "/db/models/photo")(mongoose.Schema);
   
-  // Create application
+  // Create application servers
   var app = express();
+  mongoose.connect("mongodb://localhost/spd");
   
   // Templating engine
   app.set("views", __dirname + "/views");
@@ -30,25 +33,37 @@ var createApplication = function() {
   // Create context for url mapping controllers
   var context = {
     "models": {
-      "User": mongoose.model("User", userSchema)
+      "User": mongoose.model("User", userSchema),
+      "Photo": mongoose.model("Photo", photoSchema),
+      "Event": mongoose.model("Event", eventSchema)
     },
     "sessionManager": sessionManager,
     "sanitizer": sanitizer
   };
-  
+/*  
+  new context.models.Photo({
+    "title": "Stuff",
+    "caption": "Lots of stuff and junk",
+    "album": "junk",
+    "type": "public",
+    "url": { "album": "/junk", "photo": "/spdbanner.png" }
+  }).save();
+*/
   // Serve mapped urls
   app.use("/", renderController(express.Router(), context));
   app.use("/", apiController(express.Router(), context));
   app.use(express.static(__dirname + "/public"));
-  
+/*
   // Serve unmapped urls
   app.use(function(request, response) {
-    response.render("error", {
-      title: "error",
-      user: null,
+    sessionManager.authenticate(request.cookies, function(user) {
+      response.render("error", {
+        title: "error",
+        user: user,
+      });
     });
   });
-  
+  */
   return app;
   
 };

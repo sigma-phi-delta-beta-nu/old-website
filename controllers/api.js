@@ -1,46 +1,51 @@
 var apiController = function(router, context) {
   
-  var login = require("../models/auth").login;
-  var addLink = require("../models/dashboard").addLink;
-  var removeLink = require("../models/dashboard").removeLink;
-  var addEvent = require("../models/events").addEvent;
-  var removeEvent = require("../models/events").removeEvent;
-  var addAttendee = require("../models/events").addAttendee;
-  var removeAttendee = require("../models/events").removeAttendee;
-  
   router.post("/login", function(request, response) {
     
     var username = request.body.username;
     var password = request.body.password;
     
-    login(username, password, function(user) {
-      if (user !== null && user !== false) {
-        response.cookie("logged_in", user.username, { maxAge: 100 * 60 * 60 * 24 });
-        response.cookie("name", user.name, { maxAge: 100 * 60 * 60 * 24 });
-        response.send(true);
+    // Check if user is in the database
+    context.models.User.login(username, password, function(user) {
+      
+      var success;
+      
+      // If they are, create a cookie
+      if (user !== null) {
+        context.sessionManager.add(user, function(sid) {
+          response.cookie("sid", sid, { "maxAge": 100 * 60 * 60 * 24 });
+          response.end(JSON.stringify({ "success": true }));
+        });
       } else {
-        response.send(user);
+        response.end(JSON.stringify({ "success": false }));
       }
-      response.end();
+      
     });
     
   });
   
   router.get("/logout", function(request, response) {
     
-    response.clearCookie("logged_in");
-    response.send(true);
-    response.end();
+    if (request.cookies === null) {
+      response.end(JSON.stringify({ "success": false }));
+      return;
+    }
+    
+    context.sessionManager.remove(request.cookies["sid"], function() {
+      response.clearCookie("sid");
+      response.end(JSON.stringify({ "success": true }));
+    });
     
   });
   
   router.post("/addLink", function(request, response) {
     
-    var username = request.cookies["logged_in"];
+    var username = context;
     var label = request.body.label;
     var url = request.body.url;
     
-    addLink(username, label, url, function() {
+    context.models.User.addLink(username, label, url, function(success) {
+      response.send(success);
       response.end();
     });
     
@@ -52,7 +57,8 @@ var apiController = function(router, context) {
     var label = request.body.label;
     var url = request.body.url;
     
-    removeLink(username, label, function() {
+    context.models.User.removeLink(username, label, function(success) {
+      response.send(success);
       response.end();
     });
     
@@ -87,24 +93,26 @@ var apiController = function(router, context) {
       "url": url
     }
     
-    addEvent(user, newEvent, function() {
+    addEvent(user, newEvent, function(success) {
+      response.send(success);
       response.end();
     });
     
   });
   
   router.post("/removeEvent", function(request, response) {
-    
+    /*
     var url = request.body.url;
     
     removeEvent(url, function() {
       response.end();
     });
-    
+    */
+    response.end();
   });
   
   router.post("/addAttendee", function(request, response) {
-    
+    /*
     var url = request.body.url;
     var attendee = {
       "name": request.cookies["name"].replace("_", " "),
@@ -128,7 +136,8 @@ var apiController = function(router, context) {
     removeAttendee(url, attendee, function() {
       response.end();
     });
-    
+    */
+    response.end();
   });
   
   return router;

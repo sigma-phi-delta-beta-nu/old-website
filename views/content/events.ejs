@@ -4,56 +4,25 @@
 
 <section>
   <h1>Sigma Phi Delta Events</h1>
-  <h2>Professional</h2>
-  <% for (var i = 0; i < events.length; i++) { %>
-    <% if (events[i]["category"] === "professional") { %>
-      <% var event = events[i] %>
-      <% var link = "/events/" + events[i]["url"] %>
+</section>
+<% var eventTypes = Object.keys(events); %>
+<% for (var i = 0; i < eventTypes.length; i++) { %>
+  <section>
+    <% var eventList = events[eventTypes[i]] %>
+    <h2><%= eventTypes[i] %></h2>
+    <% for (var j = 0; j < eventList.length; j++) { %>
+      <% var event = eventList[j] %>
+      <% var link = "/events" + event["url"] %>
+      <% var image = "/images" + event["picture"] %>
       <a href=<%= link %>>
         <span class="event_thumb">
-          <img align="left" src=<%= events[i]["picture"] %> />
-          <h3><%= event["name"] %></h3>
+          <img align="left" src=<%= image %> />
+          <h3><%= event["title"] %></h3>
           <p>Date: <%= event["date"] %></p>
           <p>Time: <%= event["time"] %></p>
           <p>Location: <%= event["location"] %></p>
         </span>
       </a>
     <% } %>
-  <% } %>
-</section>
-<section>
-  <h2>Social</h2>
-  <% for (var i = 0; i < events.length; i++) { %>
-    <% if (events[i]["category"] === "social") { %>
-      <% var event = events[i] %>
-      <% var link = "/events/" + events[i]["url"] %>
-      <a href=<%= link %>>
-        <span class="event_thumb">
-          <img align="left" src=<%= events[i]["picture"] %> />
-          <h3><%= event["name"] %></h3>
-          <p>Date: <%= event["date"] %></p>
-          <p>Time: <%= event["time"] %></p>
-          <p>Location: <%= event["location"] %></p>
-        </span>
-      </a>
-    <% } %>
-  <% } %>
-</section>
-<section>
-  <h2>Philanthropy</h2>
-  <% for (var i = 0; i < events.length; i++) { %>
-    <% if (events[i]["category"] === "philanthropy") { %>
-      <% var event = events[i] %>
-      <% var link = "/events/" + events[i]["url"] %>
-      <a href=<%= link %>>
-        <span class="event_thumb">
-          <img align="left" src=<%= events[i]["picture"] %> />
-          <h3><%= event["name"] %></h3>
-          <p>Date: <%= event["date"] %></p>
-          <p>Time: <%= event["time"] %></p>
-          <p>Location: <%= event["location"] %></p>
-        </span>
-      </a>
-    <% } %>
-  <% } %>
-</section>
+  </section>
+<% } %>

@@ -2,9 +2,10 @@ var createSchema = function(Schema) {
   
   // Create the Schema fields
   var userSchema = new Schema({
-    "firstname": String,
-    "lastname": String,
-    "class": String,
+    "name": {
+      "first": String,
+      "last": String
+    },
     "username": String,
     "password": String,
     "links": [
@@ -12,7 +13,8 @@ var createSchema = function(Schema) {
         "name": String,
         "url": String
       }
-    ]
+    ],
+    "events": []
   });
   
   // Create the Schema functions
@@ -46,7 +48,6 @@ var createSchema = function(Schema) {
 
   userSchema.statics.addLink = function(username, name, url, callback) {
     
-    // Do mad stuffs
     this.update(
       {"username" : username},
       {$push: {"links" : {"name" : name, "url" : url}}}, 

@@ -30,3 +30,5 @@ var Sanitizer = function() {
   return this;
   
 };
+
+module.exports = Sanitizer;

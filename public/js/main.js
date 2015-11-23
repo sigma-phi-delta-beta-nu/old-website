@@ -30,8 +30,8 @@ $(document).ready(function() {
 		var $inputs = $(this).closest("div").find("input");
 		var usr = $inputs.first().val();
 		var pwd = $inputs.last().val();
-		var hash = Sha256.hash(pwd);
-		authenticate(usr, hash);
+		//var hash = Sha256.hash(pwd);
+		authenticate(usr, pwd);
 	
 	});
 	
@@ -40,7 +40,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: 'GET',
 			url: '/logout',
-			success: function() {
+			success: function(result) {
 				if (window.location.pathname === "/dashboard"
                  || window.location.pathname === "/roster") {
                     window.location = "/";
@@ -288,14 +288,10 @@ $(document).ready(function() {
             data: JSON.stringify(sendingData),
 			contentType: 'application/json',
             success: function(returnedData) {
-                if (returnedData === true) {
+                var result = JSON.parse(returnedData);
+                if (result["success"]) {
                     window.location.reload(true);
-                } else if (returnedData === "") {
-                    alert("Sorry, we don't have that username on file");
-                    $("#login").closest("div").find("input").first().val("");
-                    $("#login").closest("div").find("input").first().next().val("");
-					$("#login").closest("div").find("input").first().focus();
-                } else if (returnedData === false) {
+                } else {
                     alert("Sorry, that password is incorrect.");
                     $("#login").closest("div").find("input").first().next().val("");
 					$("#login").closest("div").find("input").first().next().focus();
