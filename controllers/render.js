@@ -18,8 +18,7 @@ var renderController = function(router, context) {
   /* GET about us page */
   router.get("/about_us", function(request, response) {
     auth(request.cookies, function(user) {
-      var username = (user) ? user.username : null;
-      User.getClasses(username, function(classes) {
+      User.getClasses(function(classes) {
         response.render("template", {
           "title": "About Us",
           "user": user,
@@ -143,7 +142,7 @@ var renderController = function(router, context) {
         response.render("template", {
           "title": "Contact Us",
           "user": user,
-          "positions": null
+          "positions": positions
         });
       });
     });

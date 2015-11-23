@@ -14,7 +14,10 @@ var createSchema = function(Schema) {
         "url": String
       }
     ],
-    "events": []
+    "events": [String],
+    "class": String,
+    "positions": [String],
+    "email": String
   });
   
   // Create the Schema functions
@@ -75,7 +78,7 @@ var createSchema = function(Schema) {
   userSchema.statics.getClasses = function(callback) {
 
     var classes = {};
-    this.find({}, "firstname lastname class", function(err, users){
+    this.find({}, "name.first name.last class", function(err, users){
       users.forEach(function(user){
         var keys = Object.keys(classes);
         var found = false;
@@ -83,17 +86,70 @@ var createSchema = function(Schema) {
            if(user.class === className) { found = true; }
         });
         if(found) {
-          classes(user.class).push(user);
+           classes[user.class].push(user);
         }
         else {
-          classes(user.class) = [user];
+           classes[user.class] = [user];
         }
       });
       callback(classes);
     });
 
   };
- 
+  
+  userSchema.statics.getPositions = function(callback) {
+    
+    var positions = {};
+    this.find({ "positions": { "$not": { "$size": 0 } } })
+      .exec(function(error, members) {
+      if (error) {
+        console.log(error);
+        callback(null);
+      } else {
+        
+        var elected = [ "Chief Engineer", "Vice Chief Engineer", "Business Manager", "Secretary", "Historian", "Chaplain", "Pledge Master", "Guide", "Recruitment Chairman" ];
+        var appointed = [ "Social Chairman", "Risk Reduction Chairman", "Fundraising Chairman", "Expansion Chairman", "Athletic Chairman", "Pledge Board Chairman", "Brotherhood Chairman", "Philanthropy Chairman", "Assistant Business Manager", "Sergeant-At-Arms", "Webmaster", "Engineering Governing Council Delegate" ];
+
+        var positions = {
+          "elected": [],
+          "appointed": []
+        };
+        
+        for (var i = 0; i < elected.length; i++) {
+          for (var j = 0; j < members.length; j++) {
+            for (var k = 0; k < members[j].positions.length; k++) {
+              if (members[j].positions[k] === elected[i]) {
+                positions.elected.push({
+                  "name": members[j].name,
+                  "email": members[j].email,
+                  "position": members[j].positions[k]
+                });
+              }
+            }
+          }
+        }
+        
+        for (var i = 0; i < appointed.length; i++) {
+          for (var j = 0; j < members.length; j++) {
+            for (var k = 0; k < members[j].positions.length; k++) {
+              if (members[j].positions[k] === appointed[i]) {
+                positions.appointed.push({
+                  "name": members[j].name,
+                  "email": members[j].email,
+                  "position": members[j].positions[k]
+                });
+              }
+            }
+          }
+        }
+        
+        callback(positions);
+        
+      }
+    });
+    
+  };
+  
   return userSchema;
   
 };

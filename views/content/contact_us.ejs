@@ -15,10 +15,9 @@
     <% var elected = positions.elected %>
     <% for(var i = 0; i < elected.length; i++) { %>
       <tr>
-        <% console.log(elected[i]) %>
-        <td><%= elected[i]["position"] %></td>
-        <td><%= elected[i]["firstname"] %> <%= elected[i]["lastname"] %></td>
-        <td><%= elected[i]["email"] %></td>
+        <td><%= elected[i].position %></td>
+        <td><%= elected[i].name.first %> <%= elected[i].name.last %></td>
+        <td><%= elected[i].email %></td>
       </tr>
     <% } %>
   </table>
@@ -32,9 +31,9 @@
     <% var appointed = positions.appointed %>
     <% for(var i = 0; i < appointed.length; i++) { %>
       <tr>
-        <td><%= appointed[i]["position"] %></td> 
-        <td><%= appointed[i]["firstname"] %> <%= appointed[i]["lastname"] %></td>
-        <td><%= appointed[i]["email"] %></td>
+        <td><%= appointed[i].position %></td> 
+        <td><%= appointed[i].name.first %> <%= appointed[i].name.last %></td>
+        <td><%= appointed[i].email %></td>
       </tr>
     <% } %>
   </table>
