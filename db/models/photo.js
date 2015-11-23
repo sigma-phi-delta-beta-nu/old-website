@@ -53,10 +53,10 @@ var createSchema = function(Schema) {
     
     var searchParams;
     if (username) {
-      searchParams = { "album": album };
+      searchParams = { "url.album": album };
     } else {
       searchParams = {
-        "album": album,
+        "url.album": album,
         "type": "public",
       }
     }

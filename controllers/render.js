@@ -18,7 +18,8 @@ var renderController = function(router, context) {
   /* GET about us page */
   router.get("/about_us", function(request, response) {
     auth(request.cookies, function(user) {
-      User.getClasses(function(classes) {
+      var username = (user) ? user.username : null;
+      User.getClasses(username, function(classes) {
         response.render("template", {
           "title": "About Us",
           "user": user,
@@ -41,7 +42,8 @@ var renderController = function(router, context) {
   /* GET events page */
   router.get("/events", function(request, response) {
     auth(request.cookies, function(user) {
-      Event.getCategories(user.username, function(events) {
+      var username = (user) ? user.username : null;
+      Event.getCategories(username, function(events) {
         response.render("template", {
           "title": "Events",
           "user": user,
@@ -64,8 +66,9 @@ var renderController = function(router, context) {
   /* GET single event page */
   router.get("/events/*", function(request, response) {
     auth(request.cookies, function(user) {
-      var eventPath = request.path.substring(8, request.path.length);
-      Event.get(user.username, eventPath, function(eventFound) {
+      var eventPath = request.path.substring(7, request.path.length);
+      var username = (user) ? user.username : null;
+      Event.get(username, eventPath, function(eventFound) {
         response.render("template", {
           "title": "Event",
           "user": user,
@@ -103,8 +106,13 @@ var renderController = function(router, context) {
   router.get("/gallery/*", function(request, response) {
     auth(request.cookies, function(user) {
       var username = (user) ? user.username : null;
-      var path = request.path.substring(9, request.path.length);
-      var imageIndex = path.indexOf("/");
+      var path = request.path.substring(8, request.path.length);
+      var imageIndex = -1;
+      for (var i = 0; i < path.length; i++) {
+        if (path[i] === "/" && i !== 0) {
+          imageIndex = i;
+        }
+      }
       if (imageIndex === -1) {
         // Query a photo album
         Photo.getAlbum(username, path, function(album) {
@@ -112,7 +120,6 @@ var renderController = function(router, context) {
             "title": "Album",
             "user": user,
             "album": album,
-            "albumUrl": path
           });
         });
       } else {

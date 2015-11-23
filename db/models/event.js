@@ -67,9 +67,38 @@ var createSchema = function(Schema) {
   };
   
   // Get events, sorted by category
-  eventSchema.statics.getByCategories = function(username, callback) {
+  eventSchema.statics.getCategories = function(username, callback) {
     
+    var searchParams;
+    if (username) {
+      searchParams = {};
+    } else {
+      searchParams = { "type": "public" };
+    }
     
+    this.find(searchParams).exec(function(error, data) {
+      if (error) {
+        console.log(error);
+        callback([]);
+      } else {
+        var result = {};
+        for (var i = 0; i < data.length; i++) {
+          var categories = Object.keys(result);
+          var found = false;
+          for (var j = 0; j < categories.length; j++) {
+            if (categories[i] === data[i].category) {
+              found = true;
+            }
+          }
+          if (found) {
+            result[data[i].category].push(data[i]);
+          } else {
+            result[data[i].category] = [data[i]];
+          }
+        }
+        callback(result);
+      }
+    });
     
   };
   

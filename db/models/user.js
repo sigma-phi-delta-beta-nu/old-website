@@ -2,8 +2,10 @@ var createSchema = function(Schema) {
   
   // Create the Schema fields
   var userSchema = new Schema({
-    "firstname": String,
-    "lastname": String,
+    "name": {
+      "first": String,
+      "last": String
+    },
     "username": String,
     "password": String,
     "links": [
@@ -14,16 +16,6 @@ var createSchema = function(Schema) {
     ],
     "events": []
   });
-  
-  userSchema.statics.findall = function() {
-    this.find().exec(function(error, data) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(data);
-      }
-    });
-  }
   
   // Create the Schema functions
   // Login a user

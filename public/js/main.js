@@ -31,7 +31,6 @@ $(document).ready(function() {
 		var usr = $inputs.first().val();
 		var pwd = $inputs.last().val();
 		//var hash = Sha256.hash(pwd);
-                console.log(usr + ' ' + pwd);
 		authenticate(usr, pwd);
 	
 	});
