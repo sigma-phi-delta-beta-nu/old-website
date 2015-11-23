@@ -4,6 +4,7 @@ var createSchema = function(Schema) {
   var userSchema = new Schema({
     "firstname": String,
     "lastname": String,
+    "class": String,
     "username": String,
     "password": String,
     "links": [
@@ -43,12 +44,55 @@ var createSchema = function(Schema) {
     
   };
 
-  userSchema.statics.addLink = function(name, url, callback) {
+  userSchema.statics.addLink = function(username, name, url, callback) {
     
     // Do mad stuffs
-    
+    this.update(
+      {"username" : username},
+      {$push: {"links" : {"name" : name, "url" : url}}}, 
+      {upsert:true}, 
+      function(err, data) {
+        if(err) { console.log(err); }
+      }
+      );
+
   };
-  
+
+  userSchema.statics.removeLink = function(username, name, url, callback) {
+
+    this.update(
+      {"username" : username},
+      {$pull : {"links" : {"name" : name, "url" : url}}},
+      {safe : true},
+      function(err, data) {
+        if(err) { console.log(err); }
+      }
+      );
+
+  };
+ 
+  userSchema.statics.getClasses = function(callback) {
+
+    var classes = {};
+    this.find({}, "firstname lastname class", function(err, users){
+      users.forEach(function(user){
+        var keys = Object.keys(classes);
+        var found = false;
+        keys.forEach(function(className){
+           if(user.class === className) { found = true; }
+        });
+        if(found) {
+          classes(user.class).push(user);
+        }
+        else {
+          classes(user.class) = [user];
+        }
+      });
+      callback(classes);
+    });
+
+  };
+ 
   return userSchema;
   
 };
