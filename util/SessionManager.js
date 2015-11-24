@@ -46,6 +46,21 @@ var SessionManager = function() {
     
   };
   
+  // Update a session
+  this.update = function(sid, user, callback) {
+    
+    for (var i = 0; i < sessions.length; i++) {
+      if (sessions[i].sid === sid) {
+        sessions[i].user = user;
+        callback(true);
+        return;
+      }
+    }
+    
+    callback(false);
+    
+  }
+  
   // Remove a session
   this.remove = function(sid, callback) {
     

@@ -40,26 +40,44 @@ var apiController = function(router, context) {
   
   router.post("/addLink", function(request, response) {
     
-    var username = context;
-    var label = request.body.label;
-    var url = request.body.url;
-    
-    context.models.User.addLink(username, label, url, function(success) {
-      response.send(success);
-      response.end();
+    context.sessionManager.authenticate(request.cookies, function(user) {
+      
+      var username = (user) ? user.username : null;
+      var label = request.body.label;
+      var url = request.body.url;
+      
+      context.models.User.addLink(username, label, url, function(updated) {
+        if (updated) {
+          context.sessionManager.update(request.cookies["sid"], updated, function(success) {
+            response.end(JSON.stringify({ "success": success }));
+          });
+        } else {
+          response.end(JSON.stringify({ "success": false }));
+        }
+      });
+      
     });
     
   });
   
   router.post("/removeLink", function(request, response) {
     
-    var username = request.cookies["logged_in"];
-    var label = request.body.label;
-    var url = request.body.url;
-    
-    context.models.User.removeLink(username, label, function(success) {
-      response.send(success);
-      response.end();
+    context.sessionManager.authenticate(request.cookies, function(user) {
+      
+      var username = (user) ? user.username : null;
+      var label = request.body.label;
+      var url = request.body.url;
+      
+      context.models.User.removeLink(username, label, url, function(updated) {
+        if (updated) {
+          context.sessionManager.update(request.cookies["sid"], updated, function(success) {
+            response.end(JSON.stringify({ "success": success }));
+          });
+        } else {
+          response.end(JSON.stringify({ "success": false }));
+        }
+      });
+      
     });
     
   });

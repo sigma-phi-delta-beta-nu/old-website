@@ -1,5 +1,7 @@
 var createSchema = function(Schema) {
   
+  var Link = require(__dirname + "/link");
+  
   // Create the Schema fields
   var userSchema = new Schema({
     "name": {
@@ -8,12 +10,10 @@ var createSchema = function(Schema) {
     },
     "username": String,
     "password": String,
-    "links": [
-      {
-        "name": String,
-        "url": String
-      }
-    ],
+    "links": [{
+      "name": String,
+      "url": String
+    }],
     "events": [String],
     "class": String,
     "positions": [String],
@@ -48,31 +48,65 @@ var createSchema = function(Schema) {
     });
     
   };
-
+  
   userSchema.statics.addLink = function(username, name, url, callback) {
     
-    this.update(
-      {"username" : username},
-      {$push: {"links" : {"name" : name, "url" : url}}}, 
-      {upsert:true}, 
-      function(err, data) {
-        if(err) { console.log(err); }
+    if (!username) {
+      callback(false);
+      return;
+    }
+    
+    this.findOne({ "username": username }).exec(function(error, user) {
+      if (error) {
+        console.log(error);
+        callback(false);
+      } else {
+        var found = false;
+        for (var i = 0; i < user.links.length; i++) {
+          if (user.links[i].name === name) {
+            found = true;
+            user.links[i].url = url;
+          }
+        }
+        if (!found) {
+          user.links.push({
+            "name": name,
+            "url": url
+          });
+        }
+        user.save(function() {
+          callback(user);
+        });
       }
-      );
-
+    });
+    
   };
 
   userSchema.statics.removeLink = function(username, name, url, callback) {
 
-    this.update(
-      {"username" : username},
-      {$pull : {"links" : {"name" : name, "url" : url}}},
-      {safe : true},
-      function(err, data) {
-        if(err) { console.log(err); }
+    if (!username) {
+      callback(false);
+      return;
+    }
+    
+    this.findOne({ "username": username }).exec(function(error, user) {
+      if (error) {
+        console.log(error);
+        callback(false);
+      } else {
+        var newLinks = [];
+        for (var i = 0; i < user.links.length; i++) {
+          if (user.links[i].name !== name) {
+            newLinks.push(user.links[i]);
+          }
+        }
+        user.links = newLinks;
+        user.save(function() {
+          callback(user);
+        });
       }
-      );
-
+    });
+    
   };
  
   userSchema.statics.getClasses = function(callback) {

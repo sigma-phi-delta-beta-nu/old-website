@@ -40,30 +40,12 @@ var createApplication = function() {
     "sessionManager": sessionManager,
     "sanitizer": sanitizer
   };
-/*  
-  new context.models.Photo({
-    "title": "Stuff",
-    "caption": "Lots of stuff and junk",
-    "album": "junk",
-    "type": "public",
-    "url": { "album": "/junk", "photo": "/spdbanner.png" }
-  }).save();
-*/
+  
   // Serve mapped urls
   app.use("/", renderController(express.Router(), context));
   app.use("/", apiController(express.Router(), context));
   app.use(express.static(__dirname + "/public"));
-/*
-  // Serve unmapped urls
-  app.use(function(request, response) {
-    sessionManager.authenticate(request.cookies, function(user) {
-      response.render("error", {
-        title: "error",
-        user: user,
-      });
-    });
-  });
-  */
+  
   return app;
   
 };

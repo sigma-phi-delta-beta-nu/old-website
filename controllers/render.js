@@ -185,16 +185,6 @@ var renderController = function(router, context) {
     });
   });
   
-  /* GET hackathon page */
-  router.get("/jquery_hackathon", function(request, response) {
-    auth(request.cookies, function(user) {
-      response.render("template", {
-        "title": "Hackathon",
-        "user": user
-      });
-    });
-  });
-  
   return router;
   
 };
