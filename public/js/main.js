@@ -1,5 +1,24 @@
 $(document).ready(function() {
     
+    $(".content").css("margin-bottom", "0px");
+    
+    if ($(".flexslider").attr("onpage") !== "true") {
+      moveFooter();
+      $(window).resize(moveFooter);
+    }
+    
+    function moveFooter() {
+      var navHeight = $("#navbar").outerHeight();
+      var footerHeight = $("#footer").outerHeight();
+      var contentHeight = $(".content").outerHeight();
+      var bodyHeight = $("body").outerHeight();
+      if (navHeight + footerHeight + contentHeight < bodyHeight) {
+        $(".content").css({
+         "margin-bottom": bodyHeight - navHeight - footerHeight - contentHeight + "px"
+        });
+      }
+    }
+    
     $('input').keypress(function(event) {
 		
 		if (event.keyCode == 13) {
@@ -244,7 +263,6 @@ $(document).ready(function() {
       if ($(this).css("color") === "rgb(0, 0, 0)") {
         $(this).closest(".hyper_select").find("div").css("color", "#000000");
         $(this).css("color", "#FA0000");
-        console.log($(this).html());
         if ($(this).text() === "Hyperlink") {
           var currentRow = $("tr").first();
           var rowCount = $("tr").length;
@@ -252,7 +270,7 @@ $(document).ready(function() {
             var email = currentRow.find("td").last().text();
             currentRow.find("td").last().html("<a href='mailto:" + 
               email + "'>" + email + "</a>");
-            if (i === 8) {
+            if (currentRow.next().length === 0) {
               currentRow = $("tbody").last().find("tr").first();
             } else {
               currentRow = currentRow.next();
@@ -265,7 +283,7 @@ $(document).ready(function() {
             currentRow.find("td").last().html(
               currentRow.find("td").last().find("a").text()
             );
-            if (i === 8) {
+            if (currentRow.next().length === 0) {
               currentRow = $("tbody").last().find("tr").first();
             } else {
               currentRow = currentRow.next();

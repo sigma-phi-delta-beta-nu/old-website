@@ -8,6 +8,9 @@ h1, h2, h3, h4, p, ul, ol, li, input, body, div, span {
 body {
     width: 100%;
     min-height: 100vh;
+    height: fit-content;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     background-color: #FFFFFF;
     font-family: 'Charcoal', Times, serif;
     font-size: 100%;
@@ -223,9 +226,12 @@ th {
 
 /* Main Page container */
 
+.content {
+  margin-bottom: 1000px;
+}
+
 #main {
     width: 60%;
-    min-height: 750px;
     display: inline-block;
     float: left;
 }
