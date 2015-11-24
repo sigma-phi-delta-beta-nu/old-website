@@ -27,7 +27,10 @@ var createSchema = function(Schema) {
       "name": String,
       "url": String
     }],
-    "events": [String],
+    "events": [{
+      "name": String,
+      "url": String
+    }],
     "positions": [String]
   });
   
@@ -119,7 +122,61 @@ var createSchema = function(Schema) {
     });
     
   };
- 
+  
+  userSchema.methods.addEvent = function(name, url, callback) {
+    
+    this.events.push({
+      "name": name,
+      "url": url
+    });
+    
+    this.save(function() {
+      callback();
+    });
+    
+  }
+  
+  userSchema.methods.removeEvent = function(url, callback) {
+    
+    var events = [];
+    for (var i = 0; i < this.events.length; i++) {
+      if (this.events[i].url !== url) {
+        events.push(this.events[i]);
+      }
+    }
+    
+    this.events = events;
+    this.save(function() {
+      callback();
+    });
+    
+  };
+  
+  userSchema.statics.removeEventFromAll = function(url, callback) {
+    
+    this.find({ "events.url": url }).exec(function(error, data) {
+      if (error) {
+        console.log(error);
+        callback(false);
+      } else {
+        var usersUpdated = [];
+        for (var i = 0; i < data.length; i++) {
+          var events = [];
+          for (var j = 0; j < data[i].events.length; j++) {
+            if (data[i].events[j].url !== url) {
+              events.push(data[i].events[j]);
+            }
+          }
+          data[i].events = events;
+          data[i].save();
+          usersUpdated.push(data[i]);
+        }
+        callback(usersUpdated);
+      }
+    });
+    
+  };
+  
   userSchema.statics.getClasses = function(callback) {
 
     var classes = {};
@@ -198,7 +255,7 @@ var createSchema = function(Schema) {
   userSchema.statics.getAllPrivate = function(callback) {
     
     this.find({})
-      .select("name.first name.last nickname class positions email phone birthday currentAddress currentCity currentState currentPostal homeAddress homeCite homeState homePostal")
+      .select("name.first name.last nickname class positions email phone birthday currentAddress currentCity currentState currentPostal homeAddress homeCity homeState homePostal")
       .exec(function(error, data) {
       
       if (error) {

@@ -46,18 +46,25 @@ var SessionManager = function() {
     
   };
   
-  // Update a session
-  this.update = function(sid, user, callback) {
+  // Update sessions
+  this.update = function(users, callback) {
     
-    for (var i = 0; i < sessions.length; i++) {
-      if (sessions[i].sid === sid) {
-        sessions[i].user = user;
-        callback(true);
+    for (var i = 0; i < users.length; i++) {
+      var found = false;
+      for (var j = 0; j < sessions.length; j++) {
+        if (sessions[j].user.username === users[i].username) {
+          sessions[j].user = users[i];
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        callback(false);
         return;
       }
     }
     
-    callback(false);
+    callback(true);
     
   }
   

@@ -55,19 +55,26 @@ var renderController = function(router, context) {
   /* GET new event form page */
   router.get("/new_event", function(request, response) {
     auth(request.cookies, function(user) {
-      response.render("template", {
-        "title": "New Event",
-        "user": user
-      });
+      if (user !== null) {
+        response.render("template", {
+          "title": "New Event",
+          "user": user
+        });
+      } else {
+        response.render("template", {
+          "title": "Home",
+          "user": user
+        });
+      }
     });
   });
   
   /* GET single event page */
   router.get("/events/*", function(request, response) {
     auth(request.cookies, function(user) {
-      var eventPath = request.path.substring(7, request.path.length);
       var username = (user) ? user.username : null;
-      Event.get(username, eventPath, function(eventFound) {
+      var path = request.path.substring(7, request.path.length);
+      Event.get(username, path, function(eventFound) {
         response.render("template", {
           "title": "Event",
           "user": user,

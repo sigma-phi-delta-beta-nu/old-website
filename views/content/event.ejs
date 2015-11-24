@@ -3,7 +3,7 @@
     <div>
       <% var image = "/images" + event["picture"] %>
       <img width=200px height=200px align=left src=<%= image %> />
-      <h1><%= event["name"] %></h1>
+      <h1 id="event_name"><%= event["title"] %></h1>
       <h2><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></h2>
       <p><%= event["description"] %></p>
       <% if (user !== null) { %>
@@ -21,9 +21,10 @@
       <ul>
         <% var userInList = false %>
         <% for (var i = 0; i < event["attending"].length; i++) { %>
-          <li><%= event["attending"][i] %></li>
+          <% var name = event.attending[i].name.first + " " + event.attending[i].name.last %>
+          <li><%= name %></li>
           <% if (user !== null) { %>
-            <% if (user["name"] == event["attending"][i]) { %>
+            <% if (user.username === event["attending"][i].username) { %>
               <% userInList = true %>
             <% } %>
           <% } %>

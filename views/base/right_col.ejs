@@ -11,7 +11,8 @@
         <p style="text-align: center">(You haven't joined any events yet!)</p>
       <% } else { %>
         <% for (var i = 0; i < user["events"].length; i++) { %>
-          <li><a href=<%= user["events"][i]["url"] %>>
+          <% var url = "/events" + user.events[i].url %>
+          <li><a href=<%= url %>>
             <%= user["events"][i]["name"] %>
           </a></li>
         <% } %>

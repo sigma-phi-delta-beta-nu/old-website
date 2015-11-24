@@ -13,7 +13,13 @@ var createSchema = function(Schema) {
     "picture": String,
     "time": String,
     "type": String,
-    "attending": [String]
+    "attending": [{
+      "name": {
+        "first": String,
+        "last": String
+      },
+      "username": String
+    }]
   });
   
   // Create the Schema functions
@@ -52,17 +58,62 @@ var createSchema = function(Schema) {
   };
   
   // Remove an event
-  eventSchema.methods.remove = function(callback) {
+  eventSchema.statics.remove = function(url, callback) {
+    
+    this.findOne({ "url": url }).exec(function(error, data) {
+      if (error) {
+        console.log(error);
+        callback();
+      } else {
+        data.remove(function() {
+          callback();
+        });
+      }
+    });
     
   };
   
   // Add an attendee to an event
-  eventSchema.methods.addAttendee = function(callback) {
+  eventSchema.statics.addAttendee = function(url, attendee, callback) {
+    
+    this.findOne({ "url": url }).exec(function(error, data) {
+      if (error) {
+        console.log(error);
+        callback(false);
+      } else {
+        data.attending.push(attendee);
+        data.save(function() {
+          callback(true);
+        });
+      }
+    });
     
   };
   
   // Remove an attendee from an event
-  eventSchema.methods.removeAttendee = function(callback) {
+  eventSchema.statics.removeAttendee = function(url, attendee, callback) {
+    
+    this.findOne({ "url": url }).exec(function(error, data) {
+      if (error) {
+        console.log(error);
+        callback(false);
+      } else {
+        var attendees = [];
+        for (var i = 0; i < data.attending.length; i++) {
+          if (data.attending[i].username !== attendee) {
+            attendees.push(data.attending[i]);
+          }
+        }
+        if (attendees.length === data.attending.length) {
+          callback(false);
+        } else {
+          data.attending = attendees;
+          data.save(function() {
+            callback(true);
+          });
+        }
+      }
+    });
     
   };
   
@@ -86,7 +137,7 @@ var createSchema = function(Schema) {
           var categories = Object.keys(result);
           var found = false;
           for (var j = 0; j < categories.length; j++) {
-            if (categories[i] === data[i].category) {
+            if (categories[j] === data[i].category) {
               found = true;
             }
           }

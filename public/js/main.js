@@ -150,7 +150,14 @@ $(document).ready(function() {
         "type": $privacy.val(),
         "cost": $cost.val(),
         "description": $description.val()
-      }
+      };
+      
+      sendingData["url"] = "/" + sendingData.name
+        .toLowerCase()
+        .replace(/ /g, "_")
+        .replace(/'/g, "%27")
+        .replace(/\//g, "%2f")
+        .replace(/\"/g, "%22");
       
       $.ajax({
         "type": "POST",
@@ -158,7 +165,7 @@ $(document).ready(function() {
         "data": JSON.stringify(sendingData),
         "contentType": "application/json",
         "success": function() {
-          window.location.reload(true);
+          window.location = "/events" + sendingData.url;
         },
         "error": function(err) {
           console.log(err);
@@ -169,7 +176,7 @@ $(document).ready(function() {
     
     $("#removeEvent").click(function() {
       
-      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      var url = window.location.pathname.substring(7, window.location.pathname.length);
       $.ajax({
         "type": "POST",
         "url": "/removeEvent",
@@ -187,12 +194,13 @@ $(document).ready(function() {
     
     $("#addAttendee").click(function() {
       
-      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      var title = $("#event_name").text();
+      var url = window.location.pathname.substring(7, window.location.pathname.length);
       
       $.ajax({
         "type": "POST",
         "url": "/addAttendee",
-        "data": JSON.stringify({ "url": url }),
+        "data": JSON.stringify({ "title": title, "url": url }),
         "contentType": "application/json",
         "success": function() {
           window.location.reload(true);
@@ -206,7 +214,7 @@ $(document).ready(function() {
     
     $("#removeAttendee").click(function() {
       
-      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      var url = window.location.pathname.substring(7, window.location.pathname.length);
       
       $.ajax({
         "type": "POST",

@@ -48,7 +48,7 @@ var apiController = function(router, context) {
       
       context.models.User.addLink(username, label, url, function(updated) {
         if (updated) {
-          context.sessionManager.update(request.cookies["sid"], updated, function(success) {
+          context.sessionManager.update([updated], function(success) {
             response.end(JSON.stringify({ "success": success }));
           });
         } else {
@@ -70,7 +70,7 @@ var apiController = function(router, context) {
       
       context.models.User.removeLink(username, label, url, function(updated) {
         if (updated) {
-          context.sessionManager.update(request.cookies["sid"], updated, function(success) {
+          context.sessionManager.update([updated], function(success) {
             response.end(JSON.stringify({ "success": success }));
           });
         } else {
@@ -84,78 +84,114 @@ var apiController = function(router, context) {
   
   router.post("/addEvent", function(request, response) {
     
-    var user = {
-      "username": request.cookies["logged_in"],
-      "name": request.cookies["name"]
-    };
-    var category = request.body.category.toLowerCase();
-    var cost = request.body.cost;
-    var date = request.body.date;
-    var description = request.body.description;
-    var location = request.body.location;
-    var name = request.body.name;
-    var picture = "/images/event_default.jpg";
-    var time = request.body.time;
-    var type = request.body.type.toLowerCase();
-    var url = name.toLowerCase().replace(/ /g, "_").replace(/'/g, "%27").replace(/\//g, "%2f").replace(/\"/, "%22");
-    var newEvent = {
-      "category": category,
-      "cost": cost,
-      "date": date,
-      "description": description,
-      "location": location,
-      "name": name,
-      "picture": picture,
-      "time": time,
-      "type": type,
-      "url": url
-    }
-    
-    addEvent(user, newEvent, function(success) {
-      response.send(success);
-      response.end();
+    context.sessionManager.authenticate(request.cookies, function(user) {
+      
+      var category = request.body.category;
+      var cost = request.body.cost;
+      var date = request.body.date;
+      var description = request.body.description;
+      var location = request.body.location;
+      var title = request.body.name;
+      var picture = "/event_default.jpg";
+      var time = request.body.time;
+      var type = request.body.type.toLowerCase();
+      var url = request.body.url;
+      
+      var newEvent = {
+        "category": category,
+        "cost": cost,
+        "date": date,
+        "description": description,
+        "location": location,
+        "title": title,
+        "picture": picture,
+        "time": time,
+        "type": type,
+        "url": url,
+        "author": user.username,
+        "attending": [{
+          "name": {
+            "first": user.name.first,
+            "last": user.name.last
+          },
+          "username": user.username
+        }]
+      }
+      
+      new context.models.Event(newEvent).save(function() {
+        user.addEvent(newEvent.title, newEvent.url, function() {
+          response.end(JSON.stringify({ "success": true }));
+        });
+      });
+      
     });
-    
+      
   });
   
   router.post("/removeEvent", function(request, response) {
-    /*
-    var url = request.body.url;
     
-    removeEvent(url, function() {
-      response.end();
+    var url = request.body.url;
+    context.models.Event.remove(url, function() {
+      context.models.User.removeEventFromAll(url, function(users) {
+        if (users) {
+          context.sessionManager.update(users, function(success) {
+            response.end(JSON.stringify({ "success": success }));
+          });
+        } else {
+          response.end(JSON.stringify({ "success": false }));
+        }
+      });
     });
-    */
-    response.end();
+    
   });
   
   router.post("/addAttendee", function(request, response) {
-    /*
-    var url = request.body.url;
-    var attendee = {
-      "name": request.cookies["name"].replace("_", " "),
-      "username": request.cookies["logged_in"]
-    };
     
-    addAttendee(url, attendee, function() {
-      response.end();
+    context.sessionManager.authenticate(request.cookies, function(user) {
+      
+      var url = request.body.url;
+      var title = request.body.title;
+      var attendee = {
+        "name": {
+          "first": user.name.first,
+          "last": user.name.last
+        },
+        "username": user.username
+      };
+      
+      context.models.Event.addAttendee(url, attendee, function(success) {
+        if (success) {
+          user.addEvent(title, url, function() {
+            response.end(JSON.stringify({ "success": true }));
+          });
+        } else {
+          response.end(JSON.stringify({ "success": false }));
+        }
+      });
+      
     });
     
   });
   
   router.post("/removeAttendee", function(request, response) {
     
-    var url = request.body.url;
-    var attendee = {
-      "name": request.cookies["name"].replace("_", " "),
-      "username": request.cookies["logged_in"]
-    };
-    
-    removeAttendee(url, attendee, function() {
-      response.end();
+    context.sessionManager.authenticate(request.cookies, function(user) {
+      
+      var url = request.body.url;
+      var attendee = user.username;
+      
+      context.models.Event.removeAttendee(url, attendee, function(success) {
+        if (success) {
+          user.removeEvent(url, function() {
+            response.end(JSON.stringify({ "success": true }));
+          });
+        } else {
+          response.end(JSON.stringify({ "success": false }));
+        }
+      });
+      
     });
-    */
-    response.end();
+    
   });
   
   return router;
