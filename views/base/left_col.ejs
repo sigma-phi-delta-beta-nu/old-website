@@ -16,8 +16,9 @@
     <br/>
     <ul style="width: 150px; margin: auto;">
       <% for (var i = 0; i < user.links.length; i++) { %>
+        <% var link = "//" + user.links[i].url %>
         <li style="text-align: left;">
-          <a href=<%= user.links[i].url %>><%= user.links[i].name%></a>
+          <a target="_blank" href=<%= link %>><%= user.links[i].name%></a>
           <img src="/images/remove.png" width="10px" class="remove"/>
         </li>
       <% } %>

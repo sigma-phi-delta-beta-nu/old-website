@@ -8,6 +8,19 @@ var createSchema = function(Schema) {
       "first": String,
       "last": String
     },
+    "nickname": String,
+    "class": String,
+    "email": String,
+    "phone": String,
+    "birthday": String,
+    "currentAddress": String,
+    "currentCity": String,
+    "currentState": String,
+    "currentPostal": String,
+    "homeAddress": String,
+    "homeCity": String,
+    "homeState": String,
+    "homePostal": String,
     "username": String,
     "password": String,
     "links": [{
@@ -15,9 +28,7 @@ var createSchema = function(Schema) {
       "url": String
     }],
     "events": [String],
-    "class": String,
-    "positions": [String],
-    "email": String
+    "positions": [String]
   });
   
   // Create the Schema functions
@@ -180,6 +191,23 @@ var createSchema = function(Schema) {
         callback(positions);
         
       }
+    });
+    
+  };
+  
+  userSchema.statics.getAllPrivate = function(callback) {
+    
+    this.find({})
+      .select("name.first name.last nickname class positions email phone birthday currentAddress currentCity currentState currentPostal homeAddress homeCite homeState homePostal")
+      .exec(function(error, data) {
+      
+      if (error) {
+        console.log(error);
+        callback(null);
+      } else {
+        callback(data);
+      }
+      
     });
     
   };
