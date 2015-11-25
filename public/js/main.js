@@ -81,6 +81,11 @@ $(document).ready(function() {
         "url": linkURL
       }
       
+      if (sendingData.label === "" || sendingData.url === "") {
+        alert("Sorry, one of the fields was left blank.");
+        return;
+      }
+      
       $.ajax({
         type: "POST",
         url: "/addLink",
@@ -151,6 +156,14 @@ $(document).ready(function() {
         "cost": $cost.val(),
         "description": $description.val()
       };
+      
+      var keys = Object.keys(sendingData);
+      for (var i = 0; i < keys.length; i++) {
+        if (sendingData[keys[i]] === "") {
+          alert("Sorry, one of the fields was left blank.");
+          return;
+        }
+      }
       
       sendingData["url"] = "/" + sendingData.name
         .toLowerCase()
