@@ -26,29 +26,28 @@
         </tr>
         <% for (var i = 0; i < roster.length; i++) { %>
           <tr>
-            <td><%= roster[i]["firstname"] %></td>
-            <td><%= roster[i]["lastname"] %></td>
-            <td><%= roster[i]["nickname"] %></td>
-            <td><%= roster[i]["class"] %></td>
-            <td><%= roster[i]["email"] %></td>
-            <td><%= roster[i]["phone"] %></td>
-            <td><%= roster[i]["birthday"] %></td>
-            <% var currentAddress %>
-            <% if (roster[i]["currentAddress"] !== undefined) { %>
-              <% currentAddress = roster[i]["currentAddress"] %>
-              <% currentAddress += ", " + roster[i]["currentCity"] %>
-              <% currentAddress += ", " + roster[i]["currentState"] %>
-              <% currentAddress += ", " + roster[i]["currentPostal"] %>
+            <td><%= roster[i].name.first %></td>
+            <td><%= roster[i].name.last %></td>
+            <td><%= roster[i].nickname %></td>
+            <td><%= roster[i].class %></td>
+            <td><%= roster[i].email %></td>
+            <td><%= roster[i].phone %></td>
+            <td><%= roster[i].birthday %></td>
+            <% if (roster[i].currentAddress) { %>
+              <% var currentAddress = roster[i].currentAddress %>
+              <% currentAddress += ", " + roster[i].currentCity %>
+              <% currentAddress += ", " + roster[i].currentState %>
+              <% currentAddress += ", " + roster[i].currentPostal %>
             <% } else { %>
               <% currentAddress = "" %>
             <% } %>
             <td><%= currentAddress %></td>
             <% var homeAddress %>
-            <% if (roster[i]["homeAddress"] !== undefined) { %>
-              <% homeAddress = roster[i]["homeAddress"] %>
-              <% homeAddress += ", " + roster[i]["homeCity"] %>
-              <% homeAddress += ", " + roster[i]["homeState"] %>
-              <% homeAddress += ", " + roster[i]["homePostal"] %>
+            <% if (roster[i].homeAddress) { %>
+              <% homeAddress = roster[i].homeAddress %>
+              <% homeAddress += ", " + roster[i].homeCity %>
+              <% homeAddress += ", " + roster[i].homeState %>
+              <% homeAddress += ", " + roster[i].homePostal %>
             <% } else { %>
               <% homeAddress = "" %>
             <% } %>

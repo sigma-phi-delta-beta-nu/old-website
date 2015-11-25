@@ -1,5 +1,24 @@
 $(document).ready(function() {
     
+    $(".content").css("margin-bottom", "0px");
+    
+    if ($(".flexslider").attr("onpage") !== "true") {
+      moveFooter();
+      $(window).resize(moveFooter);
+    }
+    
+    function moveFooter() {
+      var navHeight = $("#navbar").outerHeight();
+      var footerHeight = $("#footer").outerHeight();
+      var contentHeight = $(".content").outerHeight();
+      var bodyHeight = $("body").outerHeight();
+      if (navHeight + footerHeight + contentHeight < bodyHeight) {
+        $(".content").css({
+         "margin-bottom": bodyHeight - navHeight - footerHeight - contentHeight + "px"
+        });
+      }
+    }
+    
     $('input').keypress(function(event) {
 		
 		if (event.keyCode == 13) {
@@ -30,8 +49,8 @@ $(document).ready(function() {
 		var $inputs = $(this).closest("div").find("input");
 		var usr = $inputs.first().val();
 		var pwd = $inputs.last().val();
-		var hash = Sha256.hash(pwd);
-		authenticate(usr, hash);
+		//var hash = Sha256.hash(pwd);
+		authenticate(usr, pwd);
 	
 	});
 	
@@ -40,7 +59,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: 'GET',
 			url: '/logout',
-			success: function() {
+			success: function(result) {
 				if (window.location.pathname === "/dashboard"
                  || window.location.pathname === "/roster") {
                     window.location = "/";
@@ -60,6 +79,11 @@ $(document).ready(function() {
       var sendingData = {
         "label": linkLabel,
         "url": linkURL
+      }
+      
+      if (sendingData.label === "" || sendingData.url === "") {
+        alert("Sorry, one of the fields was left blank.");
+        return;
       }
       
       $.ajax({
@@ -131,7 +155,22 @@ $(document).ready(function() {
         "type": $privacy.val(),
         "cost": $cost.val(),
         "description": $description.val()
+      };
+      
+      var keys = Object.keys(sendingData);
+      for (var i = 0; i < keys.length; i++) {
+        if (sendingData[keys[i]] === "") {
+          alert("Sorry, one of the fields was left blank.");
+          return;
+        }
       }
+      
+      sendingData["url"] = "/" + sendingData.name
+        .toLowerCase()
+        .replace(/ /g, "_")
+        .replace(/'/g, "%27")
+        .replace(/\//g, "%2f")
+        .replace(/\"/g, "%22");
       
       $.ajax({
         "type": "POST",
@@ -139,7 +178,7 @@ $(document).ready(function() {
         "data": JSON.stringify(sendingData),
         "contentType": "application/json",
         "success": function() {
-          window.location.reload(true);
+          window.location = "/events" + sendingData.url;
         },
         "error": function(err) {
           console.log(err);
@@ -150,7 +189,7 @@ $(document).ready(function() {
     
     $("#removeEvent").click(function() {
       
-      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      var url = window.location.pathname.substring(7, window.location.pathname.length);
       $.ajax({
         "type": "POST",
         "url": "/removeEvent",
@@ -168,12 +207,13 @@ $(document).ready(function() {
     
     $("#addAttendee").click(function() {
       
-      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      var title = $("#event_name").text();
+      var url = window.location.pathname.substring(7, window.location.pathname.length);
       
       $.ajax({
         "type": "POST",
         "url": "/addAttendee",
-        "data": JSON.stringify({ "url": url }),
+        "data": JSON.stringify({ "title": title, "url": url }),
         "contentType": "application/json",
         "success": function() {
           window.location.reload(true);
@@ -187,7 +227,7 @@ $(document).ready(function() {
     
     $("#removeAttendee").click(function() {
       
-      var url = window.location.pathname.substring(8, window.location.pathname.length);
+      var url = window.location.pathname.substring(7, window.location.pathname.length);
       
       $.ajax({
         "type": "POST",
@@ -244,7 +284,6 @@ $(document).ready(function() {
       if ($(this).css("color") === "rgb(0, 0, 0)") {
         $(this).closest(".hyper_select").find("div").css("color", "#000000");
         $(this).css("color", "#FA0000");
-        console.log($(this).html());
         if ($(this).text() === "Hyperlink") {
           var currentRow = $("tr").first();
           var rowCount = $("tr").length;
@@ -252,7 +291,7 @@ $(document).ready(function() {
             var email = currentRow.find("td").last().text();
             currentRow.find("td").last().html("<a href='mailto:" + 
               email + "'>" + email + "</a>");
-            if (i === 8) {
+            if (currentRow.next().length === 0) {
               currentRow = $("tbody").last().find("tr").first();
             } else {
               currentRow = currentRow.next();
@@ -265,7 +304,7 @@ $(document).ready(function() {
             currentRow.find("td").last().html(
               currentRow.find("td").last().find("a").text()
             );
-            if (i === 8) {
+            if (currentRow.next().length === 0) {
               currentRow = $("tbody").last().find("tr").first();
             } else {
               currentRow = currentRow.next();
@@ -288,14 +327,10 @@ $(document).ready(function() {
             data: JSON.stringify(sendingData),
 			contentType: 'application/json',
             success: function(returnedData) {
-                if (returnedData === true) {
+                var result = JSON.parse(returnedData);
+                if (result["success"]) {
                     window.location.reload(true);
-                } else if (returnedData === "") {
-                    alert("Sorry, we don't have that username on file");
-                    $("#login").closest("div").find("input").first().val("");
-                    $("#login").closest("div").find("input").first().next().val("");
-					$("#login").closest("div").find("input").first().focus();
-                } else if (returnedData === false) {
+                } else {
                     alert("Sorry, that password is incorrect.");
                     $("#login").closest("div").find("input").first().next().val("");
 					$("#login").closest("div").find("input").first().next().focus();

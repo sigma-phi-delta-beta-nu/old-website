@@ -6,12 +6,13 @@
   <h1>Photo Gallery</h1>
   <% var keys = Object.keys(gallery) %>
   <% for (var i = 0; i < keys.length; i++) { %>
-    <% var imgUrl = "/images/" + gallery[keys[i]][0]["url"] %>
-    <% var albumUrl = "/gallery/" + gallery[keys[i]][0]["albumUrl"] %>
+    <% var urls = gallery[keys[i]][0]["url"] %>
+    <% var img = "/images" + urls["photo"] %>
+    <% var link = "/gallery" + urls["album"] %>
     <span class="gallery_thumb" style="margin-right: 16px;">
-      <a href=<%= albumUrl %>>
+      <a href=<%= link %>>
         <div>
-          <img src=<%= imgUrl %> />
+          <img src=<%= img %> />
         </div>
         <h2><%= keys[i] %></h2>
       </a>

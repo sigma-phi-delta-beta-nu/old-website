@@ -15,11 +15,10 @@
     <h4>Personalized Links</h4>
     <br/>
     <ul style="width: 150px; margin: auto;">
-      <% var keys = Object.keys(user.links) %>
-      <% for (var i = 0; i < keys.length; i++) { %>
-        <% var link = user.links[keys[i]]; %>
+      <% for (var i = 0; i < user.links.length; i++) { %>
+        <% var link = "//" + user.links[i].url %>
         <li style="text-align: left;">
-          <a href="<%= link %>"><%= keys[i] %></a>
+          <a target="_blank" href=<%= link %>><%= user.links[i].name%></a>
           <img src="/images/remove.png" width="10px" class="remove"/>
         </li>
       <% } %>

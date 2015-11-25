@@ -1,5 +1,3 @@
 node_modules/*
-bin/keys/*
-*.log
-*.archive
-config.js
+server/keys/*
+db/data/*
