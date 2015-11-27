@@ -49,8 +49,8 @@ $(document).ready(function() {
 		var $inputs = $(this).closest("div").find("input");
 		var usr = $inputs.first().val();
 		var pwd = $inputs.last().val();
-		//var hash = Sha256.hash(pwd);
-		authenticate(usr, pwd);
+		var hash = Sha256.hash(pwd);
+		authenticate(usr, hash);
 	
 	});
 	

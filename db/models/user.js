@@ -210,8 +210,8 @@ var createSchema = function(Schema) {
       } else {
         
         var elected = [ "Chief Engineer", "Vice Chief Engineer", "Business Manager", "Secretary", "Historian", "Chaplain", "Pledge Master", "Guide", "Recruitment Chairman" ];
-        var appointed = [ "Social Chairman", "Risk Reduction Chairman", "Fundraising Chairman", "Expansion Chairman", "Athletic Chairman", "Pledge Board Chairman", "Brotherhood Chairman", "Philanthropy Chairman", "Assistant Business Manager", "Sergeant-At-Arms", "Webmaster", "Engineering Governing Council Delegate" ];
-
+        var appointed = [ "Pledge Board Chairman", "Assistant Business Manager", "Social Chairman", "Athletic Chairman", "Engineering Governing Council Representative", "Risk Management Chairman", "Fundraising Chairman", "Webmaster", "Expansion Chairman", "House Manager", "Academic Chairman", "Sergeant-At-Arms", "Brotherhood Chairman", "Philanthropy Chairman" ];
+        
         var positions = {
           "elected": [],
           "appointed": []
