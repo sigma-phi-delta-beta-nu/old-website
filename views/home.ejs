@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sigma Phi Delta Beta-Nu</title>
+  <link rel="icon" type="image/png" href="/favicon.ico" />
+  <% include base/styles %>
+</head>
+
+<body id="home">
+  <div id="background" class="full-screen">
+    <% include base/navbar %>
+    <div id="super-center">
+      <div class="col-sm-12 hidden-xs text-center">
+        <h1>Sigma Phi Delta Beta-Nu Chapter</h1>
+        <br/>
+        <p>The Premier International Fraternity of Engineers</p>
+      </div>
+      <div class="col-xs-12 hidden-sm hidden-md hidden-lg text-center">
+        <h2>Sigma Phi Delta</h2>
+        <h2 style="margin-top: -5px;">Beta-Nu Chapter</h2>
+        <br/>
+        <p>The Premier International Fraternity of Engineers</p>
+      </div>
+    </div>
+    <a id="arrowdown" class="smoothScroll" href="#summary"></a>
+    <style>
+      #arrowdown {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 20px;
+        width: 70px;
+        height: 70px;
+        margin: auto;
+        background-image: url("/res/down.png");
+        background-size: contain;
+      }
+    </style>
+  </div>
+  <div id="summary" class="full-screen">
+    <a id="arrowup" class="smoothScroll" href="#background"></a>
+    <style>
+      #arrowup {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -90px;
+        width: 70px;
+        height: 70px;
+        margin: auto;
+        background-image: url("/res/up.png");
+        background-size: contain;
+      }
+    </style>
+  </div>
+  <% include base/scripts %>
+</body>
+
+</html>

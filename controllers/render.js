@@ -8,7 +8,7 @@ var renderController = function(router, context) {
   /* GET home page */
   router.get("/", function(request, response) {
     auth(request.cookies, function(user) {
-      response.render("template", {
+      response.render("home", {
         "title": "Home",
         "user": user
       });
@@ -19,7 +19,7 @@ var renderController = function(router, context) {
   router.get("/about_us", function(request, response) {
     auth(request.cookies, function(user) {
       User.getClasses(function(classes) {
-        response.render("template", {
+        response.render("about_us", {
           "title": "About Us",
           "user": user,
           "classes": classes
