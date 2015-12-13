@@ -8,51 +8,29 @@
 </head>
 
 <body id="home">
+  <% include base/navbar %>
   <div id="background" class="full-screen">
-    <% include base/navbar %>
     <div id="super-center">
-      <div class="col-sm-12 hidden-xs text-center">
+      <div class="col-sm-12 hidden-xs text-center white">
         <h1>Sigma Phi Delta Beta-Nu Chapter</h1>
         <br/>
         <p>The Premier International Fraternity of Engineers</p>
       </div>
-      <div class="col-xs-12 hidden-sm hidden-md hidden-lg text-center">
+      <div class="col-xs-12 hidden-sm hidden-md hidden-lg text-center white">
         <h2>Sigma Phi Delta</h2>
-        <h2 style="margin-top: -5px;">Beta-Nu Chapter</h2>
+        <h2 class="margin-top-up-5">Beta-Nu Chapter</h2>
         <br/>
         <p>The Premier International Fraternity of Engineers</p>
       </div>
-    </div>
-    <a id="arrowdown" class="smoothScroll" href="#summary"></a>
-    <style>
-      #arrowdown {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 20px;
-        width: 70px;
-        height: 70px;
-        margin: auto;
-        background-image: url("/res/down.png");
-        background-size: contain;
-      }
-    </style>
+      </div>
+    <a id="arrowdown" data-scroll href="#summary"></a>
   </div>
   <div id="summary" class="full-screen">
-    <a id="arrowup" class="smoothScroll" href="#background"></a>
-    <style>
-      #arrowup {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -90px;
-        width: 70px;
-        height: 70px;
-        margin: auto;
-        background-image: url("/res/up.png");
-        background-size: contain;
-      }
-    </style>
+    <div class="container content-area">
+      <h1>Hello world!</h1>
+      <h2>This is a subheading</h2>
+      <p>And this is just a bunch of text</p>
+    </div>
   </div>
   <% include base/scripts %>
 </body>

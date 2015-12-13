@@ -2,9 +2,17 @@
 // Copyright (c) 2015 Brandon M. Kelley
 
 $(document).ready(function() {
+
+  centerLanding();
+  $(window).resize(centerLanding);
   
-  var centerLanding = function() {
-    var canvas = $("#background").outerHeight() - $(".navbar").outerHeight();
+  setNavOpacity();
+  $(document).scroll(setNavOpacity);
+  
+  function centerLanding() {
+    var canvas = $("#background").outerHeight();
+    var arrowSize = $("#arrowdown").outerHeight();
+    var fluffSize = 100;
     var landingSize;
     if ($("#super-center div").outerHeight() > 0) {
       landingSize = $("#super-center div").outerHeight();
@@ -13,14 +21,21 @@ $(document).ready(function() {
     }
     var topOffset;
     if (canvas > landingSize + 10) {
-      topOffset = (canvas - landingSize) / 2;
+      topOffset = (canvas - landingSize - arrowSize - fluffSize);
     } else {
       topOffset = 10;
     }
-    $("#super-center").css("margin-top", topOffset + "px");
-  };
+    $("#super-center").css("padding-top", topOffset + "px");
+  }
   
-  centerLanding();
-  $(window).resize(centerLanding);
+  function setNavOpacity() {
+    var fadeDist = $("#background").outerHeight();
+    var scrolledDist = $(document).scrollTop();
+    if (scrolledDist <= fadeDist) {
+      var fractionFade = scrolledDist / fadeDist;
+      var newColor = "rgba(200, 0, 0, " + fractionFade + ")";
+      $(".navbar").css("background-color", newColor);
+    }
+  }
   
 });

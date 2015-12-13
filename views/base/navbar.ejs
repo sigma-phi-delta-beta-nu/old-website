@@ -1,42 +1,26 @@
-<div class="navbar">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-header">
-    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
     </button>
+    <a class="navbar-brand"
+      <% if (title === "Home") { %>
+        data-scroll href="#home"
+      <% } else { %>
+        href="/"
+      <% } %>
+    >&Sigma;&Phi;&Delta;</a>
   </div>
-  <nav class="collapse navbar-collapse">
-    <div class="container">
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="/"
-            <% if (title === "Home") { %>id="active"<% } %>
-          >Home</a>
-        </li>
-        <li>
-          <a href="/about_us" 
-            <% if (title === "About Us") { %>id="active"<% } %>
-          >About Us</a>
-        </li>
-        <li>
-          <a href="/recruitment"
-            <% if (title === "Recruitment") { %>id="active"<% } %>
-          >Recruitment</a>
-        </li>
-        <li>
-          <a href="/events"
-            <% if (title === "Events") { %>id="active"<% } %>
-          >Events</a>
-        </li>
-        <li>
-          <a href="/gallery"
-            <% if (title === "Gallery") { %>id="active"<% } %>
-          >Gallery</a>
-        </li>
-        <li>
-          <a href="/contact_us"
-            <% if (title === "Contact Us") { %>id="active"<% } %>
-          >Contact Us</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav" style="float: right;">
+      <li><a href="#about_us">About Us</a></li>
+      <li><a href="#recruitment">Recruitment</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact_us">Contact Us</a></li>
+      <li><a href="//calpoly.edu" target="_blank">Cal Poly SLO</a></li>
+    </ul>
+  </div>
 </div>

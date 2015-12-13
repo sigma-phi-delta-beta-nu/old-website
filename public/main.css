@@ -1,80 +1,78 @@
 /* public/res/css/main.css */
 /* Copyright (c) 2015 Brandon M. Kelley */
 
-h1, h2, h3, h4, p {
-  color: #FFFFFF;
+.white {
+  color: #E7E7E7;
 }
 
 .no-bold {
   font-weight: normal;
 }
 
-.navbar {
-  padding-top: 10px;
-  margin-bottom: 5px;
-}
-
 .space {
   height: 5px;
 }
 
-.navbar-brand {
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  margin-right: 40px;
-  padding: 5px;
+.margin-top-up-5 {
+  margin-top: -5px;
 }
 
-.navbar-brand:hover .navbar-header:hover {
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
+.btn:focus {
+  outline: none;
 }
 
 .navbar {
-  background: rgba(0, 0, 0, 0);
   border: none;
 }
 
-.navbar .navbar-collapse {
-  text-align: center;
-  border-top: none;
-  box-shadow: none;
+.navbar a {
+  color: #E7E7E7;
+  font-family: "Times New Roman", Times, serif;
+  text-shadow: none;
 }
 
-.navbar-nav {
-  display: inline-block;
-  float: none;
+.navbar-header a {
+  color: #E7E7E7;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-size: 36px;
+  text-shadow: none;
 }
 
-.navbar-nav > li {
-  margin-left: 5px;
-  margin-right: 5px;
+.navbar-nav a {
+  color: #E7E7E7;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+  text-shadow: none;
 }
 
 .navbar-nav > li > a {
-  color: #FFFFFF;
-  font-size: 20px;
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
+  text-shadow: none;
+}
+
+.navbar a:hover {
+  background-color: #990000;
 }
 
 .navbar-nav > li > a:hover {
-  background: transparent;
-  text-shadow: none;
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -o-transform: scale(1.2);
+  background-color: #990000;
 }
 
-.navbar #active {
-  background: rgba(255, 0, 0, 0.6);
-  border-radius: 10px;
+.navbar-nav > li > a:focus {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.nav .open > a:focus {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.navbar-fixed-top .navbar-collapse {
+  box-shadow: none;
 }
 
 .navbar-toggle {
-  margin: 0px 0px 0px 0px !important;
+  margin-top: 5px !important;
+  margin-right: 5px !important;
   width: 40px;
   height: 40px;
   background-image: url("/res/menu.png");
@@ -83,25 +81,86 @@ h1, h2, h3, h4, p {
   margin: auto;
 }
 
-.navbar-collapse {
-  border: none;
-}
-
-.btn:focus {
-  outline: none;
+@media (max-width: 991px) {
+  .navbar-header {
+    float: none;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+  
+  .navbar-fixed-top .navbar-collapse {
+    padding-right: 15px;
+  }
+  .navbar-collapse.collapse {
+    display: none !important;
+  }
+  .navbar-nav {
+    float: right !important;
+    margin: 7.5px -15px;
+  }
+  .navbar-nav>li {
+    float: none;
+  }
+  .navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .navbar-text {
+    float: none;
+    margin: 15px 0;
+  }
+  .navbar-collapse.collapse.in {
+    display: block !important;
+  }
+  .collapsing {
+    overflow: hidden !important;
+  }
 }
 
 #super-center h1 {
+  font-family: "Times New Roman", Times, serif;
   font-size: 50px;
   color: #FFFFFF;
 }
 
 #super-center h2 {
+  font-family: "Times New Roman", Times, serif;
   font-size: 40px;
   color: #FFFFFF;
 }
 
 #super-center p {
+  font-family: "Times New Roman", Times, serif;
   font-size: 20px;
   color: #FFFFFF;
+}
+
+#summary .container {
+  padding-top: 70px;
+}
+
+.content-area h1 {
+  font-family: "Times New Roman", Times, serif;
+  color: #BB0000;
+}
+
+.content-area h2 {
+  font-family: "Times New Roman", Times, serif;
+  color: #555555;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#arrowdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  background-image: url("/res/down.png");
+  background-size: contain;
+}
 }

@@ -1,0 +1,42 @@
+<div class="navbar">
+  <div class="navbar-header">
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+    </button>
+  </div>
+  <nav class="collapse navbar-collapse">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/"
+            <% if (title === "Home") { %>id="active"<% } %>
+          >Home</a>
+        </li>
+        <li>
+          <a href="/about_us" 
+            <% if (title === "About Us") { %>id="active"<% } %>
+          >About Us</a>
+        </li>
+        <li>
+          <a href="/recruitment"
+            <% if (title === "Recruitment") { %>id="active"<% } %>
+          >Recruitment</a>
+        </li>
+        <li>
+          <a href="/events"
+            <% if (title === "Events") { %>id="active"<% } %>
+          >Events</a>
+        </li>
+        <li>
+          <a href="/gallery"
+            <% if (title === "Gallery") { %>id="active"<% } %>
+          >Gallery</a>
+        </li>
+        <li>
+          <a href="/contact_us"
+            <% if (title === "Contact Us") { %>id="active"<% } %>
+          >Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
