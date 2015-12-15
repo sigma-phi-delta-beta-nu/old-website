@@ -81,6 +81,14 @@
   margin: auto;
 }
 
+.navbar-collapse.collapsing {
+  background-color: #990000;
+}
+
+.navbar-collapse.collapse.in {
+  background-color: #990000;
+}
+
 @media (max-width: 991px) {
   .navbar-header {
     float: none;
@@ -90,13 +98,13 @@
   }
   
   .navbar-fixed-top .navbar-collapse {
-    padding-right: 15px;
+    padding-left: 15px;
   }
   .navbar-collapse.collapse {
     display: none !important;
   }
   .navbar-nav {
-    float: right !important;
+    float: left !important;
     margin: 7.5px -15px;
   }
   .navbar-nav>li {
@@ -162,5 +170,4 @@
   margin: auto;
   background-image: url("/res/down.png");
   background-size: contain;
-}
 }

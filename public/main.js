@@ -1,5 +1,9 @@
 $(document).ready(function() {
     
+    $(".navbar-brand").click(function() {
+      $(this).css("background", "transparent");
+    });
+    
     $(".content").css("margin-bottom", "0px");
     
     if ($(".flexslider").attr("onpage") !== "true") {
