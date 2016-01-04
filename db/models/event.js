@@ -39,7 +39,7 @@ var createSchema = function(Schema) {
       } else {
         
         // Test if user was found
-        if (data !== undefined) {
+        if (data !== undefined && data !== null) {
           
           // Make sure this user can view it
           if (data.type === "private" && username === null) {
