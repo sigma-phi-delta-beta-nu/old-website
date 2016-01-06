@@ -75,7 +75,7 @@
   margin-right: 5px !important;
   width: 40px;
   height: 40px;
-  background-image: url("/res/menu.png");
+  background-image: url("/assets/images/menu.png");
   background-size: cover;
   background-position: center center;
   margin: auto;
@@ -144,7 +144,7 @@
   color: #FFFFFF;
 }
 
-#summary .container {
+#summary {
   padding-top: 70px;
 }
 
@@ -160,6 +160,10 @@
   font-weight: bold;
 }
 
+.content-area p {
+  clear: both;
+}
+
 #arrowdown {
   position: absolute;
   left: 0;
@@ -168,6 +172,6 @@
   width: 70px;
   height: 70px;
   margin: auto;
-  background-image: url("/res/down.png");
+  background-image: url("/assets/images/down.png");
   background-size: contain;
 }

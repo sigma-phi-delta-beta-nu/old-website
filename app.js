@@ -25,7 +25,7 @@ var createApplication = function() {
   app.set("view engine", "ejs");
   
   // Middleware
-  app.use(favicon(__dirname + "/public/favicon.ico"));
+  app.use(favicon(__dirname + "/public/assets/images/favicon.ico"));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(cookieParser());
@@ -44,8 +44,7 @@ var createApplication = function() {
   // Serve mapped urls
   app.use("/", renderController(express.Router(), context));
   app.use("/", apiController(express.Router(), context));
-  app.use("/", express.static(__dirname + "/libs"));
-  app.use("/res", express.static(__dirname + "/public"));
+  app.use("/", express.static(__dirname + "/public"));
   
   return app;
   

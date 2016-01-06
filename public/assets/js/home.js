@@ -9,6 +9,12 @@ $(document).ready(function() {
   setNavOpacity();
   $(document).scroll(setNavOpacity);
   
+  $(".hover-info div").hide();
+
+  $(".hover-info").hover(function() {
+    $(this).find("div").slideToggle();
+  });
+  
   function centerLanding() {
     var canvas = $("#background").outerHeight();
     var arrowSize = $("#arrowdown").outerHeight();
