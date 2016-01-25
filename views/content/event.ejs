@@ -1,0 +1,42 @@
+<section>
+  <div id="event">
+    <div>
+      <% var image = "/images" + event["picture"] %>
+      <img width=200px height=200px align=left src=<%= image %> />
+      <h1 id="event_name"><%= event["title"] %></h1>
+      <h2><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></h2>
+      <p><%= event["description"] %></p>
+      <% if (user !== null) { %>
+        <p>This is a <strong><%= event["type"] %></strong> event</p>
+        <% if (user["username"] === event["author"]) { %>
+          <button id="removeEvent" type="button">Remove This Event</button>
+        <% } %>
+      <% } %>
+    </div>
+    <div>
+      <% if (event["cost"] !== "0") { %>
+        <p>Cost: $<%= event["cost"] %></p>
+      <% } %>
+      <p>List of Attendees:</p>
+      <ul>
+        <% var userInList = false %>
+        <% for (var i = 0; i < event["attending"].length; i++) { %>
+          <% var name = event.attending[i].name.first + " " + event.attending[i].name.last %>
+          <li><%= name %></li>
+          <% if (user !== null) { %>
+            <% if (user.username === event["attending"][i].username) { %>
+              <% userInList = true %>
+            <% } %>
+          <% } %>
+        <% } %>
+      </ul>
+      <% if (user !== null) { %>
+        <% if (userInList) { %>
+          <button type="button" id="removeAttendee">Leave This Event</button>
+        <% } else { %>
+          <button type="button" id="addAttendee">Join This Event</button>
+        <% } %>
+      <% } %>
+    </div>
+  </div>
+</section>

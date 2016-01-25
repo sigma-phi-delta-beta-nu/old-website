@@ -1,0 +1,43 @@
+<%         /* about_us.ejs */         %>
+<%       /* About Us partial */       %>
+<%   /* Written by Brandon Kelley */  %>
+
+<section>
+  <h1>About Us: The Sigma Phi Delta Fraternity</h1>
+  <img width="45%" align="right" style="margin-left: 20px" src="/images/crest_large.png"/>
+  <h2>Declaration of Principles and Objects</h2>
+  <p>"From time to time the Fraternity, of Greek, system is called upon to set forth the principles for which it stands. So far, it has been able to offer a satisfactory explanation for its existence. As a part of this system - as a Fraternity of Engineers we insist that whatever our own superficial peculiarities, we exist for a purpose.</p>
+  <p>We stand steadfast and firm in our belief that we serve as a necessary adjunct to our Colleges and Universities in the training of young engineers. Our Constitution states, without equivocation, that the Object of the Fraternity shall be to promote the advancement of the Engineering Profession; to foster the advancement of Engineering Education; to instill a greater spirit of cooperation among Engineering Students and Organizations; to inculcate in its members the highest ideals of virtuous manhood, good Citizenship, obedience to Law, and Brotherhood; and to encourage excellence in scholarship. These objects we endeavor to fulfill in our Laws, in our Ritual, in our conduct and in our relations with others.</p>
+  <p>The Sigma Phi Delta Fraternity has, since its founding on April 11, 1924, at the University of Southern California, been a Professional-Social Fraternity of Engineers. We are Professional in that, unlike the General Fraternity, we admin to membership only students enrolled or working in a curriculum, or program, leading toward a degree in engineering; that we encourage and expect our Chapters to conduct and to participate in a continuing professional program through symposia, seminars, field trips, and similar programs; and that we encourage our members to give the fullest support to the faculty of the Colleges and Schools of Engineering throughout North America.</p>
+  <p>We are Social in that, similar to the General Fraternity, our members maintain and live in Chapter houses; have a social program; participate in athletic programs; and foster a close relationship with our graduated, or alumni, members."</p>
+  <p style="text-align: right">Manual of Procedure - First Edition, printed August 10, 1927</p>
+</section>
+<section>
+  <h2>Beta-Nu Emphasis</h2>
+  <p>Here in San Luis Obispo, California, the Beta-Nu chapter of Sigma Phi Delta strives to uphold the traditions of its Brotherhood, passed down through the generations. As members, our priorities involve professionalism, as well as upholding our Code of Ethics. Throughout both pledging and active life, we are focused on not only being the best engineers we can be, but also the best men. Representing our ideals and tearing down barriers of stigma are what we stand for.</p>
+  <p style="text-align: right">"An Engineer should live that his actions shall never besmirch his own honor, and thus maintain the honor of the Engineering profession."</p>
+  <p style="text-align: right">The Code of Ethics of Sigma Phi Delta</p>
+</section>
+<section>
+  <h2>History of the Fraternity</h2>
+  <p>Sigma Phi Delta was founded on April 11, 1924 at University of Southern California in Los Angeles, California. Presently, this Fraternity now recognizes 36 chapters internationally, with colonization still underway. A detailed history of Sigma Phi Delta can be found <a href="http://www.sigmaphidelta.org/s/1247/aff_1_interior.aspx?sid=1247&gid=1&pgid=404">here</a>.</p>
+</section>
+<section>
+  <h2>Beta-Nu History</h2>
+  <p>The Beta-Nu Chapter of Sigma Phi Delta was colonized on October 26, 2013 and officially chartered on April 19 of the following year. The first rush and pledging process were held that Fall. Since then, this chapter has initiated an Alpha and a Beta class.</p>
+</section>
+<section id="membership">
+  <h2>Membership</h2>
+  <% var classnames = Object.keys(classes) %>
+  <% for (var i = 0; i < classnames.length; i++) { %>
+    <span>
+      <p><%= classnames[i] %> Class</p>
+      <ul>
+        <% var pclass = classes[classnames[i]] %>
+        <% for (var j = 0; j < pclass.length; j++) { %>
+          <li><%= pclass[j]["name"]["first"] %> <%= pclass[j]["name"]["last"] %></li>
+        <% } %>
+      </ul>
+    </span>
+  <% } %>
+</section>
