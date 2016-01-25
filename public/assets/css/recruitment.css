@@ -1,0 +1,17 @@
+.recruitment-standards {
+   display: flex;
+   justify-content: space-between;
+}
+
+.image-wrapper {
+   max-width: 195px;
+}
+
+.image-wrapper img {
+   width: 100%;
+}
+
+ul.no_bullet {
+   list-style-type: none;
+   padding-left: 0;
+}

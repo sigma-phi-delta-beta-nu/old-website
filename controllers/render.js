@@ -35,7 +35,7 @@ var renderController = function(router, context) {
       response.render("template", {
         "page": "content/recruitment",
         "user": user,
-        "styles": []
+        "styles": ["/assets/css/recruitment.css"]
       });
     });
   });
