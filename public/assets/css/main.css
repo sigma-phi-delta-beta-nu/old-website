@@ -1,5 +1,8 @@
 /* public/res/css/main.css */
 /* Copyright (c) 2015 Brandon M. Kelley */
+.content-page {
+   margin-top: 40px;
+}
 
 .white {
   color: #E7E7E7;
@@ -96,7 +99,7 @@
   .navbar-toggle {
     display: block;
   }
-  
+
   .navbar-fixed-top .navbar-collapse {
     padding-left: 15px;
   }

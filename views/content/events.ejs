@@ -15,7 +15,7 @@
     <% for (var j = 0; j < eventList.length; j++) { %>
       <% var event = eventList[j] %>
       <% var url = "/events" + event.url %>
-      <% var image = "/images" + event.picture %>
+      <% var image = "/assets/images" + event.picture %>
       <a href=<%= url %>>
         <span class="event_thumb">
           <img align="left" src=<%= image %> />

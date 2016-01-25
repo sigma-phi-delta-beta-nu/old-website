@@ -1,7 +1,7 @@
 <section>
   <div id="event">
     <div>
-      <% var image = "/images" + event["picture"] %>
+      <% var image = "/assets/images" + event["picture"] %>
       <img width=200px height=200px align=left src=<%= image %> />
       <h1 id="event_name"><%= event["title"] %></h1>
       <h2><%= event["time"] %> on <%= event["date"] %> at <%= event["location"] %></h2>

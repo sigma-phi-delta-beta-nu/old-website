@@ -2,7 +2,7 @@
   <h1><%= album[0]["album"] %></h1>
   <% for (var i = 0; i < album.length; i++) { %>
     <% var urls = album[i]["url"] %>
-    <% var img = "/images" + urls["photo"] %>
+    <% var img = "/assets/images" + urls["photo"] %>
     <% var link = "/gallery" + urls["album"] + urls["photo"] %>
     <span class="gallery_thumb" style="margin-right: 16px;">
       <a href=<%= link %>>

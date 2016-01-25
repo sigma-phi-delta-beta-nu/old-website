@@ -8,4 +8,9 @@
 <link rel="stylesheet" type="text/css" href="/assets/css/main.css"/>
 <% if (page === "content/home") { %>
   <link rel="stylesheet" type="text/css" href="/assets/css/home.css"/>
+<% } else { %>
+  <link rel="stylesheet" type="text/css" href="/assets/css/template.css"/>
+  <% for (var i = 0; i < styles.length; i++) { %>
+    <link rel="stylesheet" type="text/css" href=<%= styles[i] %> />
+  <% } %>
 <% } %>

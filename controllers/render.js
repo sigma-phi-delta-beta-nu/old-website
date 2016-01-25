@@ -22,7 +22,8 @@ var renderController = function(router, context) {
         response.render("template", {
           "page": "content/about_us",
           "user": user,
-          "classes": classes
+          "classes": classes,
+          "styles": ["/assets/css/about.css"]
         });
       });
     });
@@ -33,7 +34,8 @@ var renderController = function(router, context) {
     auth(request.cookies, function(user) {
       response.render("template", {
         "page": "content/recruitment",
-        "user": user
+        "user": user,
+        "styles": []
       });
     });
   });
@@ -46,7 +48,8 @@ var renderController = function(router, context) {
         response.render("template", {
           "page": "content/events",
           "user": user,
-          "events": events
+          "events": events,
+          "styles": []
         });
       });
     });
@@ -58,7 +61,8 @@ var renderController = function(router, context) {
       if (user !== null) {
         response.render("template", {
           "page": "content/new_event",
-          "user": user
+          "user": user,
+          "styles": []
         });
       } else {
         response.render("template", {
@@ -78,7 +82,8 @@ var renderController = function(router, context) {
         response.render("template", {
           "page": "content/event",
           "user": user,
-          "event": eventFound
+          "event": eventFound,
+          "styles": []
         });
       });
     });
@@ -92,7 +97,8 @@ var renderController = function(router, context) {
         response.render("template", {
           "page": "content/gallery",
           "user": user,
-          "gallery": albums
+          "gallery": albums,
+          "styles": []
         });
       });
     });
@@ -103,7 +109,8 @@ var renderController = function(router, context) {
     auth(request.cookies, function(user) {
       response.render("template", {
         "page": "content/new_photo",
-        "user": user
+        "user": user,
+        "styles": []
       });
     });
   });
@@ -126,6 +133,7 @@ var renderController = function(router, context) {
             "page": "content/album",
             "user": user,
             "album": album,
+            "styles": []
           });
         });
       } else {
@@ -135,7 +143,8 @@ var renderController = function(router, context) {
           response.render("template", {
             "page": "content/photo",
             "user": user,
-            "photo": photoFound
+            "photo": photoFound,
+            "styles": []
           });
         });
       }
@@ -149,7 +158,8 @@ var renderController = function(router, context) {
         response.render("template", {
           "page": "content/contact_us",
           "user": user,
-          "positions": positions
+          "positions": positions,
+          "styles": []
         });
       });
     });
@@ -166,7 +176,8 @@ var renderController = function(router, context) {
       } else {
         response.render("template", {
           "page": "content/dashboard",
-          "user": user
+          "user": user,
+          "styles": []
         });
       }
     });
@@ -185,7 +196,8 @@ var renderController = function(router, context) {
           response.render("template", {
             "page": "content/roster",
             "user": user,
-            "roster": roster
+            "roster": roster,
+            "styles": []
           });
         });
       }

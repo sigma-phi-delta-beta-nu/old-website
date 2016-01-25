@@ -9,9 +9,11 @@
   <% include base/styles %>
 </head>
 
-<body>
+<body class="content-page">
   <% include base/navbar %>
-  <%- include(page) %>
+  <div class="container">
+     <%- include(page) %>
+  </div>
   <% include base/scripts %>
 </body>
 
