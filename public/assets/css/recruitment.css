@@ -1,6 +1,7 @@
 .recruitment-standards {
    display: flex;
    justify-content: space-between;
+   margin-bottom: 20px;
 }
 
 .image-wrapper {

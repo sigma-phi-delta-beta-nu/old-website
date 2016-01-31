@@ -1,10 +1,11 @@
 .navbar {
-   background-color: rgba(200, 0, 0, 1);
+   background-color: rgba(170, 0, 0, 1);
 }
 
 .old-page-container {
-   max-width: 750px;
+   max-width: 770px;
    margin: 0 auto;
+   padding: 0 10px;
 }
 
 .content-page {

@@ -5,8 +5,11 @@
 <section>
   <h1>Sigma Phi Delta Events</h1>
   <h2>Event Policy</h2>
-  <p>All Sigma Phi Delta events listed below are open to the public and all are invited. As included in the fraternity's risk management policy, a full risk reduction write-up will be present all events, posted in plain sight.</p>
+  <p>All Sigma Phi Delta events listed below are open to the public and all are
+   invited. As included in the fraternity's risk management policy, a full risk
+   reduction write-up will be present all events, posted in plain sight.</p>
 </section>
+
 <% var eventTypes = Object.keys(events); %>
 <% for (var i = 0; i < eventTypes.length; i++) { %>
   <section>
@@ -16,9 +19,9 @@
       <% var event = eventList[j] %>
       <% var url = "/events" + event.url %>
       <% var image = "/assets/images" + event.picture %>
-      <a href=<%= url %>>
+      <a class="event_link" href=<%= url %>>
         <span class="event_thumb">
-          <img align="left" src=<%= image %> />
+          <img src=<%= image %> />
           <h3><%= event["title"] %></h3>
           <p>Date: <%= event["date"] %></p>
           <p>Time: <%= event["time"] %></p>

@@ -49,7 +49,7 @@ var renderController = function(router, context) {
           "page": "content/events",
           "user": user,
           "events": events,
-          "styles": []
+          "styles": ["/assets/css/events.css"]
         });
       });
     });
