@@ -14,7 +14,18 @@ var renderController = function(router, context) {
       });
     });
   });
-
+  
+  /* GET login page */
+  router.get("/login", function(request, response) {
+    auth(request.cookies, function(user) {
+      response.render("template", {
+        "page": "content/login",
+        "user": user,
+        "styles": []
+      });
+    });
+  });
+  
   /* GET about us page */
   router.get("/about_us", function(request, response) {
     auth(request.cookies, function(user) {
