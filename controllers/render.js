@@ -98,7 +98,7 @@ var renderController = function(router, context) {
           "page": "content/gallery",
           "user": user,
           "gallery": albums,
-          "styles": []
+          "styles": ["/assets/css/gallery.css"]
         });
       });
     });
@@ -133,7 +133,7 @@ var renderController = function(router, context) {
             "page": "content/album",
             "user": user,
             "album": album,
-            "styles": []
+            "styles": ["/assets/css/gallery.css"]
           });
         });
       } else {
@@ -144,7 +144,7 @@ var renderController = function(router, context) {
             "page": "content/photo",
             "user": user,
             "photo": photoFound,
-            "styles": []
+            "styles": ["/assets/css/photo.css"]
           });
         });
       }
