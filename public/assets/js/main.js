@@ -42,6 +42,7 @@ $(document).ready(function() {
 			  	return;
 			  }
 			  var hash = Sha256.hash(pwd);
+        console.log("Hash: " + hash);
 			  authenticate(usr, hash);
 		    }
         }
@@ -58,8 +59,9 @@ $(document).ready(function() {
 
 	});
 
-	$('#logout').click(function() {
+	$('#logout').click(function(clickEvent) {
 
+    clickEvent.preventDefault();
 		$.ajax({
 			type: 'GET',
 			url: '/logout',
@@ -325,7 +327,7 @@ $(document).ready(function() {
             success: function(returnedData) {
                 var result = JSON.parse(returnedData);
                 if (result["success"]) {
-                    window.location.reload(true);
+                    window.location = "/dashboard";
                 } else {
                     alert("Sorry, that password is incorrect.");
                     $("#login").closest("div").find("input").first().next().val("");
