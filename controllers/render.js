@@ -208,7 +208,7 @@ var renderController = function(router, context) {
             "page": "content/roster",
             "user": user,
             "roster": roster,
-            "styles": []
+            "styles": [ "/assets/css/roster.css" ]
           });
         });
       }
