@@ -2,7 +2,15 @@
 <%  /* Stylesheet inclusion partial */ %>
 <%   /* Written by Brandon Kelley */   %>
 
-<link rel="stylesheet" type="text/css" href="/css/main.css"/>
-<% if (title === "Home") { %>
-  <link rel="stylesheet" type="text/css" href="/css/flexslider.css"/>
+<link rel="stylesheet" type="text/css" href="/assets/css/speed.css"/>
+<link rel="stylesheet" type="text/css" href="/libs/bootstrap/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/libs/bootstrap/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css"/>
+<% if (page === "content/home") { %>
+  <link rel="stylesheet" type="text/css" href="/assets/css/home.css"/>
+<% } else { %>
+  <link rel="stylesheet" type="text/css" href="/assets/css/template.css"/>
+  <% for (var i = 0; i < styles.length; i++) { %>
+    <link rel="stylesheet" type="text/css" href=<%= styles[i] %> />
+  <% } %>
 <% } %>

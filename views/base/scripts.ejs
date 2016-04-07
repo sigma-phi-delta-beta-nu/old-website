@@ -2,11 +2,18 @@
 <%   /* Script inclusion partial */   %>
 <%   /* Written by Brandon Kelley */  %>
 
-<script src="/js/jquery-2.1.3.min.js"></script>
-<% if (title === "Home") { %>
-  <script src="/js/jquery.flexslider.js"></script>
-  <script src="/js/jquery.flexslider.start.js"></script>
-<% } %>
-<script src="/js/main.js"></script>
-<script src="/js/jquery.cookie.js"></script>
-<script src="/js/sha256.js"></script>
+<script src="/libs/jquery/jquery-2.1.3.min.js"></script>
+<script src="/libs/bootstrap/bootstrap.min.js"></script>
+<script src="/assets/js/home.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/libs/jquery/jquery.cookie.js"></script>
+<script src="/libs/sha256/sha256.js"></script>
+<script src="/libs/smoothscroll/smooth-scroll.min.js"></script>
+<script src="/libs/react/react.min.js"></script>
+<script src="/libs/react/JSXTransformer-0.12.2.js"></script>
+<script>
+  smoothScroll.init({
+    "speed": 900,
+    "easing": "easeInOutLinear"
+  });
+</script>

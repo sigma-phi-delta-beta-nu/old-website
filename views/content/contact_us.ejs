@@ -4,11 +4,7 @@
 
 <section>
   <h1>Elected Officials</h1>
-  <div class="hyper_select right">
-    <div class="left_rounded_btn">Text</div>
-    <div class="right_rounded_btn">Hyperlink</div>
-  </div>
-  <table style="width: 80%">
+  <table style="width: 100%">
     <col style="width: 35%"/>
     <col style="width: 30%"/>
     <col style="width: 30%"/>
@@ -24,14 +20,14 @@
 </section>
 <section>
   <h1>Appointed Officials</h1>
-  <table style="width: 80%">
+  <table style="width: 100%">
     <col style="width: 35%"/>
     <col style="width: 30%"/>
     <col style="width: 30%"/>
     <% var appointed = positions.appointed %>
     <% for(var i = 0; i < appointed.length; i++) { %>
       <tr>
-        <td><%= appointed[i].position %></td> 
+        <td><%= appointed[i].position %></td>
         <td><%= appointed[i].name.first %> <%= appointed[i].name.last %></td>
         <td><%= appointed[i].email %></td>
       </tr>

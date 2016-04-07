@@ -1,0 +1,13 @@
+.navbar {
+   background-color: rgba(170, 0, 0, 1);
+}
+
+.old-page-container {
+   max-width: 770px;
+   margin: 0 auto;
+   padding: 0 10px;
+}
+
+.content-page {
+   margin-top: 75px;
+}

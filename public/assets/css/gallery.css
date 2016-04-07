@@ -1,0 +1,40 @@
+.galleries {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+
+a:hover {
+   text-decoration: none;
+}
+
+.gallery_thumb:hover {
+   background-color: rgba(250, 221, 221, 1);
+}
+
+.albums {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.gallery_thumb {
+   width: 32%;
+   text-align: center;
+   padding: 10px;
+   border: 1px solid rgba(170, 0, 0, 1);
+   border-radius: 4px;
+}
+.gallery_thumb div {
+   width: 100%;
+   margin: 0 auto;
+}
+.gallery_thumb img {
+   width: 100%;
+   border-radius: 4px;
+}
+
+.gallery_thumb h2 {
+   color: #5D5D5D;
+   margin: 20px 0;
+}

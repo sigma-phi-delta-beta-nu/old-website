@@ -1,0 +1,180 @@
+/* public/res/css/main.css */
+/* Copyright (c) 2015 Brandon M. Kelley */
+.content-page {
+   margin-top: 40px;
+}
+
+.white {
+  color: #E7E7E7;
+}
+
+.no-bold {
+  font-weight: normal;
+}
+
+.space {
+  height: 5px;
+}
+
+.margin-top-up-5 {
+  margin-top: -5px;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.navbar {
+  border: none;
+}
+
+.navbar a {
+  color: #E7E7E7;
+  font-family: "Times New Roman", Times, serif;
+  text-shadow: none;
+}
+
+.navbar-header a {
+  color: #E7E7E7;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-size: 36px;
+  text-shadow: none;
+}
+
+.navbar-nav a {
+  color: #E7E7E7;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+  text-shadow: none;
+}
+
+.navbar-nav > li > a {
+  text-shadow: none;
+}
+
+.navbar a:hover {
+  background-color: #990000;
+}
+
+.navbar-nav > li > a:hover {
+  background-color: #990000;
+}
+
+.navbar-nav > li > a:focus {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.nav .open > a:focus {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.navbar-fixed-top .navbar-collapse {
+  box-shadow: none;
+}
+
+.navbar-toggle {
+  margin-top: 5px !important;
+  margin-right: 5px !important;
+  width: 40px;
+  height: 40px;
+  background-image: url("/assets/images/menu.png");
+  background-size: cover;
+  background-position: center center;
+  margin: auto;
+}
+
+.navbar-collapse.collapsing {
+  background-color: #990000;
+}
+
+.navbar-collapse.collapse.in {
+  background-color: #990000;
+}
+
+@media (max-width: 991px) {
+  .navbar-header {
+    float: none;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+
+  .navbar-fixed-top .navbar-collapse {
+    padding-left: 15px;
+  }
+  .navbar-collapse.collapse {
+    display: none !important;
+  }
+  .navbar-nav {
+    float: left !important;
+    margin: 7.5px -15px;
+  }
+  .navbar-nav>li {
+    float: none;
+  }
+  .navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .navbar-text {
+    float: none;
+    margin: 15px 0;
+  }
+  .navbar-collapse.collapse.in {
+    display: block !important;
+  }
+  .collapsing {
+    overflow: hidden !important;
+  }
+}
+
+#super-center h1 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 50px;
+  color: #FFFFFF;
+}
+
+#super-center h2 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 40px;
+  color: #FFFFFF;
+}
+
+#super-center p {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+  color: #FFFFFF;
+}
+
+#summary {
+  padding-top: 70px;
+}
+
+.content-area h1 {
+  font-family: "Times New Roman", Times, serif;
+  color: #BB0000;
+}
+
+.content-area h2 {
+  font-family: "Times New Roman", Times, serif;
+  color: #555555;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.content-area p {
+  clear: both;
+}
+
+#arrowdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  background-image: url("/assets/images/down.png");
+  background-size: contain;
+}

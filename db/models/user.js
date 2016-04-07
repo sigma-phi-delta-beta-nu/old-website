@@ -1,7 +1,5 @@
 var createSchema = function(Schema) {
   
-  var Link = require(__dirname + "/link");
-  
   // Create the Schema fields
   var userSchema = new Schema({
     "name": {

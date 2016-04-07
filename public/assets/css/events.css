@@ -1,0 +1,25 @@
+.event_thumb img {
+   float: left;
+   width: 120px;
+   margin: 0 10px 0 0;
+}
+
+.event_thumb p {
+   margin: 0;
+   color: black;
+}
+
+.event_thumb h3 {
+   color: black;
+}
+
+.event_link:hover {
+   text-decoration: none;
+}
+
+.event_link {
+   display: inline-block;
+   width: 49%;
+   padding: 0 10px 13px 0;
+   border: 1px solid black;
+}

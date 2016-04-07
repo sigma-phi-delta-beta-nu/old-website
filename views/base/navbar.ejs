@@ -1,124 +1,38 @@
-<%          /* navbar.ejs */          %>
-<%        /* Navbar partial */        %>
-<%   /* Written by Brandon Kelley */  %>
-
-<span id="mobile_navbar_button"></span>
-
-<span id="mobile_navbar">
-  <% if (title !== "Home") { %>
-    <div>
-      <a href="/"><p>Home</p></a>
-    </div>
-  <% } %>
-  <% if (title !== "About Us") { %>
-    <div>
-      <a href="/about_us"><p>About Us</p></a>
-    </div>
-  <% } %>
-  <% if (title !== "Recruitment") { %>
-    <div>
-      <a href="/recruitment"><p>Recruitment</p></a>
-    </div>
-  <% } %>
-  <% if (title !== "Events") { %>
-    <div>
-      <a href="/events"><p>Events</p></a>
-    </div>
-  <% } %>
-  <% if (title !== "Gallery") { %>
-    <div>
-      <a href="/gallery"><p>Gallery</p></a>
-    </div>
-  <% } %>
-  <% if (title !== "Contact Us") { %>
-    <div>
-      <a href="/contact_us"><p>Contact Us</p></a>
-    </div>
-  <% } %>
-  <% if (title !== "Dashboard" && user !== null) { %>
-    <div>
-      <a href="/dashboard"><p>Dashboard</p></a>
-    </div>
-  <% } %>
-</span>
-
-<span id="navbar_header">
-  <div id="navbar_header_container">
-    <div <% if (title === "Home") { %>class="active"<% } %>>
-      <a href="/"><h>&#931&#934&#916</h></a>
-    </div>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand"
+      <% if (page === "content/home") { %>
+        data-scroll href="#home"
+      <% } else { %>
+        href="/"
+      <% } %>
+    >&Sigma;&Phi;&Delta;</a>
   </div>
-</span>
-
-<span id="navbar_body">
-  <span
-    <% if (title === "About Us") { %>
-      class="active"
-    <% } %>>
-    <a href="/about_us">
-      <h4>About Us</h4>
-    </a>
-  </span>
-  
-  <span 
-    <% if (title === "Recruitment") { %>
-      class="active"
-    <% } %>>
-    <a href="/recruitment">
-      <h4>Recruitment</h4>
-    </a>
-  </span>
-  
-  <span 
-    <% if (title === "Events" || title === "Event" || title === "New Event") { %>
-      class="active"
-    <% } %>>
-    <a href="/events">
-      <h4>Events</h4>
-    </a>
-  </span>
-  
-  <span 
-    <% if (title === "Gallery" || title === "Album" || title === "Photo") { %>
-      class="active"
-    <% } %>>
-    <a href="/gallery">
-      <h4>Gallery</h4>
-    </a>
-  </span>
-  
-  <span
-    <% if (title === "Contact Us") { %>
-      class="active"
-    <% } %>>
-    <a href="/contact_us">
-      <h4>Contact Us</h4>
-    </a>
-  </span>
-  
-  <% if (user !== null) { %>
-    <span
-      <% if (title === "Dashboard") { %>
-        class="active"
-      <% } %>>
-      <a href="/dashboard">
-        <h4>Dashboard</h4>
-      </a>
-    </span>
-    
-    <span
-      <% if (title === "Roster") { %>
-        class="active"
-      <% } %>>
-      <a href="/roster">
-        <h4>Roster</h4>
-      </a>
-    </span>
-  <% } %>
-</span>
-  
-<span id="navbar_school_container">
-  <div style="margin: auto; padding: 0.9em;">
-    <a href="http://www.calpoly.edu/"><h4>Cal Poly, SLO</h4></a>
+  <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav" style="float: right;">
+      <% if (user === null) { %>
+        <li><a href="/login">Login</a></li>
+      <% } else { %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged in as: <%= user.username %><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/roster">Roster</a></li>
+            <li><a id="logout" href="/logout">Logout</a></li>
+          </ul>
+        </li>
+      <% } %>
+      <li><a href="/about_us">About Us</a></li>
+      <li><a href="/recruitment">Recruitment</a></li>
+      <li><a href="/events">Events</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/contact_us">Contact Us</a></li>
+      <li><a href="//calpoly.edu" target="_blank">Cal Poly SLO</a></li>
+    </ul>
   </div>
-</span>
+</div>
