@@ -194,6 +194,51 @@ var apiController = function(router, context) {
     
   });
   
+  router.get("/hackathon/endpoint/stores", function(request, response) {
+    response.end(JSON.stringify({
+      "success": true, "stores": request.cookies.data_stores || 0
+    }));
+  });
+  
+  router.get("/hackathon/endpoint", function(request, response) {
+    context.models.HackathonData.get(request.query.id, function(data) {
+      if (data) {
+        response.end(JSON.stringify({ "success": true, "data": data }));
+      }
+      else {
+        response.end(JSON.stringify({ "success": false }));
+      }
+    });
+  });
+  
+  router.post("/hackathon/endpoint", function(request, response) {
+    console.log(request.cookies.data_stores);
+    if (request.cookies.data_stores == undefined) {
+      response.cookie("data_stores", 0);
+    }
+    if (request.cookies.data_stores === 30) {
+      response.end(JSON.stringify({
+        "success": false, "message": "Exceeded use of 30 data objects."
+      }));
+    }
+    new context.models.HackathonData(request.body)
+      .save(function(err, data, saved) {
+      if (saved) {
+        request.cookies.data_stores += 1;
+      }
+      response.end(JSON.stringify({ "success": saved, "id": data._id }));
+    });
+  });
+  
+  router.delete("/hackathon/endpoint", function(request, response) {
+    context.models.HackathonData.remove(request.query.id, function(success){
+      if (success && request.cookies.data_stores) {
+        request.cookies.data_stores -= 1;
+      }
+      response.end(JSON.stringify({ "success": success }));
+    });
+  });
+  
   return router;
   
 };

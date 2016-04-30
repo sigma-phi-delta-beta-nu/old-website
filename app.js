@@ -15,6 +15,8 @@ var createApplication = function() {
   var userSchema = require(__dirname + "/db/models/user")(mongoose.Schema);
   var eventSchema = require(__dirname + "/db/models/event")(mongoose.Schema);
   var photoSchema = require(__dirname + "/db/models/photo")(mongoose.Schema);
+  var hackathonDataSchema = require(__dirname + "/db/models/hackathon_data")
+    (mongoose.Schema);
   
   // Create application servers
   var app = express();
@@ -35,7 +37,8 @@ var createApplication = function() {
     "models": {
       "User": mongoose.model("User", userSchema),
       "Photo": mongoose.model("Photo", photoSchema),
-      "Event": mongoose.model("Event", eventSchema)
+      "Event": mongoose.model("Event", eventSchema),
+      "HackathonData": mongoose.model("HackathonData", hackathonDataSchema)
     },
     "sessionManager": sessionManager,
     "sanitizer": sanitizer
