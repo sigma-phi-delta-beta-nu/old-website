@@ -208,8 +208,10 @@ var createSchema = function(Schema) {
       } else {
         
         var elected = [ "Chief Engineer", "Vice Chief Engineer", "Business Manager", "Secretary", "Historian", "Chaplain", "Pledge Master", "Guide", "Recruitment Chairman" ];
+		var electedEmails = [ "chief", "vicechief", "business", "secretary", "historian", "chaplain", "pledge", "guide", "recruitment" ];
         var appointed = [ "Pledge Board Chairman", "Assistant Business Manager", "Social Chairman", "Athletic Chairman", "Engineering Governing Council Representative", "Risk Management Chairman", "Fundraising Chairman", "Webmaster", "Expansion Chairman", "House Manager", "Academic Chairman", "Sergeant-At-Arms", "Brotherhood Chairman", "Philanthropy Chairman" ];
-        
+        var appointedEmails = [ "pbc", "abm", "social", "athletic", "egcr", "risk", "fundraising", "webmaster", "expansion", "housemanager", "academic", "sergeant", "brotherhood", "philanthropy" ];
+		
         var positions = {
           "elected": [],
           "appointed": []
@@ -221,7 +223,7 @@ var createSchema = function(Schema) {
               if (members[j].positions[k] === elected[i]) {
                 positions.elected.push({
                   "name": members[j].name,
-                  "email": members[j].email,
+                  "email": electedEmails[i] + ".spd.calpoly@gmail.com",
                   "position": members[j].positions[k]
                 });
               }
@@ -235,7 +237,7 @@ var createSchema = function(Schema) {
               if (members[j].positions[k] === appointed[i]) {
                 positions.appointed.push({
                   "name": members[j].name,
-                  "email": members[j].email,
+                  "email": appointedEmails[i] + ".spd.calpoly@gmail.com",
                   "position": members[j].positions[k]
                 });
               }
