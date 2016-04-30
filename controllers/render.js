@@ -214,6 +214,16 @@ var renderController = function(router, context) {
       }
     });
   });
+  
+  router.get("/hackathon", function(request, response) {
+    auth(request.cookies, function(user) {
+      response.render("template", {
+        "page": "content/hackathon",
+        "user": user,
+        "styles": []
+      });
+    });
+  });
 
   return router;
 
