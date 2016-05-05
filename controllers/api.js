@@ -1,15 +1,15 @@
 var apiController = function(router, context) {
-  
+
   router.post("/login", function(request, response) {
-    
+
     var username = request.body.username;
     var password = request.body.password;
-    
+
     // Check if user is in the database
     context.models.User.login(username, password, function(user) {
-      
+
       var success;
-      
+
       // If they are, create a cookie
       if (user !== null) {
         context.sessionManager.add(user, function(sid) {
@@ -19,33 +19,33 @@ var apiController = function(router, context) {
       } else {
         response.end(JSON.stringify({ "success": false }));
       }
-      
+
     });
-    
+
   });
-  
+
   router.get("/logout", function(request, response) {
-    
+
     if (request.cookies === null) {
       response.end(JSON.stringify({ "success": false }));
       return;
     }
-    
+
     context.sessionManager.remove(request.cookies["sid"], function() {
       response.clearCookie("sid");
       response.end(JSON.stringify({ "success": true }));
     });
-    
+
   });
-  
+
   router.post("/addLink", function(request, response) {
-    
+
     context.sessionManager.authenticate(request.cookies, function(user) {
-      
+
       var username = (user) ? user.username : null;
       var label = request.body.label;
       var url = request.body.url;
-      
+
       context.models.User.addLink(username, label, url, function(updated) {
         if (updated) {
           context.sessionManager.update([updated], function(success) {
@@ -55,19 +55,19 @@ var apiController = function(router, context) {
           response.end(JSON.stringify({ "success": false }));
         }
       });
-      
+
     });
-    
+
   });
-  
+
   router.post("/removeLink", function(request, response) {
-    
+
     context.sessionManager.authenticate(request.cookies, function(user) {
-      
+
       var username = (user) ? user.username : null;
       var label = request.body.label;
       var url = request.body.url;
-      
+
       context.models.User.removeLink(username, label, url, function(updated) {
         if (updated) {
           context.sessionManager.update([updated], function(success) {
@@ -77,15 +77,15 @@ var apiController = function(router, context) {
           response.end(JSON.stringify({ "success": false }));
         }
       });
-      
+
     });
-    
+
   });
-  
+
   router.post("/addEvent", function(request, response) {
-    
+
     context.sessionManager.authenticate(request.cookies, function(user) {
-      
+
       var category = request.body.category;
       var cost = request.body.cost;
       var date = request.body.date;
@@ -96,7 +96,7 @@ var apiController = function(router, context) {
       var time = request.body.time;
       var type = request.body.type.toLowerCase();
       var url = request.body.url;
-      
+
       var newEvent = {
         "category": category,
         "cost": cost,
@@ -117,19 +117,19 @@ var apiController = function(router, context) {
           "username": user.username
         }]
       }
-      
+
       new context.models.Event(newEvent).save(function() {
         user.addEvent(newEvent.title, newEvent.url, function() {
           response.end(JSON.stringify({ "success": true }));
         });
       });
-      
+
     });
-      
+
   });
-  
+
   router.post("/removeEvent", function(request, response) {
-    
+
     var url = request.body.url;
     context.models.Event.remove(url, function() {
       context.models.User.removeEventFromAll(url, function(users) {
@@ -142,13 +142,13 @@ var apiController = function(router, context) {
         }
       });
     });
-    
+
   });
-  
+
   router.post("/addAttendee", function(request, response) {
-    
+
     context.sessionManager.authenticate(request.cookies, function(user) {
-      
+
       var url = request.body.url;
       var title = request.body.title;
       var attendee = {
@@ -158,7 +158,7 @@ var apiController = function(router, context) {
         },
         "username": user.username
       };
-      
+
       context.models.Event.addAttendee(url, attendee, function(success) {
         if (success) {
           user.addEvent(title, url, function() {
@@ -168,18 +168,18 @@ var apiController = function(router, context) {
           response.end(JSON.stringify({ "success": false }));
         }
       });
-      
+
     });
-    
+
   });
-  
+
   router.post("/removeAttendee", function(request, response) {
-    
+
     context.sessionManager.authenticate(request.cookies, function(user) {
-      
+
       var url = request.body.url;
       var attendee = user.username;
-      
+
       context.models.Event.removeAttendee(url, attendee, function(success) {
         if (success) {
           user.removeEvent(url, function() {
@@ -189,17 +189,12 @@ var apiController = function(router, context) {
           response.end(JSON.stringify({ "success": false }));
         }
       });
-      
+
     });
-    
+
   });
   
-  router.get("/hackathon/endpoint/stores", function(request, response) {
-    response.end(JSON.stringify({
-      "success": true, "stores": request.cookies.data_stores || 0
-    }));
-  });
-  
+  /*
   router.get("/hackathon/endpoint", function(request, response) {
     context.models.HackathonData.get(request.query.id, function(data) {
       if (data) {
@@ -210,17 +205,8 @@ var apiController = function(router, context) {
       }
     });
   });
-  
+
   router.post("/hackathon/endpoint", function(request, response) {
-    console.log(request.cookies.data_stores);
-    if (request.cookies.data_stores == undefined) {
-      response.cookie("data_stores", 0);
-    }
-    if (request.cookies.data_stores === 30) {
-      response.end(JSON.stringify({
-        "success": false, "message": "Exceeded use of 30 data objects."
-      }));
-    }
     new context.models.HackathonData(request.body)
       .save(function(err, data, saved) {
       if (saved) {
@@ -229,18 +215,16 @@ var apiController = function(router, context) {
       response.end(JSON.stringify({ "success": saved, "id": data._id }));
     });
   });
-  
+
   router.delete("/hackathon/endpoint", function(request, response) {
     context.models.HackathonData.remove(request.query.id, function(success){
-      if (success && request.cookies.data_stores) {
-        request.cookies.data_stores -= 1;
-      }
       response.end(JSON.stringify({ "success": success }));
     });
   });
-  
+  */
+
   return router;
-  
+
 };
 
 module.exports = apiController;

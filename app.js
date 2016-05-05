@@ -49,6 +49,17 @@ var createApplication = function() {
   app.use("/", apiController(express.Router(), context));
   app.use("/", express.static(__dirname + "/public"));
   
+  // Serve unmapped urls
+  app.use(function(request, response) {
+    sessionManager.authenticate(request.cookies, function(user) {
+      response.render("template", {
+        "page": "content/not_found",
+        "user": user,
+        "styles": []
+      });
+    });
+  });
+
   return app;
   
 };

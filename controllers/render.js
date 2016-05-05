@@ -77,8 +77,9 @@ var renderController = function(router, context) {
         });
       } else {
         response.render("template", {
-          "page": "content/home",
-          "user": user
+          "page": "content/not_found",
+          "user": user,
+          "styles": []
         });
       }
     });
@@ -181,8 +182,9 @@ var renderController = function(router, context) {
     auth(request.cookies, function(user) {
       if (user === null) {
         response.render("template", {
-          "page": "content/home",
-          "user": user
+          "page": "content/not_found",
+          "user": user,
+          "styles": []
         });
       } else {
         response.render("template", {
@@ -199,8 +201,9 @@ var renderController = function(router, context) {
     auth(request.cookies, function(user) {
       if (user === null) {
         response.render("template", {
-          "page": "content/home",
-          "user": user
+          "page": "content/not_found",
+          "user": user,
+          "styles": []
         });
       } else {
         User.getAllPrivate(function(roster) {
@@ -215,6 +218,7 @@ var renderController = function(router, context) {
     });
   });
   
+  /*
   router.get("/hackathon", function(request, response) {
     auth(request.cookies, function(user) {
       response.render("template", {
@@ -224,6 +228,7 @@ var renderController = function(router, context) {
       });
     });
   });
+  */
 
   return router;
 
