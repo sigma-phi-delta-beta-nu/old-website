@@ -29,6 +29,10 @@
 <section id="membership">
   <h2>Membership</h2>
   <% var classnames = Object.keys(classes) %>
+  <% var sorted = [ "Founding", "Alpha", "Beta", "Gamma", "Delta" ] %>
+  <% classnames.sort(function(a, b) { %>
+    <% return sorted.indexOf(a) - sorted.indexOf(b) %>
+  <% }) %>
   <% for (var i = 0; i < classnames.length; i++) { %>
     <span class="col-sm-3 col-xs-12">
       <p><%= classnames[i] %> Class</p>
@@ -39,5 +43,8 @@
         <% } %>
       </ul>
     </span>
+    <% if (i % 4 === 3) { %>
+      <div class="clearfix"></div>
+    <% } %>
   <% } %>
 </section>
