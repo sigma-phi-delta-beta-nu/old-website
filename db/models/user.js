@@ -262,6 +262,16 @@ var createSchema = function(Schema) {
         console.log(error);
         callback(null);
       } else {
+        var classes = [ "Founding", "Alpha", "Beta", "Gamma", "Delta" ];
+        data.sort(function(a, b) {
+          if (classes.indexOf(a.class) != classes.indexOf(b.class)) {
+            return classes.indexOf(a.class) - classes.indexOf(b.class);
+          }
+          if (a.name.first < b.name.first) {
+            return -1;
+          }
+          return 1;
+        });
         callback(data);
       }
       

@@ -1,10 +1,10 @@
 <section>
   <h1>Sigma Phi Delta Beta-Nu Roster</h1>
+  <br>
   <div id="roster">
     <table>
       <colgroup>
-        <col style="width: 7%;"/>
-        <col style="width: 7%;"/>
+        <col style="width: 8%;"/>
         <col style="width: 8%;"/>
         <col style="width: 7%;"/>
         <col style="width: 12%;"/>
@@ -15,8 +15,7 @@
       </colgroup>
       <tbody>
         <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
+          <th>Name</th>
           <th>Nickname</th>
           <th>Pledge Class</th>
           <th>Email</th>
@@ -25,10 +24,23 @@
           <th>Current Address</th>
           <th>Home Address</th>
         </tr>
+        <% var currentClass = roster[0].class %>
         <% for (var i = 0; i < roster.length; i++) { %>
+          <% if (roster[i].class !== currentClass) { %>
+            <% currentClass = roster[i].class %>
+            <tr>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+            </tr>
+          <% } %>
           <tr>
-            <td><%= roster[i].name.first %></td>
-            <td><%= roster[i].name.last %></td>
+            <td><%= roster[i].name.first %> <%= roster[i].name.last %></td>
             <td><%= roster[i].nickname %></td>
             <td><%= roster[i].class %></td>
             <td><%= roster[i].email %></td>
