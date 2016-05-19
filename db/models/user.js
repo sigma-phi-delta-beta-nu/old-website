@@ -209,8 +209,8 @@ var createSchema = function(Schema) {
         
         var elected = [ "Chief Engineer", "Vice Chief Engineer", "Business Manager", "Secretary", "Historian", "Chaplain", "Pledge Master", "Guide", "Recruitment Chairman" ];
 		var electedEmails = [ "chief", "vicechief", "business", "secretary", "historian", "chaplain", "pledge", "guide", "recruitment" ];
-        var appointed = [ "Pledge Board Chairman", "Assistant Business Manager", "Social Chairman", "Athletic Chairman", "Engineering Governing Council Representative", "Risk Management Chairman", "Fundraising Chairman", "Webmaster", "Expansion Chairman", "House Manager", "Academic Chairman", "Sergeant-At-Arms", "Brotherhood Chairman", "Philanthropy Chairman" ];
-        var appointedEmails = [ "pbc", "abm", "social", "athletic", "egcr", "risk", "fundraising", "webmaster", "expansion", "housemanager", "academic", "sergeant", "brotherhood", "philanthropy" ];
+        var appointed = [ "Pledge Board Chairman", "Assistant Business Manager", "Social Chairman", "Athletic Chairman", "Engineering Governing Council Representative", "Risk Management Chairman", "Fundraising Chairman", "Webmaster", "Expansion Chairman", "House Manager", "Academic Chairman", "Sergeant-At-Arms", "Brotherhood Chairman", "Philanthropy Chairman", "Professional Chairman" ];
+        var appointedEmails = [ "pbc", "abm", "social", "athletic", "egcr", "risk", "fundraising", "webmaster", "expansion", "housemanager", "academic", "sergeant", "brotherhood", "philanthropy", "professional" ];
 		
         var positions = {
           "elected": [],
